@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="10541" started-at="2021-10-11T04:01:37Z" finished-at="2021-10-11T04:01:47Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="10541" started-at="2021-10-11T04:01:37Z" finished-at="2021-10-11T04:01:47Z">
+      <class name="com.project.testcases.FogotPasswordPageTest">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.project.testcases.FogotPasswordPageTest@754ba872]" name="setup" is-config="true" duration-ms="6330" started-at="2021-10-11T04:01:37Z" finished-at="2021-10-11T04:01:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="validateTitle()[pri:1, instance:com.project.testcases.FogotPasswordPageTest@754ba872]" name="validateTitle" duration-ms="18" started-at="2021-10-11T04:01:43Z" finished-at="2021-10-11T04:01:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateTitle -->
+        <test-method status="PASS" signature="validateForgotPassword(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:2, instance:com.project.testcases.FogotPasswordPageTest@754ba872]" name="validateForgotPassword" duration-ms="1004" started-at="2021-10-11T04:01:45Z" data-provider="testdata" finished-at="2021-10-11T04:01:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[wk@g.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1.23456789E9]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[wk@!2345]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[wk@12345]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[Invalid]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateForgotPassword -->
+        <test-method status="PASS" signature="validateForgotPassword(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:2, instance:com.project.testcases.FogotPasswordPageTest@754ba872]" name="validateForgotPassword" duration-ms="774" started-at="2021-10-11T04:01:46Z" data-provider="testdata" finished-at="2021-10-11T04:01:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[sk@g.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123.0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[sk@12345]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[sk@12345]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[Invalid]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateForgotPassword -->
+        <test-method status="PASS" signature="validateForgotPassword(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:2, instance:com.project.testcases.FogotPasswordPageTest@754ba872]" name="validateForgotPassword" duration-ms="854" started-at="2021-10-11T04:01:46Z" data-provider="testdata" finished-at="2021-10-11T04:01:47Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[fake@g.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1.23456789E9]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[fake@12345]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[fake@12345]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[Valid]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateForgotPassword -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.project.testcases.FogotPasswordPageTest@754ba872]" name="tearDown" is-config="true" duration-ms="84" started-at="2021-10-11T04:01:47Z" finished-at="2021-10-11T04:01:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.project.testcases.FogotPasswordPageTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
