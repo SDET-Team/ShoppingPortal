@@ -17,6 +17,7 @@ public class HomePage extends CommonBase{
 	
 	public HomePage()
 	{
+System.out.println("hello");
 		PageFactory.initElements(driver,this);
 	}
 	
