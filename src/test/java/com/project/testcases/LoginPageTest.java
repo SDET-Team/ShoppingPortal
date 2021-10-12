@@ -89,6 +89,8 @@ public class LoginPageTest extends CommonBase {
 	{
 		boolean status=loginpage.regOperation(fullname, email, contact, newpass, cpass,remarks);
 		Assert.assertTrue(status);
+		
+	
 	}
 	
 	@AfterTest
