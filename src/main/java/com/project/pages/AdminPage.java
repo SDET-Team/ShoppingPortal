@@ -7,11 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.project.base.AdminCommonBase;
 import com.project.base.CommonBase;
 import com.project.utils.TestUtils;
 
-public class AdminPage extends AdminCommonBase
+public class AdminPage extends CommonBase
 {		
 	@FindBy(id="inputEmail")
 	WebElement adminLoginMail;

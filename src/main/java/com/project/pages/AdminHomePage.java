@@ -3,9 +3,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.project.base.AdminCommonBase;
 import com.project.base.CommonBase;
-public class AdminHomePage extends AdminCommonBase
+public class AdminHomePage extends CommonBase
 {
 		
 		

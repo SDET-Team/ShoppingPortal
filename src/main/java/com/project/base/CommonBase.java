@@ -36,10 +36,31 @@ public class CommonBase {
 			}
 		}
 			
+
+		public static void initialization() {
+			String browserName = config.getProperty("browser");
+			String filePath = System.getProperty("user.dir");
+			if(browserName.equals("chrome")){
+				System.setProperty("webdriver.chrome.driver",  filePath +config.getProperty("browserDriverpath"));	
+				driver = new ChromeDriver(); 
+			}
+			else if(browserName.equals("FireFox")){
+				System.setProperty("webdriver.gecko.driver", filePath +config.getProperty("browserDriverpath"));	
+				driver = new FirefoxDriver(); 
+		}
+			driver.manage().window().maximize();
+			driver.manage().deleteAllCookies();
+			driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
+			
+			driver.get(config.getProperty("url"));
+			
+			navbeforeLogin=new NavbarBeforeLogin(driver);
+			navafterLogin=new NavbarAfterLogin(driver);
+			
+		}
 			
 			
-			
-			public static void initialization() {
+			public static void initialization(String mode) {
 				String browserName = config.getProperty("browser");
 				String filePath = System.getProperty("user.dir");
 				if(browserName.equals("chrome")){
@@ -54,7 +75,8 @@ public class CommonBase {
 				driver.manage().deleteAllCookies();
 				driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
 				
-				driver.get(config.getProperty("url"));
+				if(mode.equals("admin"))
+				driver.get(config.getProperty("adminurl"));
 				
 				navbeforeLogin=new NavbarBeforeLogin(driver);
 				navafterLogin=new NavbarAfterLogin(driver);

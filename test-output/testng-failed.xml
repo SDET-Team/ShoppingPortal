@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.project.testcases.HomePageTest">
+      <class name="com.project.testcases.TrackOrderPageTest">
         <methods>
-          <include name="validateTitle"/>
-          <include name="tearDown"/>
+          <include name="validatTrackorderOperation" invocation-numbers="0 1 2 3"/>
           <include name="setup"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.project.testcases.HomePageTest -->
+      </class> <!-- com.project.testcases.TrackOrderPageTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

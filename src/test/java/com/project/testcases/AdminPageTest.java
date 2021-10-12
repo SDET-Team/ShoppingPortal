@@ -15,14 +15,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.project.base.AdminCommonBase;
 import com.project.base.CommonBase;
 import com.project.pages.AdminHomePage;
 import com.project.pages.AdminPage;
 import com.project.pages.HomePage;
 import com.project.pages.LoginPage;
 import com.project.utils.TestUtils;
-public class AdminPageTest extends AdminCommonBase
+public class AdminPageTest extends CommonBase
 {
 		AdminPage adminpage;
 		AdminHomePage adminhomepage;
@@ -35,7 +34,7 @@ public class AdminPageTest extends AdminCommonBase
 		@BeforeTest
 		public void setup()
 		{	
-			admininitialization();	
+			initialization("admin");	
 		}
 		
 		

@@ -30,7 +30,7 @@ public class FogotPasswordPageTest extends CommonBase {
 	@DataProvider(name="testdata")
 	public Object[][] getloginData(Method m) throws IOException{
 		
-		filepath="C:\\Users\\shivam_kushwaha\\eclipse-workspace\\ShoppingPortal\\src\\resources\\testdata\\forgotpassTestdata.xlsx";
+		filepath=System.getProperty("user.dir")+"\\src\\resources\\testdata\\forgotpassTestdata.xlsx";
 		Object data[][] = TestUtils.getTestData(filepath); 
 		return data; 
 	}
