@@ -42,7 +42,7 @@ public class TestUtils extends CommonBase{
 			for (int i = 0; i <row_count; i++) 
 			{ 
 				for (int j = 0; j < column_count; j++) {
-					data[i][j] = sheet1.getRow(i + 1).getCell(j).toString();
+					data[i][j] = formatter.formatCellValue(sheet1.getRow(i + 1).getCell(j));
 				}
 			
 			

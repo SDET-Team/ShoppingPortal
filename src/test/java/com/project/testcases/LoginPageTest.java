@@ -57,11 +57,11 @@ public class LoginPageTest extends CommonBase {
 	}
 	
 	@Test(priority=2,dataProvider="testdata")
-	public void validateLogin(String email,String password,String remarks) 
+	public void validateLogin(String email,String password,String expected) 
 	{	
 		
-		boolean status=loginpage.loginOperation(email, password,remarks);
-		if(remarks.equals("pass"))
+		boolean status=loginpage.loginOperation(email, password,expected);
+		if(expected.equals("pass"))
 		{
 			Assert.assertFalse(status);
 			navafterLogin.logout();
@@ -85,9 +85,9 @@ public class LoginPageTest extends CommonBase {
 	}
 	
 	@Test(priority=4, dataProvider="testdata")
-	public void validateRegistration(String fullname,String email,String contact,String newpass,String cpass,String remarks)
+	public void validateRegistration(String fullname,String email,String contact,String newpass,String cpass,String expected)
 	{
-		boolean status=loginpage.regOperation(fullname, email, contact, newpass, cpass,remarks);
+		boolean status=loginpage.regOperation(fullname, email, contact, newpass, cpass,expected);
 		Assert.assertTrue(status);
 		
 	

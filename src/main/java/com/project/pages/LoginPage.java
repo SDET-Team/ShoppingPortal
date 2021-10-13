@@ -64,13 +64,13 @@ public class LoginPage extends CommonBase {
 		return driver.getTitle();
 	}
 	
-	public boolean loginOperation(String email,String password,String remarks) 
+	public boolean loginOperation(String email,String password,String expected) 
 	{
 		loginEmail.sendKeys(email);
 		loginPass.sendKeys(password);
 		loginBtn.click();
 		boolean status=false;
-		if(remarks.equals("fail"))
+		if(expected.equals("fail"))
 			status=invalidLogin.isDisplayed();
 		return status;
 	}
@@ -99,7 +99,7 @@ public class LoginPage extends CommonBase {
 		confirmPass.clear();
 	}
 	
-	public boolean regOperation(String fname,String email,String contact,String pass,String cpass,String remarks)
+	public boolean regOperation(String fname,String email,String contact,String pass,String cpass,String expected)
 	{
 		
 		Alert alert;
@@ -110,7 +110,7 @@ public class LoginPage extends CommonBase {
 		contactNo.sendKeys(contact);
 		newPass.sendKeys(pass);
 		confirmPass.sendKeys(cpass);
-		if(remarks.equals("Duplicate email") && !(signupBtn.isEnabled()) && duplicateEmail.isDisplayed())
+		if(expected.equals("Duplicate email") && !(signupBtn.isEnabled()) && duplicateEmail.isDisplayed())
 		{
 			regFormclear();
 			return true;
@@ -118,13 +118,13 @@ public class LoginPage extends CommonBase {
 		signupBtn.click();
 		WebDriverWait wait = new WebDriverWait(driver,10);
 		
-		if(remarks.equals("Password and Confirm Password Field do not match  !!"))
+		if(expected.equals("Password and Confirm Password Field do not match  !!"))
 		{
 			wait.until(ExpectedConditions.alertIsPresent());
 			alert=TestUtils.switchToAlert();
 			String msg=alert.getText();
 			alert.accept();
-			if(msg.equals(remarks))
+			if(msg.equals(expected))
 				status=true;
 			else 
 				status= false;
@@ -136,7 +136,7 @@ public class LoginPage extends CommonBase {
 			alert=TestUtils.switchToAlert();
 			String msg=alert.getText();
 			alert.accept();
-			if(msg.equals(remarks))
+			if(msg.equals(expected))
 				status=true;
 			else 
 				status= false;
