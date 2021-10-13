@@ -6,38 +6,35 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.project.base.CommonBase;
 
-public class TrackOrderPage extends CommonBase{
+public class TrackOrderPage extends CommonBase {
+
 
 	@FindBy(name="orderid")
 	WebElement orderId;
-	
-	@FindBy(id="exampleBillingEmail1")
+
+	@FindBy(id = "exampleBillingEmail1")
 	WebElement emailId;
-	
-	@FindBy(name="submit")
+
+	@FindBy(name = "submit")
 	WebElement submitBtn;
-	
-	@FindBy(xpath="//td[contains(text(),'Registered email id is invalid')]")
+
+	@FindBy(xpath = "//td[contains(text(),'Registered email id is invalid')]")
 	WebElement invalidOrder;
-	
-	
-	
-	public TrackOrderPage()
-	{
-		PageFactory.initElements(driver,this);
+
+	public TrackOrderPage() {
+		PageFactory.initElements(driver, this);
 	}
-	
-	public String title()
-	{
+
+	public String title() {
 		return driver.getTitle();
 	}
-	
-	public void clearForm()
-	{
+
+	public void clearForm() {
 		orderId.clear();
 		emailId.clear();
-		
+
 	}
+
 	public boolean trackingOption(String orderid,String email,String expected)
 	{
 		orderId.sendKeys(orderid);
@@ -53,11 +50,7 @@ public class TrackOrderPage extends CommonBase{
 			status=true;
 		}
 		return status;
-		
-			
-		
-		
-		
+
 	}
-	
+
 }

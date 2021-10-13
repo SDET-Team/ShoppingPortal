@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results skipped="0" failed="1" ignored="0" total="11" passed="10">
   <reporter-output>
   </reporter-output>
@@ -324,6 +325,41 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- com.project.testcases.LoginPageTest -->
+=======
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-10-13T11:09:21 IST" name="Default suite" finished-at="2021-10-13T11:09:36 IST" duration-ms="14615">
+    <groups>
+    </groups>
+    <test started-at="2021-10-13T11:09:21 IST" name="Default test" finished-at="2021-10-13T11:09:36 IST" duration-ms="14615">
+      <class name="com.project.testcases.CartActivityTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.project.testcases.CartActivityTest@2b662a77]" started-at="2021-10-13T11:09:21 IST" name="setup" finished-at="2021-10-13T11:09:29 IST" duration-ms="8092" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="validateTitle()[pri:1, instance:com.project.testcases.CartActivityTest@2b662a77]" started-at="2021-10-13T11:09:29 IST" name="validateTitle" finished-at="2021-10-13T11:09:29 IST" duration-ms="46" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateTitle -->
+        <test-method signature="validateFeatureProductTitle()[pri:2, instance:com.project.testcases.CartActivityTest@2b662a77]" started-at="2021-10-13T11:09:29 IST" name="validateFeatureProductTitle" finished-at="2021-10-13T11:09:29 IST" duration-ms="151" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateFeatureProductTitle -->
+        <test-method signature="validateFeatureProductSort()[pri:3, instance:com.project.testcases.CartActivityTest@2b662a77]" started-at="2021-10-13T11:09:29 IST" name="validateFeatureProductSort" finished-at="2021-10-13T11:09:29 IST" duration-ms="118" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateFeatureProductSort -->
+        <test-method signature="validateFeatureProductList()[pri:4, instance:com.project.testcases.CartActivityTest@2b662a77]" started-at="2021-10-13T11:09:29 IST" name="validateFeatureProductList" finished-at="2021-10-13T11:09:35 IST" duration-ms="5266" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateFeatureProductList -->
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:com.project.testcases.CartActivityTest@2b662a77]" started-at="2021-10-13T11:09:35 IST" name="afterTest" finished-at="2021-10-13T11:09:36 IST" duration-ms="800" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- com.project.testcases.CartActivityTest -->
+>>>>>>> ee17ece67c9572e63409523e67e5593e8b9dfaca
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
