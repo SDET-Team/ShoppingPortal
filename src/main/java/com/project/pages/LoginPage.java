@@ -12,141 +12,123 @@ import com.project.base.CommonBase;
 import com.project.utils.TestUtils;
 
 public class LoginPage extends CommonBase {
-	
-	@FindBy(name="email")
+
+	@FindBy(name = "email")
 	WebElement loginEmail;
-	
-	@FindBy(id="exampleInputPassword1")
+
+	@FindBy(id = "exampleInputPassword1")
 	WebElement loginPass;
-	
-	@FindBy(name="login")
+
+	@FindBy(name = "login")
 	WebElement loginBtn;
-	
-	
-	@FindBy(id="fullname")
+
+	@FindBy(id = "fullname")
 	WebElement fullName;
-	
-	@FindBy(name="emailid")
+
+	@FindBy(name = "emailid")
 	WebElement regEmail;
-	
-	@FindBy(name="contactno")
+
+	@FindBy(name = "contactno")
 	WebElement contactNo;
-	
-	@FindBy(id="password")
+
+	@FindBy(id = "password")
 	WebElement newPass;
-	
-	@FindBy(name="confirmpassword")
+
+	@FindBy(name = "confirmpassword")
 	WebElement confirmPass;
-	
-	@FindBy(id="submit")
+
+	@FindBy(id = "submit")
 	WebElement signupBtn;
-		
-	@FindBy(linkText="Forgot your Password?")
+
+	@FindBy(linkText = "Forgot your Password?")
 	WebElement fpassLink;
-	
-	@FindBy(xpath="//span[contains(text(),'Invalid email id or Password')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Invalid email id or Password')]")
 	WebElement invalidLogin;
-	
-	@FindBy(xpath="//span[contains(text(),'Email already exists .')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Email already exists .')]")
 	WebElement duplicateEmail;
-	
-	public LoginPage()
-	{
-		PageFactory.initElements(driver,this);
+
+	public LoginPage() {
+		PageFactory.initElements(driver, this);
 	}
-	
-	
-	
-	
-	//Login 
-	public String loginpageTitle()
-	{
+
+	// Login
+	public String loginpageTitle() {
 		return driver.getTitle();
 	}
-	
-	public boolean loginOperation(String email,String password,String remarks) 
-	{
+
+	public boolean loginOperation(String email, String password, String remarks) {
 		loginEmail.sendKeys(email);
 		loginPass.sendKeys(password);
 		loginBtn.click();
-		boolean status=false;
-		if(remarks.equals("fail"))
-			status=invalidLogin.isDisplayed();
+		boolean status = false;
+		if (remarks.equals("fail"))
+			status = invalidLogin.isDisplayed();
 		return status;
 	}
-	
-	//forgot
-	
-	public String forgotpassTitle()
-	{
+
+	// forgot
+
+	public String forgotpassTitle() {
 		return driver.getTitle();
 	}
-	
-	public void navigateToForgotpass()
-	{
+
+	public void navigateToForgotpass() {
 		fpassLink.click();
 	}
 
-	
-	//registration
-	
-	public void regFormclear()
-	{
+	// registration
+
+	public void regFormclear() {
 		fullName.clear();
 		regEmail.clear();
 		contactNo.clear();
 		newPass.clear();
 		confirmPass.clear();
 	}
-	
-	public boolean regOperation(String fname,String email,String contact,String pass,String cpass,String remarks)
-	{
-		
+
+	public boolean regOperation(String fname, String email, String contact, String pass, String cpass, String remarks) {
+
 		Alert alert;
-		boolean status=false,btnStatus=true;
-		
+		boolean status = false, btnStatus = true;
+
 		fullName.sendKeys(fname);
 		regEmail.sendKeys(email);
 		contactNo.sendKeys(contact);
 		newPass.sendKeys(pass);
 		confirmPass.sendKeys(cpass);
-		if(remarks.equals("Duplicate email") && !(signupBtn.isEnabled()) && duplicateEmail.isDisplayed())
-		{
+		if (remarks.equals("Duplicate email") && !(signupBtn.isEnabled()) && duplicateEmail.isDisplayed()) {
 			regFormclear();
 			return true;
 		}
 		signupBtn.click();
-		WebDriverWait wait = new WebDriverWait(driver,10);
-		
-		if(remarks.equals("Password and Confirm Password Field do not match  !!"))
-		{
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+
+		if (remarks.equals("Password and Confirm Password Field do not match  !!")) {
 			wait.until(ExpectedConditions.alertIsPresent());
-			alert=TestUtils.switchToAlert();
-			String msg=alert.getText();
+			alert = TestUtils.switchToAlert();
+			String msg = alert.getText();
 			alert.accept();
-			if(msg.equals(remarks))
-				status=true;
-			else 
-				status= false;
-			
-		}
-		else
-		{
+			if (msg.equals(remarks))
+				status = true;
+			else
+				status = false;
+
+		} else {
 			wait.until(ExpectedConditions.alertIsPresent());
-			alert=TestUtils.switchToAlert();
-			String msg=alert.getText();
+			alert = TestUtils.switchToAlert();
+			String msg = alert.getText();
 			alert.accept();
-			if(msg.equals(remarks))
-				status=true;
-			else 
-				status= false;
-			
+			if (msg.equals(remarks))
+				status = true;
+			else
+				status = false;
+
 		}
-		
-		
+
 		regFormclear();
 		return status;
 	}
-	
 
 }

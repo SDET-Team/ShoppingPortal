@@ -1,6 +1,5 @@
 package com.project.testcases;
 
-
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -21,74 +20,59 @@ import com.project.pages.AdminPage;
 import com.project.pages.HomePage;
 import com.project.pages.LoginPage;
 import com.project.utils.TestUtils;
-public class AdminPageTest extends CommonBase
-{
-		AdminPage adminpage;
-		AdminHomePage adminhomepage;
-		
-		public AdminPageTest()
-		{
-			super();
-		}
-		
-		@BeforeTest
-		public void setup()
-		{	
-			initialization("admin");	
-		}
-		
-		
-		@Test(priority=1)
-		public void validateTitle()
-		{
-			adminhomepage=new AdminHomePage();
-			String title=adminhomepage.title();
-			Assert.assertEquals(title, "Shopping Portal | Admin login","Login Page Title Not Matched");
-			
-		}
-		
-		@Test(priority=2)
-		public void validateLogin()
-		{
-			adminpage=new AdminPage();
-			adminpage.adminloginOperation(config.getProperty("adminUserName"),config.getProperty("adminPassword"));
-			Assert.assertEquals(adminpage.adminloginpageTitle(), "Admin| Change Password","Title not match");
-		}	
-		
-		@Test(priority=3,dependsOnMethods="validateLogin")
-		public void validateColor()
-		{
-		    
-			boolean status=adminpage.orderManagement();
-			
-			Assert.assertTrue(status);
-			
-			String colorCode=adminpage.getColorCode();
-			String expectedColor="rgba(255, 255, 255, 1)";
-			Assert.assertEquals(colorCode, expectedColor);
-		}	
-		
-		@Test(priority=4,dependsOnMethods="validateLogin")
-		public void validateTodaysOrder()
-		{
-			List<WebElement> elements=driver.findElements(By.xpath("//*[@id=\"DataTables_Table_0\"]/thead/tr/td[1]"));
-			Assert.assertEquals("2",elements.size());
-			//tbody/tr[1]/td[1]    
-			//tbody/tr[2]/td[1]
-			
-		}
-		
-		
-		
-				
-		@AfterTest
-		public void tearDown()
-		{
-			driver.close();
-		}
-		
-		
-	
 
+public class AdminPageTest extends CommonBase {
+	AdminPage adminpage;
+	AdminHomePage adminhomepage;
+
+	public AdminPageTest() {
+		super();
+	}
+
+	@BeforeTest
+	public void setup() {
+		initialization("admin");
+	}
+
+	@Test(priority = 1)
+	public void validateTitle() {
+		adminhomepage = new AdminHomePage();
+		String title = adminhomepage.title();
+		Assert.assertEquals(title, "Shopping Portal | Admin login", "Login Page Title Not Matched");
+
+	}
+
+	@Test(priority = 2)
+	public void validateLogin() {
+		adminpage = new AdminPage();
+		adminpage.adminloginOperation(config.getProperty("adminUserName"), config.getProperty("adminPassword"));
+		Assert.assertEquals(adminpage.adminloginpageTitle(), "Admin| Change Password", "Title not match");
+	}
+
+	@Test(priority = 3, dependsOnMethods = "validateLogin")
+	public void validateColor() {
+
+		boolean status = adminpage.orderManagement();
+
+		Assert.assertTrue(status);
+
+		String colorCode = adminpage.getColorCode();
+		String expectedColor = "rgba(255, 255, 255, 1)";
+		Assert.assertEquals(colorCode, expectedColor);
+	}
+
+	@Test(priority = 4, dependsOnMethods = "validateLogin")
+	public void validateTodaysOrder() {
+		List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"DataTables_Table_0\"]/thead/tr/td[1]"));
+		Assert.assertEquals("2", elements.size());
+		// tbody/tr[1]/td[1]
+		// tbody/tr[2]/td[1]
+
+	}
+
+	@AfterTest
+	public void tearDown() {
+		driver.close();
+	}
 
 }

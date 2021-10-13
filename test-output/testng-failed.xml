@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.project.testcases.TrackOrderPageTest">
+      <class name="com.project.testcases.CartActivityTest">
         <methods>
-          <include name="validatTrackorderOperation" invocation-numbers="0 1 2 3"/>
+          <include name="validateFeatureProductSort"/>
+          <include name="validateFeatureProductTitle"/>
+          <include name="validateFeatureProductList"/>
+          <include name="afterTest"/>
+          <include name="validateTitle"/>
           <include name="setup"/>
-          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.project.testcases.TrackOrderPageTest -->
+      </class> <!-- com.project.testcases.CartActivityTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

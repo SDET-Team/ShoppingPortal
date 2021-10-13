@@ -6,23 +6,14 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.project.base.CommonBase;
 
+public class HomePage extends CommonBase {
 
-
-public class HomePage extends CommonBase{
-	
-	
-	
-	
-	
-	
-	public HomePage()
-	{
-		PageFactory.initElements(driver,this);
+	public HomePage() {
+		PageFactory.initElements(driver, this);
 	}
-	
-	public String title()
-	{
+
+	public String title() {
 		return driver.getTitle();
 	}
-	
+
 }
