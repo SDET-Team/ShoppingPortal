@@ -6,22 +6,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class NavbarAfterLogin {
-	
 
 	WebDriver driver;
-	
-	public NavbarAfterLogin(WebDriver driver)
-	{
-		this.driver=driver;
-		PageFactory.initElements(driver,this);
+
+	public NavbarAfterLogin(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
-	
-	@FindBy(linkText="Logout")
+
+	@FindBy(linkText = "Logout")
 	WebElement logoutBtn;
-	
-	
-	public void logout()
-	{
+
+	public void logout() {
 		logoutBtn.click();
 	}
 

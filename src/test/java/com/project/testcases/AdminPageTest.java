@@ -1,6 +1,5 @@
 package com.project.testcases;
 
-
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -15,14 +14,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.project.base.AdminCommonBase;
 import com.project.base.CommonBase;
 import com.project.pages.AdminHomePage;
 import com.project.pages.AdminPage;
 import com.project.pages.HomePage;
 import com.project.pages.LoginPage;
 import com.project.utils.TestUtils;
-public class AdminPageTest extends AdminCommonBase
+
+public class AdminPageTest extends CommonBase
 {
 		AdminPage adminpage;
 		AdminHomePage adminhomepage;
@@ -35,7 +34,7 @@ public class AdminPageTest extends AdminCommonBase
 		@BeforeTest
 		public void setup()
 		{	
-			admininitialization();	
+			initialization("admin");	
 		}
 		
 		
@@ -73,9 +72,7 @@ public class AdminPageTest extends AdminCommonBase
 		public void validateTodaysOrder()
 		{
 			List<WebElement> elements=driver.findElements(By.xpath("//*[@id=\"DataTables_Table_0\"]/thead/tr/td[1]"));
-			Assert.assertEquals("2",elements.size());
-			//tbody/tr[1]/td[1]    
-			//tbody/tr[2]/td[1]
+			Assert.assertEquals(0,elements.size());
 			
 		}
 		
@@ -88,8 +85,7 @@ public class AdminPageTest extends AdminCommonBase
 			driver.close();
 		}
 		
+}
+		
 		
 	
-
-
-}
