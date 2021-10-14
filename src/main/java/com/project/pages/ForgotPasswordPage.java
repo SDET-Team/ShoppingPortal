@@ -7,43 +7,37 @@ import org.openqa.selenium.support.PageFactory;
 import com.project.base.CommonBase;
 
 public class ForgotPasswordPage extends CommonBase {
-	
-	
-	@FindBy(name="email")
+
+	@FindBy(name = "email")
 	WebElement emailTxt;
-	
-	@FindBy(id="contact")
+
+	@FindBy(id = "contact")
 	WebElement contactTxt;
-	
-	
-	@FindBy(name="password")
+
+	@FindBy(name = "password")
 	WebElement passTxt;
-	
-	
-	@FindBy(id="confirmpassword")
+
+	@FindBy(id = "confirmpassword")
 	WebElement confirmTxt;
-	
-	@FindBy(name="change")
+
+	@FindBy(name = "change")
 	WebElement changePassbtn;
-	
-	@FindBy(xpath="//span[contains(text(),'Invalid email id or Contact no')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Invalid email id or Contact no')]")
 	WebElement invalidUser;
-	
-	@FindBy(xpath="//span[contains(text(),'Password Changed Successfully')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Password Changed Successfully')]")
 	WebElement changeSuccess;
-	
-	
-	public ForgotPasswordPage()
-	{
-		PageFactory.initElements(driver,this);
+
+	public ForgotPasswordPage() {
+		PageFactory.initElements(driver, this);
 	}
-	
-	public String title()
-	{
+
+	public String title() {
 		return driver.getTitle();
 	}
 	
-	public boolean changepassword(String email,String contact,String newpass,String cpass,String remarks)
+	public boolean changepassword(String email,String contact,String newpass,String cpass,String expected)
 	{
 		emailTxt.sendKeys(email);
 		contactTxt.sendKeys(contact);
@@ -51,17 +45,12 @@ public class ForgotPasswordPage extends CommonBase {
 		confirmTxt.sendKeys(cpass);
 		changePassbtn.click();
 		boolean status;
-		if(remarks.equals("Valid"))
+		if(expected.equals("Valid"))
 			status=changeSuccess.isDisplayed();
 		else
-			status=invalidUser.isDisplayed();
+			status = invalidUser.isDisplayed();
 		return status;
-		
+
 	}
-	
-	
-	
-	
-	
 
 }

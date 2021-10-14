@@ -18,25 +18,25 @@ import org.testng.Assert;
 import com.project.base.CommonBase;
 import com.project.utils.TestUtils;
 
-public class AdminPage extends CommonBase
-{		
-	@FindBy(id="inputEmail")
+public class AdminPage extends CommonBase {
+	@FindBy(id = "inputEmail")
 	WebElement adminLoginMail;
-	
-	@FindBy(name="password")
+
+	@FindBy(name = "password")
 	WebElement adminLoginPass;
-	
-	@FindBy(name="submit")
+
+	@FindBy(name = "submit")
 	WebElement adminLoginBtn;
-	
-	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/a[1]/i[2]")
+
+	@FindBy(xpath = "//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/a[1]/i[2]")
 	WebElement orderManagementList;
 
-	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]/b[1]")
+	@FindBy(xpath = "//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]/b[1]")
 	WebElement colorCode;
-	
-	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]")
+
+	@FindBy(xpath = "//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]")
 	WebElement deliveredOrders;
+<<<<<<< HEAD
 	
 	@FindBy(linkText="Create Category")
 	WebElement createCategoryBtn;
@@ -99,32 +99,41 @@ public class AdminPage extends CommonBase
 	public AdminPage()
 	{
 		PageFactory.initElements(driver,this);
+=======
+
+	public AdminPage() {
+		PageFactory.initElements(driver, this);
+>>>>>>> 37c8ca44be461405f4f77b860d54949b909f92d6
 	}
-	
-	//Login 
-	public String adminloginpageTitle()
-	{
+
+	// Login
+	public String adminloginpageTitle() {
 		return driver.getTitle();
 	}
-	
-	public void adminloginOperation(String email,String password) 
-	{
+
+	public void adminloginOperation(String email, String password) {
 		adminLoginMail.sendKeys(email);
 		adminLoginPass.sendKeys(password);
 		adminLoginBtn.click();
-		
+
 	}
+<<<<<<< HEAD
 	
 	public boolean orderManagement()
 	{
+=======
+
+	public boolean orderManagement() {
+>>>>>>> 37c8ca44be461405f4f77b860d54949b909f92d6
 		orderManagementList.click();
-		boolean status=deliveredOrders.isDisplayed();
+		boolean status = deliveredOrders.isDisplayed();
 		return status;
 	}
-	public String getColorCode()
-	{
+
+	public String getColorCode() {
 		return colorCode.getCssValue("color");
 	}
+<<<<<<< HEAD
 	public String createCategory()
 	{
 		
@@ -299,3 +308,7 @@ public class AdminPage extends CommonBase
 	        }
 	}
 }
+=======
+
+}
+>>>>>>> 37c8ca44be461405f4f77b860d54949b909f92d6

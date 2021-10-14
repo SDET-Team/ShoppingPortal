@@ -1,4 +1,5 @@
 package com.project.testcases;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 
@@ -15,59 +16,55 @@ import com.project.pages.LoginPage;
 import com.project.utils.TestUtils;
 
 public class FogotPasswordPageTest extends CommonBase {
-	
-	
+
 	LoginPage loginpage;
 	HomePage homepage;
 	ForgotPasswordPage forgotpasspage;
 	String filepath;
-	
-	public FogotPasswordPageTest()
-	{
+
+	public FogotPasswordPageTest() {
 		super();
 	}
-	
-	@DataProvider(name="testdata")
-	public Object[][] getloginData(Method m) throws IOException{
-		
-		filepath=System.getProperty("user.dir")+"\\src\\resources\\testdata\\forgotpassTestdata.xlsx";
-		Object data[][] = TestUtils.getTestData(filepath); 
-		return data; 
+
+	@DataProvider(name = "testdata")
+	public Object[][] getloginData(Method m) throws IOException {
+
+		filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\forgotpassTestdata.xlsx";
+		Object data[][] = TestUtils.getTestData(filepath);
+		return data;
 	}
-	
-	
+
 	@BeforeTest
-	public void setup()
-	{	
+	public void setup() {
 		initialization();
-		homepage=new HomePage();
-		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page","Home Page Title Not Matched");
+		homepage = new HomePage();
+		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 		navbeforeLogin.navigatetologin();
-		loginpage=new LoginPage();
-		Assert.assertEquals(loginpage.loginpageTitle(), "Shopping Portal | Signi-in | Signup","Login Page Title Not Matched");
+		loginpage = new LoginPage();
+		Assert.assertEquals(loginpage.loginpageTitle(), "Shopping Portal | Signi-in | Signup",
+				"Login Page Title Not Matched");
 		loginpage.navigateToForgotpass();
 	}
-	
-	@Test(priority=1)
-	public void validateTitle()
-	{
-	 forgotpasspage=new ForgotPasswordPage();
-	 String title=forgotpasspage.title();
-	 Assert.assertEquals(title, "Shopping Portal | Forgot Password","Forgot Password Page Title Not Matched");
-		
+
+	@Test(priority = 1)
+	public void validateTitle() {
+		forgotpasspage = new ForgotPasswordPage();
+		String title = forgotpasspage.title();
+		Assert.assertEquals(title, "Shopping Portal | Forgot Password", "Forgot Password Page Title Not Matched");
+
 	}
+
 	
 	@Test(priority=2,dataProvider="testdata")
-	public void validateForgotPassword(String email,String contact,String newpass, String cpass,String remarks)
+	public void validateForgotPassword(String email,String contact,String newpass, String cpass,String expected)
 	{
-		boolean status=forgotpasspage.changepassword(email, contact, newpass, cpass,remarks);
+		boolean status=forgotpasspage.changepassword(email, contact, newpass, cpass,expected);
 		Assert.assertTrue(status);
 	}
-	
+
 	@AfterTest
-	public void tearDown()
-	{
-		
+	public void tearDown() {
+
 		driver.close();
 	}
 
