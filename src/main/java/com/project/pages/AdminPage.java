@@ -18,25 +18,25 @@ import org.testng.Assert;
 import com.project.base.CommonBase;
 import com.project.utils.TestUtils;
 
-public class AdminPage extends CommonBase {
-	@FindBy(id = "inputEmail")
+public class AdminPage extends CommonBase
+{		
+	@FindBy(id="inputEmail")
 	WebElement adminLoginMail;
-
-	@FindBy(name = "password")
+	
+	@FindBy(name="password")
 	WebElement adminLoginPass;
-
-	@FindBy(name = "submit")
+	
+	@FindBy(name="submit")
 	WebElement adminLoginBtn;
-
-	@FindBy(xpath = "//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/a[1]/i[2]")
+	
+	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/a[1]/i[2]")
 	WebElement orderManagementList;
 
-	@FindBy(xpath = "//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]/b[1]")
+	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]/b[1]")
 	WebElement colorCode;
-
-	@FindBy(xpath = "//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]")
+	
+	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]")
 	WebElement deliveredOrders;
-<<<<<<< HEAD
 	
 	@FindBy(linkText="Create Category")
 	WebElement createCategoryBtn;
@@ -99,41 +99,32 @@ public class AdminPage extends CommonBase {
 	public AdminPage()
 	{
 		PageFactory.initElements(driver,this);
-=======
-
-	public AdminPage() {
-		PageFactory.initElements(driver, this);
->>>>>>> 37c8ca44be461405f4f77b860d54949b909f92d6
 	}
-
-	// Login
-	public String adminloginpageTitle() {
+	
+	//Login 
+	public String adminloginpageTitle()
+	{
 		return driver.getTitle();
 	}
-
-	public void adminloginOperation(String email, String password) {
+	
+	public void adminloginOperation(String email,String password) 
+	{
 		adminLoginMail.sendKeys(email);
 		adminLoginPass.sendKeys(password);
 		adminLoginBtn.click();
-
+		
 	}
-<<<<<<< HEAD
 	
 	public boolean orderManagement()
 	{
-=======
-
-	public boolean orderManagement() {
->>>>>>> 37c8ca44be461405f4f77b860d54949b909f92d6
 		orderManagementList.click();
-		boolean status = deliveredOrders.isDisplayed();
+		boolean status=deliveredOrders.isDisplayed();
 		return status;
 	}
-
-	public String getColorCode() {
+	public String getColorCode()
+	{
 		return colorCode.getCssValue("color");
 	}
-<<<<<<< HEAD
 	public String createCategory()
 	{
 		
@@ -275,11 +266,27 @@ public class AdminPage extends CommonBase {
 		wait.until(ExpectedConditions.elementToBeClickable(insertProductBtn));
 		insertProductBtn.click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        /*
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]"), "×\\\\\\\\nWell done! Product Inserted Successfully !!"));
+        
+		/*wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]"), "×\\\\\\\\nWell done! Product Inserted Successfully !!"));
 		String output=driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]")).getText();
         */
-		
+		driver.get("http://localhost/OnlineShoppingPortal/shopping/");
+		driver.findElement(By.cssSelector(".dropdown:nth-child(3) > a")).click();
+	    driver.findElement(By.cssSelector(".dropdown:nth-child(6) > a")).click();
+	    driver.findElement(By.cssSelector(".dropdown:nth-child(7) > a")).click();
+	    driver.findElement(By.cssSelector(".dropdown:nth-child(3) > a")).click();
+	    driver.findElement(By.cssSelector(".dropdown-toggle:nth-child(2)")).click();
+	    String output=driver.findElement(By.linkText("Samsung")).getText();
+	    driver.findElement(By.cssSelector(".col-sm-6:nth-child(2) img")).click();
+	    {
+	      List<WebElement> elements = driver.findElements(By.cssSelector(".owl-item:nth-child(1) > #slide1 .img-responsive"));
+	      assert(elements.size() > 0);
+	    }
+	    driver.findElement(By.name("product")).click();
+	    driver.findElement(By.name("product")).sendKeys("samsung");
+	    driver.findElement(By.cssSelector(".search-button")).click();
+	    output=driver.findElement(By.linkText("Samsung")).getText();
+	    System.out.println(output);
 		return output;
 		
 	}
@@ -308,7 +315,3 @@ public class AdminPage extends CommonBase {
 	        }
 	}
 }
-=======
-
-}
->>>>>>> 37c8ca44be461405f4f77b860d54949b909f92d6
