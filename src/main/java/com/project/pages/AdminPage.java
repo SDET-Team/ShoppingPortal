@@ -36,7 +36,7 @@ public class AdminPage extends CommonBase {
 
 	@FindBy(xpath = "//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]")
 	WebElement deliveredOrders;
-<<<<<<< HEAD
+
 	
 	@FindBy(linkText="Create Category")
 	WebElement createCategoryBtn;
@@ -99,11 +99,6 @@ public class AdminPage extends CommonBase {
 	public AdminPage()
 	{
 		PageFactory.initElements(driver,this);
-=======
-
-	public AdminPage() {
-		PageFactory.initElements(driver, this);
->>>>>>> 37c8ca44be461405f4f77b860d54949b909f92d6
 	}
 
 	// Login
@@ -117,14 +112,10 @@ public class AdminPage extends CommonBase {
 		adminLoginBtn.click();
 
 	}
-<<<<<<< HEAD
-	
-	public boolean orderManagement()
-	{
-=======
+
 
 	public boolean orderManagement() {
->>>>>>> 37c8ca44be461405f4f77b860d54949b909f92d6
+
 		orderManagementList.click();
 		boolean status = deliveredOrders.isDisplayed();
 		return status;
@@ -133,7 +124,7 @@ public class AdminPage extends CommonBase {
 	public String getColorCode() {
 		return colorCode.getCssValue("color");
 	}
-<<<<<<< HEAD
+
 	public String createCategory()
 	{
 		
@@ -280,7 +271,7 @@ public class AdminPage extends CommonBase {
 		String output=driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]")).getText();
         */
 		
-		return output;
+		//return output;
 		
 	}
 	//AutoIt
@@ -308,7 +299,4 @@ public class AdminPage extends CommonBase {
 	        }
 	}
 }
-=======
 
-}
->>>>>>> 37c8ca44be461405f4f77b860d54949b909f92d6
