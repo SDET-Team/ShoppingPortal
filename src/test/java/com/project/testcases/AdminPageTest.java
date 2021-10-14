@@ -71,6 +71,7 @@ public class AdminPageTest extends CommonBase
 		@Test(priority=4,dependsOnMethods="validateLogin")
 		public void validateTodaysOrder()
 		{
+
 			String status=adminpage.todaysOrder();
 		      Assert.assertEquals(status,"0");
 		}
@@ -80,7 +81,10 @@ public class AdminPageTest extends CommonBase
 		{
 			   String status=adminpage.createCategory();
 			   Assert.assertEquals(status,"Electronics");
-			   
+
+			List<WebElement> elements=driver.findElements(By.xpath("//*[@id=\"DataTables_Table_0\"]/thead/tr/td[1]"));
+			Assert.assertEquals(0,elements.size());
+
 			
 		}
 		

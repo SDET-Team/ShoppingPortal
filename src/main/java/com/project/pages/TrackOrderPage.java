@@ -40,8 +40,6 @@ public class TrackOrderPage extends CommonBase {
 		orderId.sendKeys(orderid);
 		emailId.sendKeys(email);
 		submitBtn.click();
-		driver.navigate().back();
-		clearForm();
 		boolean status=false;
 
 		
@@ -49,6 +47,9 @@ public class TrackOrderPage extends CommonBase {
 		{	
 			status=true;
 		}
+
+		driver.navigate().back();
+		clearForm();
 		return status;
 
 	}

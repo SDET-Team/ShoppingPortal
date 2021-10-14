@@ -37,6 +37,7 @@ public class AdminPage extends CommonBase
 	
 	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]")
 	WebElement deliveredOrders;
+
 	
 	@FindBy(linkText="Create Category")
 	WebElement createCategoryBtn;
@@ -114,9 +115,13 @@ public class AdminPage extends CommonBase
 		adminLoginBtn.click();
 		
 	}
+
 	
 	public boolean orderManagement()
 	{
+
+
+
 		orderManagementList.click();
 		boolean status=deliveredOrders.isDisplayed();
 		return status;
@@ -125,6 +130,7 @@ public class AdminPage extends CommonBase
 	{
 		return colorCode.getCssValue("color");
 	}
+
 	public String createCategory()
 	{
 		
@@ -270,6 +276,7 @@ public class AdminPage extends CommonBase
 		/*wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]"), "×\\\\\\\\nWell done! Product Inserted Successfully !!"));
 		String output=driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]")).getText();
         */
+
 		driver.get("http://localhost/OnlineShoppingPortal/shopping/");
 		driver.findElement(By.cssSelector(".dropdown:nth-child(3) > a")).click();
 	    driver.findElement(By.cssSelector(".dropdown:nth-child(6) > a")).click();
@@ -288,6 +295,7 @@ public class AdminPage extends CommonBase
 	    output=driver.findElement(By.linkText("Samsung")).getText();
 	    System.out.println(output);
 		return output;
+
 		
 	}
 	//AutoIt
@@ -314,4 +322,7 @@ public class AdminPage extends CommonBase
 	         e.printStackTrace();
 	        }
 	}
+
 }
+
+
