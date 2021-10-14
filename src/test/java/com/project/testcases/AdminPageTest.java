@@ -71,14 +71,33 @@ public class AdminPageTest extends CommonBase
 		@Test(priority=4,dependsOnMethods="validateLogin")
 		public void validateTodaysOrder()
 		{
-			List<WebElement> elements=driver.findElements(By.xpath("//*[@id=\"DataTables_Table_0\"]/thead/tr/td[1]"));
-			Assert.assertEquals("2",elements.size());
-			//tbody/tr[1]/td[1]    
-			//tbody/tr[2]/td[1]
+			String status=adminpage.todaysOrder();
+		      Assert.assertEquals(status,"0");
+		}
+		
+		@Test(priority=5)
+		public void validateUniqueCategory()
+		{
+			   String status=adminpage.createCategory();
+			   Assert.assertEquals(status,"Electronics");
+			   
 			
 		}
 		
+		@Test(priority=6)
+		public void validateUploadImage()
+		{
+			String status=adminpage.uploadImage();
+			Assert.assertEquals(status,"SamsungTVFrontView.jpg");
+		}
 		
+		@Test(priority=7)
+		public void validateInsertProduct()
+		{
+			String actualOutput=adminpage.insertProduct();
+			String expectedOutput="×\\\\nWell done! Product Inserted Successfully !!";
+		    Assert.assertEquals(actualOutput, expectedOutput);
+		}
 		
 				
 		@AfterTest
