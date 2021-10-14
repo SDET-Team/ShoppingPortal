@@ -72,9 +72,7 @@ public class AdminPageTest extends CommonBase
 		public void validateTodaysOrder()
 		{
 			List<WebElement> elements=driver.findElements(By.xpath("//*[@id=\"DataTables_Table_0\"]/thead/tr/td[1]"));
-			Assert.assertEquals("0",elements.size());
-			//tbody/tr[1]/td[1]    
-			//tbody/tr[2]/td[1]
+			Assert.assertEquals(0,elements.size());
 			
 		}
 		
