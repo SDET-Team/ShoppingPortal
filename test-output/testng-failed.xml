@@ -3,24 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-<<<<<<< HEAD
-      <class name="com.project.testcases.OrderHistoryPageTest">
-        <methods>
-          <include name="checkIfNewOrdersAtTopInOrderHistory"/>
-          <include name="setup"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- com.project.testcases.OrderHistoryPageTest -->
-=======
       <class name="com.project.testcases.AdminPageTest">
         <methods>
+          <include name="tearDown"/>
           <include name="setup"/>
           <include name="validateLogin"/>
-          <include name="tearDown"/>
           <include name="validateColor"/>
         </methods>
       </class> <!-- com.project.testcases.AdminPageTest -->
->>>>>>> b752ac4b44d4ae226dc6d1f041a3c57adb31d288
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

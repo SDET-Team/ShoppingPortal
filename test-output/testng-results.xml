@@ -1,166 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<testng-results ignored="0" total="3" passed="2" failed="1" skipped="0">
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-10-14T10:24:57 IST" name="Default suite" finished-at="2021-10-14T10:25:07 IST" duration-ms="9308">
+  <suite started-at="2021-10-14T11:36:31 IST" name="Default suite" finished-at="2021-10-14T11:36:46 IST" duration-ms="15588">
     <groups>
     </groups>
-    <test started-at="2021-10-14T10:24:57 IST" name="Default test" finished-at="2021-10-14T10:25:07 IST" duration-ms="9308">
-      <class name="com.project.testcases.OrderHistoryPageTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:com.project.testcases.OrderHistoryPageTest@7a419da4]" started-at="2021-10-14T10:24:58 IST" name="setup" finished-at="2021-10-14T10:25:03 IST" duration-ms="5765" status="PASS">
+    <test started-at="2021-10-14T11:36:31 IST" name="Default test" finished-at="2021-10-14T11:36:46 IST" duration-ms="15588">
+      <class name="com.project.testcases.CartActivityTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.project.testcases.CartActivityTest@13f17eb4]" started-at="2021-10-14T11:36:31 IST" name="setup" finished-at="2021-10-14T11:36:39 IST" duration-ms="8425" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="loginAndNavigateToMyAccount(java.lang.String,java.lang.String,java.lang.String)[pri:1, instance:com.project.testcases.OrderHistoryPageTest@7a419da4]" started-at="2021-10-14T10:25:03 IST" name="loginAndNavigateToMyAccount" data-provider="login_data" finished-at="2021-10-14T10:25:04 IST" duration-ms="917" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[anuj.lpu1@gmail.com]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[Test@123]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[pass]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- loginAndNavigateToMyAccount -->
-        <test-method signature="checkIfAllOrdersContainProductDetails()[pri:2, instance:com.project.testcases.OrderHistoryPageTest@7a419da4]" started-at="2021-10-14T10:25:04 IST" name="checkIfAllOrdersContainProductDetails" finished-at="2021-10-14T10:25:05 IST" duration-ms="438" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkIfAllOrdersContainProductDetails -->
-        <test-method signature="checkIfNewOrdersAtTopInOrderHistory()[pri:2, instance:com.project.testcases.OrderHistoryPageTest@7a419da4]" started-at="2021-10-14T10:25:05 IST" name="checkIfNewOrdersAtTopInOrderHistory" finished-at="2021-10-14T10:25:05 IST" duration-ms="374" status="FAIL">
-          <exception class="java.lang.AssertionError">
-            <message>
-              <![CDATA[Order history does not show newer orders at top. expected [true] but found [false]]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Order history does not show newer orders at top. expected [true] but found [false]
-at org.testng.Assert.fail(Assert.java:99)
-at org.testng.Assert.failNotEquals(Assert.java:1037)
-at org.testng.Assert.assertTrue(Assert.java:45)
-at com.project.testcases.OrderHistoryPageTest.checkIfNewOrdersAtTopInOrderHistory(OrderHistoryPageTest.java:58)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:567)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
-at org.testng.SuiteRunner.run(SuiteRunner.java:276)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
-at org.testng.TestNG.runSuites(TestNG.java:1063)
-at org.testng.TestNG.run(TestNG.java:1031)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkIfNewOrdersAtTopInOrderHistory -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.project.testcases.OrderHistoryPageTest@7a419da4]" started-at="2021-10-14T10:25:05 IST" name="tearDown" finished-at="2021-10-14T10:25:07 IST" duration-ms="1772" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- com.project.testcases.OrderHistoryPageTest -->
-=======
-<testng-results skipped="0" failed="1" ignored="0" total="4" passed="3">
-  <reporter-output>
-  </reporter-output>
-  <suite name="Default suite" duration-ms="11448" started-at="2021-10-13T11:02:11Z" finished-at="2021-10-13T11:02:23Z">
-    <groups>
-    </groups>
-    <test name="Default test" duration-ms="11448" started-at="2021-10-13T11:02:11Z" finished-at="2021-10-13T11:02:23Z">
-      <class name="com.project.testcases.AdminPageTest">
-        <test-method status="PASS" signature="setup()[pri:0, instance:com.project.testcases.AdminPageTest@5702b3b1]" name="setup" is-config="true" duration-ms="5601" started-at="2021-10-13T11:02:11Z" finished-at="2021-10-13T11:02:17Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method status="PASS" signature="validateTitle()[pri:1, instance:com.project.testcases.AdminPageTest@5702b3b1]" name="validateTitle" duration-ms="42" started-at="2021-10-13T11:02:17Z" finished-at="2021-10-13T11:02:17Z">
+        <test-method signature="validateTitle()[pri:1, instance:com.project.testcases.CartActivityTest@13f17eb4]" started-at="2021-10-14T11:36:39 IST" name="validateTitle" finished-at="2021-10-14T11:36:39 IST" duration-ms="26" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateTitle -->
-        <test-method status="PASS" signature="validateLogin()[pri:2, instance:com.project.testcases.AdminPageTest@5702b3b1]" name="validateLogin" duration-ms="361" started-at="2021-10-13T11:02:17Z" finished-at="2021-10-13T11:02:18Z">
+        <test-method signature="validateFeatureProductTitle()[pri:2, instance:com.project.testcases.CartActivityTest@13f17eb4]" started-at="2021-10-14T11:36:39 IST" name="validateFeatureProductTitle" finished-at="2021-10-14T11:36:39 IST" duration-ms="71" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- validateLogin -->
-        <test-method status="FAIL" signature="validateColor()[pri:3, instance:com.project.testcases.AdminPageTest@5702b3b1]" name="validateColor" duration-ms="179" started-at="2021-10-13T11:02:18Z" depends-on-methods="com.project.testcases.AdminPageTest.validateLogin" finished-at="2021-10-13T11:02:18Z">
-          <exception class="java.lang.AssertionError">
-            <message>
-              <![CDATA[expected [true] but found [false]]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
-at org.testng.Assert.fail(Assert.java:96)
-at org.testng.Assert.failNotEquals(Assert.java:776)
-at org.testng.Assert.assertTrue(Assert.java:44)
-at org.testng.Assert.assertTrue(Assert.java:54)
-at com.project.testcases.AdminPageTest.validateColor(AdminPageTest.java:64)
-at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.lang.reflect.Method.invoke(Method.java:498)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
-at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
-at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-at org.testng.TestRunner.privateRun(TestRunner.java:648)
-at org.testng.TestRunner.run(TestRunner.java:505)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
-at org.testng.SuiteRunner.run(SuiteRunner.java:364)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
-at org.testng.TestNG.runSuites(TestNG.java:1049)
-at org.testng.TestNG.run(TestNG.java:1017)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
+        </test-method> <!-- validateFeatureProductTitle -->
+        <test-method signature="validateFeatureProductSort()[pri:3, instance:com.project.testcases.CartActivityTest@13f17eb4]" started-at="2021-10-14T11:36:39 IST" name="validateFeatureProductSort" finished-at="2021-10-14T11:36:39 IST" duration-ms="131" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- validateColor -->
-        <test-method status="PASS" signature="validateTodaysOrder()[pri:4, instance:com.project.testcases.AdminPageTest@5702b3b1]" name="validateTodaysOrder" duration-ms="5072" started-at="2021-10-13T11:02:18Z" depends-on-methods="com.project.testcases.AdminPageTest.validateLogin" finished-at="2021-10-13T11:02:23Z">
+        </test-method> <!-- validateFeatureProductSort -->
+        <test-method signature="validateFeatureProductList()[pri:4, instance:com.project.testcases.CartActivityTest@13f17eb4]" started-at="2021-10-14T11:36:39 IST" name="validateFeatureProductList" finished-at="2021-10-14T11:36:44 IST" duration-ms="5002" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- validateTodaysOrder -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.project.testcases.AdminPageTest@5702b3b1]" name="tearDown" is-config="true" duration-ms="61" started-at="2021-10-13T11:02:23Z" finished-at="2021-10-13T11:02:23Z">
+        </test-method> <!-- validateFeatureProductList -->
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:com.project.testcases.CartActivityTest@13f17eb4]" started-at="2021-10-14T11:36:44 IST" name="afterTest" finished-at="2021-10-14T11:36:46 IST" duration-ms="1857" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- com.project.testcases.AdminPageTest -->
->>>>>>> b752ac4b44d4ae226dc6d1f041a3c57adb31d288
+        </test-method> <!-- afterTest -->
+      </class> <!-- com.project.testcases.CartActivityTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
