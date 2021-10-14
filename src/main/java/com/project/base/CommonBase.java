@@ -47,7 +47,7 @@ public class CommonBase {
 					driver = new ChromeDriver(); 
 				}
 				else if(browserName.equals("FireFox")){
-					System.setProperty("webdriver.gecko.driver", config.getProperty("browserDriverpath"));	
+					System.setProperty("webdriver.gecko.driver", filePath + config.getProperty("browserDriverpath"));	
 					driver = new FirefoxDriver(); 
 			}
 				driver.manage().window().maximize();

@@ -38,10 +38,15 @@ public class LoginPageTest extends CommonBase {
 	
 	@DataProvider(name="testdata")
 	public Object[][] getloginData(Method m) throws IOException{
-		if(m.getName().equals("validateLogin"))
-			filepath="C:\\Users\\shivam_kushwaha\\eclipse-workspace\\ShoppingPortal\\src\\resources\\testdata\\loginTestdata.xlsx";
-		else if(m.getName().equals("validateRegistration"))
-			filepath="C:\\Users\\shivam_kushwaha\\eclipse-workspace\\ShoppingPortal\\src\\resources\\testdata\\regTestdata.xlsx";
+		if(m.getName().equals("validateLogin")) {
+			String temp = System.getProperty("user.dir");
+			//System.out.println("################ " + temp);
+			filepath = temp + "\\src\\resources\\testdata\\loginTestdata.xlsx";
+		}
+		else if(m.getName().equals("validateRegistration")) {
+			String temp = System.getProperty("user.dir");
+			filepath = temp + "\\src\\resources\\testdata\\regTestdata.xlsx";
+		}
 		Object data[][] = TestUtils.getTestData(filepath); 
 		return data; 
 	}
