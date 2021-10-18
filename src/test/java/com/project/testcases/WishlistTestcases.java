@@ -28,7 +28,8 @@ public class WishlistTestcases extends CommonBase {
 	
 	
 	@BeforeClass
-	public void setup() {initialization();
+	public void setup() {
+		initialization();
 		HomePage homepage=new HomePage();
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched.");
 		navbeforeLogin.navigatetologin();
@@ -39,7 +40,7 @@ public class WishlistTestcases extends CommonBase {
 	
 	
 	@Test(priority=1, dataProvider="login_data")
-	public void loginAndNavigateToMyAccount(String email, String password, String expectedResult) {
+	public void login(String email, String password, String expectedResult) {
 		boolean actualResult = loginpage.loginOperation(email, password, expectedResult);
 		Assert.assertFalse(actualResult);
 		
