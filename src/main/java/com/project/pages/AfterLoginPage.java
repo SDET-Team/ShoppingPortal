@@ -17,12 +17,26 @@ public class AfterLoginPage extends CommonBase{
 	@FindBy(css = "body > header > div.top-bar.animate-dropdown > div > div > div.cnt-account > ul > li:nth-child(2) > a")
 	WebElement myAccountButton;
 	
+	@FindBy(css = ".cnt-account > ul:nth-child(1) > li:nth-child(3) > a:nth-child(1)")
+	WebElement myWishlistButton;
+	
+	@FindBy(css = "li.dropdown:nth-child(2) > a:nth-child(1)")
+	WebElement booksCategoryButton;
+	
 	public String getTitle() {
 		return driver.getTitle();
 	}
 	
 	public void goToMyAccountPage() {
 		myAccountButton.click();
+	}
+	
+	public void goToWishlistButton() {
+		myWishlistButton.click();
+	}
+	
+	public void goToBooksCategory() {
+		booksCategoryButton.click();
 	}
 
 }

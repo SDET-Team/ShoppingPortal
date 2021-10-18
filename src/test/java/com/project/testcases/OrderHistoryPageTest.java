@@ -36,7 +36,7 @@ public class OrderHistoryPageTest extends CommonBase {
 	
 	
 	@Test(priority=1, dataProvider="login_data")
-	public void loginAndNavigateToMyAccount(String email, String password, String expectedResult) {
+	public void loginAndNavigateToOrderHistory(String email, String password, String expectedResult) {
 		boolean actualResult = loginpage.loginOperation(email, password, expectedResult);
 		Assert.assertFalse(actualResult);
 		
