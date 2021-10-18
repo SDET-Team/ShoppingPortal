@@ -54,9 +54,11 @@ public class FogotPasswordPageTest extends CommonBase {
 
 	}
 
-	@Test(priority = 2, dataProvider = "testdata")
-	public void validateForgotPassword(String email, String contact, String newpass, String cpass, String remarks) {
-		boolean status = forgotpasspage.changepassword(email, contact, newpass, cpass, remarks);
+	
+	@Test(priority=2,dataProvider="testdata")
+	public void validateForgotPassword(String email,String contact,String newpass, String cpass,String expected)
+	{
+		boolean status=forgotpasspage.changepassword(email, contact, newpass, cpass,expected);
 		Assert.assertTrue(status);
 	}
 

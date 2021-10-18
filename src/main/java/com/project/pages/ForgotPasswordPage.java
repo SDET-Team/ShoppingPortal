@@ -36,16 +36,17 @@ public class ForgotPasswordPage extends CommonBase {
 	public String title() {
 		return driver.getTitle();
 	}
-
-	public boolean changepassword(String email, String contact, String newpass, String cpass, String remarks) {
+	
+	public boolean changepassword(String email,String contact,String newpass,String cpass,String expected)
+	{
 		emailTxt.sendKeys(email);
 		contactTxt.sendKeys(contact);
 		passTxt.sendKeys(newpass);
 		confirmTxt.sendKeys(cpass);
 		changePassbtn.click();
 		boolean status;
-		if (remarks.equals("Valid"))
-			status = changeSuccess.isDisplayed();
+		if(expected.equals("Valid"))
+			status=changeSuccess.isDisplayed();
 		else
 			status = invalidUser.isDisplayed();
 		return status;

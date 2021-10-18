@@ -41,23 +41,25 @@ public class TrackOrderPageTest extends CommonBase {
 		return data;
 	}
 
-	@Test(priority = 1)
-	public void validateTitle() {
-		trackorderpage = new TrackOrderPage();
-		String title = trackorderpage.title();
-		Assert.assertEquals(title, "Track Orders", "Title Not Matched");
 
+	@Test(priority=1)
+	public void validateTitle()
+	{
+		trackorderpage=new TrackOrderPage();
+		String title=trackorderpage.title();
+		Assert.assertEquals(title, "Track Orders","Title Not Matched");
+		
+		
 	}
-
-	@Test(priority = 2, dataProvider = "testdata")
-	public void validatTrackorderOperation(String orderid, String emailid, String remarks) {
-		boolean status = trackorderpage.trackingOption(orderid, emailid, remarks);
-		if (remarks.equals("Invalid"))
+	
+	@Test(priority=2,dataProvider="testdata")
+	public void validatTrackorderOperation(String orderid,String emailid,String expected)
+	{
+		boolean status=trackorderpage.trackingOption(orderid, emailid, expected);
+		if(expected.equals("Invalid"))
 			Assert.assertTrue(status);
 		else
 			Assert.assertFalse(status);
-		driver.navigate().back();
-
 	}
 
 	@AfterTest

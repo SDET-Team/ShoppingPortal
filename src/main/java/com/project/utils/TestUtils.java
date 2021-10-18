@@ -34,7 +34,6 @@ import com.project.pages.MyCartPage;
 public class TestUtils extends CommonBase {
 
 	public static long IMPLICIT_WAIT = 5;
-
 	static HttpURLConnection huc = null;
 	static int respCode = 200;
 	static CartActivity cartActivity;

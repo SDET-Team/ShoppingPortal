@@ -8,7 +8,8 @@ import com.project.base.CommonBase;
 
 public class TrackOrderPage extends CommonBase {
 
-	@FindBy(id = "exampleOrderId1")
+
+	@FindBy(name="orderid")
 	WebElement orderId;
 
 	@FindBy(id = "exampleBillingEmail1")
@@ -34,15 +35,21 @@ public class TrackOrderPage extends CommonBase {
 
 	}
 
-	public boolean trackingOption(String orderid, String email, String remarks) {
+	public boolean trackingOption(String orderid,String email,String expected)
+	{
 		orderId.sendKeys(orderid);
 		emailId.sendKeys(email);
 		submitBtn.click();
-		boolean status = false;
+		boolean status=false;
+
+		
+		if(expected.equals("Invalid") && invalidOrder.isDisplayed() && invalidOrder.getText().equals("Either order id or Registered email id is invalid"))
+		{	
+			status=true;
+		}
+
+		driver.navigate().back();
 		clearForm();
-		if (remarks.equals("Invalid")
-				&& invalidOrder.getText().equals("Either order id or Registered email id is invalid"))
-			status = true;
 		return status;
 
 	}

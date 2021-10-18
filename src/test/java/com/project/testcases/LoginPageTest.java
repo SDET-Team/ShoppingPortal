@@ -33,7 +33,7 @@ public class LoginPageTest extends CommonBase {
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 		navbeforeLogin.navigatetologin();
 	}
-
+	
 	@DataProvider(name = "testdata")
 	public Object[][] getloginData(Method m) throws IOException {
 		if (m.getName().equals("validateLogin"))
@@ -51,12 +51,14 @@ public class LoginPageTest extends CommonBase {
 		Assert.assertEquals(title, "Shopping Portal | Signi-in | Signup", "Login Page Title Not Matched");
 
 	}
-
-	@Test(priority = 2, dataProvider = "testdata")
-	public void validateLogin(String email, String password, String remarks) {
-
-		boolean status = loginpage.loginOperation(email, password, remarks);
-		if (remarks.equals("pass")) {
+	
+	@Test(priority=2,dataProvider="testdata")
+	public void validateLogin(String email,String password,String expected) 
+	{	
+		
+		boolean status=loginpage.loginOperation(email, password,expected);
+		if(expected.equals("pass"))
+		{
 			Assert.assertFalse(status);
 			navafterLogin.logout();
 			Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
@@ -78,10 +80,12 @@ public class LoginPageTest extends CommonBase {
 				"Login Page Title Not Matched");
 	}
 
-	@Test(priority = 4, dataProvider = "testdata")
-	public void validateRegistration(String fullname, String email, String contact, String newpass, String cpass,
-			String remarks) {
-		boolean status = loginpage.regOperation(fullname, email, contact, newpass, cpass, remarks);
+	
+	@Test(priority=4, dataProvider="testdata")
+	public void validateRegistration(String fullname,String email,String contact,String newpass,String cpass,String expected)
+	{
+		boolean status=loginpage.regOperation(fullname, email, contact, newpass, cpass,expected);
+
 		Assert.assertTrue(status);
 
 	}

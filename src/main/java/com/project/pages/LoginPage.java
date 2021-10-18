@@ -57,14 +57,15 @@ public class LoginPage extends CommonBase {
 	public String loginpageTitle() {
 		return driver.getTitle();
 	}
-
-	public boolean loginOperation(String email, String password, String remarks) {
+	
+	public boolean loginOperation(String email,String password,String expected) 
+	{
 		loginEmail.sendKeys(email);
 		loginPass.sendKeys(password);
 		loginBtn.click();
-		boolean status = false;
-		if (remarks.equals("fail"))
-			status = invalidLogin.isDisplayed();
+		boolean status=false;
+		if(expected.equals("fail"))
+			status=invalidLogin.isDisplayed();
 		return status;
 	}
 
@@ -87,9 +88,10 @@ public class LoginPage extends CommonBase {
 		newPass.clear();
 		confirmPass.clear();
 	}
-
-	public boolean regOperation(String fname, String email, String contact, String pass, String cpass, String remarks) {
-
+ 
+	
+	public boolean regOperation(String fname,String email,String contact,String pass,String cpass,String expected)
+	{
 		Alert alert;
 		boolean status = false, btnStatus = true;
 
@@ -98,33 +100,38 @@ public class LoginPage extends CommonBase {
 		contactNo.sendKeys(contact);
 		newPass.sendKeys(pass);
 		confirmPass.sendKeys(cpass);
-		if (remarks.equals("Duplicate email") && !(signupBtn.isEnabled()) && duplicateEmail.isDisplayed()) {
+		if(expected.equals("Duplicate email") && !(signupBtn.isEnabled()) && duplicateEmail.isDisplayed())
+		{
 			regFormclear();
 			return true;
 		}
 		signupBtn.click();
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 
-		if (remarks.equals("Password and Confirm Password Field do not match  !!")) {
+		WebDriverWait wait = new WebDriverWait(driver,10);
+		
+		if(expected.equals("Password and Confirm Password Field do not match  !!"))
+		{
 			wait.until(ExpectedConditions.alertIsPresent());
 			alert = TestUtils.switchToAlert();
 			String msg = alert.getText();
 			alert.accept();
-			if (msg.equals(remarks))
-				status = true;
-			else
-				status = false;
-
-		} else {
+			if(msg.equals(expected))
+				status=true;
+			else 
+				status= false;
+			
+		}
+		else
+		{
 			wait.until(ExpectedConditions.alertIsPresent());
 			alert = TestUtils.switchToAlert();
 			String msg = alert.getText();
 			alert.accept();
-			if (msg.equals(remarks))
-				status = true;
-			else
-				status = false;
-
+			if(msg.equals(expected))
+				status=true;
+			else 
+				status= false;
+			
 		}
 
 		regFormclear();
