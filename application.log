@@ -1,14 +1,39 @@
-2021-10-19 10:13:07,248  INFO [main] CommonBase:54 - Testcase Passed!
-2021-10-19 10:13:07,857  INFO [main] CommonBase:61 - Validating Tracking order operation by providing correct emailid and orderid
-2021-10-19 10:13:07,857  INFO [main] CommonBase:62 - Order details: Orderid: {0} , Emailid: {1}
-2021-10-19 10:13:08,284  INFO [main] CommonBase:65 - Testcase Passed!
-2021-10-19 10:13:08,314  INFO [main] CommonBase:73 - Validating Tracking order operation by providing incorrect emailid or orderid
-2021-10-19 10:13:08,315  INFO [main] CommonBase:74 - Order details: Orderid: {0} , Emailid: {1}
-2021-10-19 10:13:08,640  INFO [main] CommonBase:77 - Testcase Passed!
-2021-10-19 10:13:08,641  INFO [main] CommonBase:73 - Validating Tracking order operation by providing incorrect emailid or orderid
-2021-10-19 10:13:08,641  INFO [main] CommonBase:74 - Order details: Orderid: {0} , Emailid: {1}
-2021-10-19 10:13:08,957  INFO [main] CommonBase:77 - Testcase Passed!
-2021-10-19 10:13:08,960  INFO [main] CommonBase:73 - Validating Tracking order operation by providing incorrect emailid or orderid
-2021-10-19 10:13:08,960  INFO [main] CommonBase:74 - Order details: Orderid: {0} , Emailid: {1}
-2021-10-19 10:13:09,276  INFO [main] CommonBase:77 - Testcase Passed!
-2021-10-19 10:13:09,277  INFO [main] CommonBase:82 - Closing Browser
+2021-10-19 10:29:28,723  INFO [main] CommonBase:64 - Testcase Passed!
+2021-10-19 10:29:29,262  INFO [main] CommonBase:69 - Validating Login operation using correct Credentials
+2021-10-19 10:29:29,262  INFO [main] CommonBase:70 - Logging using Username:{0} , Password:{1}
+2021-10-19 10:29:29,851  INFO [main] CommonBase:73 - Testcase Passed!
+2021-10-19 10:29:30,226  INFO [main] CommonBase:76 - User logged out!!
+2021-10-19 10:29:30,336  INFO [main] CommonBase:69 - Validating Login operation using correct Credentials
+2021-10-19 10:29:30,336  INFO [main] CommonBase:70 - Logging using Username:{0} , Password:{1}
+2021-10-19 10:29:30,634  INFO [main] CommonBase:73 - Testcase Passed!
+2021-10-19 10:29:30,853  INFO [main] CommonBase:76 - User logged out!!
+2021-10-19 10:29:30,963  INFO [main] CommonBase:69 - Validating Login operation using correct Credentials
+2021-10-19 10:29:30,964  INFO [main] CommonBase:70 - Logging using Username:{0} , Password:{1}
+2021-10-19 10:29:31,251  INFO [main] CommonBase:73 - Testcase Passed!
+2021-10-19 10:29:31,471  INFO [main] CommonBase:76 - User logged out!!
+2021-10-19 10:29:31,583  INFO [main] CommonBase:69 - Validating Login operation using correct Credentials
+2021-10-19 10:29:31,583  INFO [main] CommonBase:70 - Logging using Username:{0} , Password:{1}
+2021-10-19 10:29:31,884  INFO [main] CommonBase:73 - Testcase Passed!
+2021-10-19 10:29:32,113  INFO [main] CommonBase:76 - User logged out!!
+2021-10-19 10:29:32,272  INFO [main] CommonBase:82 - Validating Login operation using incorrect Credentials
+2021-10-19 10:29:32,272  INFO [main] CommonBase:83 - Logging using Username:{0} , Password: {1}
+2021-10-19 10:29:32,589  INFO [main] CommonBase:93 - Testcase Passed!
+2021-10-19 10:29:32,591  INFO [main] CommonBase:82 - Validating Login operation using incorrect Credentials
+2021-10-19 10:29:32,591  INFO [main] CommonBase:83 - Logging using Username:{0} , Password: {1}
+2021-10-19 10:29:32,883  INFO [main] CommonBase:93 - Testcase Passed!
+2021-10-19 10:29:32,885  INFO [main] CommonBase:82 - Validating Login operation using incorrect Credentials
+2021-10-19 10:29:32,885  INFO [main] CommonBase:83 - Logging using Username:{0} , Password: {1}
+2021-10-19 10:29:33,192  INFO [main] CommonBase:93 - Testcase Passed!
+2021-10-19 10:29:33,193  INFO [main] CommonBase:82 - Validating Login operation using incorrect Credentials
+2021-10-19 10:29:33,194  INFO [main] CommonBase:83 - Logging using Username:{0} , Password: {1}
+2021-10-19 10:29:33,486  INFO [main] CommonBase:93 - Testcase Passed!
+2021-10-19 10:29:33,488  INFO [main] CommonBase:82 - Validating Login operation using incorrect Credentials
+2021-10-19 10:29:33,488  INFO [main] CommonBase:83 - Logging using Username:{0} , Password: {1}
+2021-10-19 10:29:33,793  INFO [main] CommonBase:93 - Testcase Passed!
+2021-10-19 10:29:33,794  INFO [main] CommonBase:99 - Validating that link for forgot password page is not broken
+2021-10-19 10:29:33,943  INFO [main] CommonBase:103 - Testcase Passed!
+2021-10-19 10:29:34,128  INFO [main] CommonBase:113 - Validating registration operation by providing all correct details
+2021-10-19 10:29:34,681  INFO [main] CommonBase:113 - Validating registration operation by providing all correct details
+2021-10-19 10:29:35,111  INFO [main] CommonBase:124 - Validating registration operation by providing some incorrect details
+2021-10-19 10:29:40,592  INFO [main] CommonBase:124 - Validating registration operation by providing some incorrect details
+2021-10-19 10:29:46,172  INFO [main] CommonBase:141 - Closing the Browser

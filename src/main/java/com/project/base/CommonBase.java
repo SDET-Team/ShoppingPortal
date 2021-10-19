@@ -5,11 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,7 +18,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
+import org.openqa.selenium.interactions.Actions;
 import com.project.pages.common.NavbarAfterLogin;
 import com.project.pages.common.NavbarBeforeLogin;
 import com.project.utils.TestUtils;
@@ -29,18 +30,20 @@ public class CommonBase {
 	public static FileInputStream input;
 	public static NavbarBeforeLogin navbeforeLogin;
 	public static NavbarAfterLogin navafterLogin;
-
+	public static String filePath;
+	public static JavascriptExecutor javascriptExecutor = null;
+	public static Alert alert = null;
+	public static Actions actions = null;	
 	public static Logger logger = LogManager.getLogger(CommonBase.class.getName());
 	public static Logger log;
 	
-	public static String testDataDirectoryPath = "\\src\\resources\\testdata";
-
+	
 	// Create a constructor and initialize the variables
 	public CommonBase() {
 		try {
 			
 			config = new Properties();
-			String filePath = System.getProperty("user.dir");
+			filePath = System.getProperty("user.dir");
 			input = new FileInputStream(filePath + "\\src\\main\\java\\com\\project\\config\\config.properties");
 			config.load(input);
 			
@@ -147,5 +150,5 @@ public class CommonBase {
 		navafterLogin = new NavbarAfterLogin(driver);
 
 	}
-
+	
 }

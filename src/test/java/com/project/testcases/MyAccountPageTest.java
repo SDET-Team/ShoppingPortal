@@ -175,9 +175,7 @@ public class MyAccountPageTest extends CommonBase {
 	
 	@AfterClass
 	public void tearDown() {
-		try {
-			Thread.sleep(5*1000);
-		} catch(Exception e) {}
+		//try { Thread.sleep(5*1000); } catch(Exception e) {}
 		driver.quit();
 	}
 	

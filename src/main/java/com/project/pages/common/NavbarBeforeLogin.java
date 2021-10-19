@@ -1,5 +1,6 @@
 package com.project.pages.common;
 
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,14 +21,30 @@ public class NavbarBeforeLogin {
 	@FindBy(xpath = "//span[contains(text(),'Track Order')]")
 	WebElement trackNavbtn;
 
-	public void navigatetologin() {
+	@FindBy(className = "logo")
+	WebElement logoElement;
+
+	@FindBy(linkText = "My Cart")
+	WebElement myCartElement;
+	
+	public void navigatetologin() throws ElementNotInteractableException {
 		loginNavbtn.click();
 
 	}
 
-	public void clickontrackorder() {
+	public void clickontrackorder() throws ElementNotInteractableException {
 		trackNavbtn.click();
 
+	}
+
+	public void clickOnLogoImage() throws ElementNotInteractableException {
+		logoElement.click();
+
+	}
+
+	public void clickOnMyCartImage() throws ElementNotInteractableException {
+		myCartElement.click();
+		
 	}
 
 }

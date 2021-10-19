@@ -2,9 +2,13 @@ package com.project.pages;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,7 +36,13 @@ public class CartActivity extends CommonBase {
 	WebElement productName;
 
 	@FindBy(className = "product-price")
+	WebElement productPriceSection;
+
+	@FindBy(className = "price")
 	WebElement productPrice;
+
+	@FindBy(className = "price-before-discount")
+	WebElement priceBeforeDiscount;
 
 	@FindBy(className = "action")
 	WebElement addToCartAction;
@@ -43,10 +53,13 @@ public class CartActivity extends CommonBase {
 	@FindBy(tagName = "span")
 	WebElement spanElement;
 
+	@FindBy(xpath = "//div[@class='sections prod-slider-small outer-top-small']//div[@class='row']//div[@class=\"owl-wrapper\"]")
+	List<WebElement> otherSectionElements;
+
 	public CartActivity() {
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public String indexPageTitle() {
 		return driver.getTitle();
 	}
@@ -67,6 +80,14 @@ public class CartActivity extends CommonBase {
 		return featuresProductElement.getText();
 	}
 
+	public List<WebElement> getfeatureProductListElement() {
+		return featureProductList;
+	}
+
+	public List<WebElement> getOtherSectionListElement() {
+		return otherSectionElements;
+	}
+
 	public ArrayList<String> getfeatureProductSortElement() {
 
 		ArrayList<String> webArrayList = new ArrayList<>();
@@ -76,32 +97,53 @@ public class CartActivity extends CommonBase {
 		return webArrayList;
 	}
 
-	public List<WebElement> getfeatureProductListElement() {
-		return featureProductList;
-	}
-
 	public ArrayList<String> getProductDetails(WebElement webElement) {
 		ArrayList<String> productDetailsList = new ArrayList<>();
 
 		WebElement element1 = this.getWebElement("tagname", "img", webElement);
-		String productImageSrcString = element1.getAttribute("src");
-		productDetailsList.add(productImageSrcString);
+		productDetailsList.add(element1.getAttribute("src"));
 
 		WebElement element2 = this.getWebElement("classname", "name", webElement);
 		WebElement element3 = this.getWebElement("tagname", "a", element2);
-		String productPageLink = element3.getAttribute("href");
-		productDetailsList.add(productPageLink);
-		productDetailsList.add(element3.getText());
+		productDetailsList.add(element3.getAttribute("href"));
+		productDetailsList.add(element3.getAttribute("innerHTML"));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		javascriptExecutor = (JavascriptExecutor) driver;
+		javascriptExecutor.executeScript("arguments[0].scrollIntoView();", element3);
 
-		List<WebElement> priceList = this.getWebElements("tagname", "span", productPrice);
+		List<WebElement> priceList = this.getWebElements("tagname", "span", productPriceSection);
 		for (WebElement e : priceList) {
-			productDetailsList.add(e.getText());
+			productDetailsList.add(e.getAttribute("innerHTML").trim());
 		}
 
-//		WebElement element4 = this.getWebElement("tagname", "a", addToCartAction);
-//		productDetailsList.add("");
+		WebElement element4 = this.getWebElement("tagname", "a", addToCartAction);
+		productDetailsList.add(element4.getAttribute("innerHTML"));
 
 		return productDetailsList;
+	}
+	
+	public String handleClickActionOnWebElement(WebElement webElement, int i) throws ElementNotInteractableException {
+
+		WebElement element = webElement.findElement(By.xpath("//div[" + i + "]//div[1]//div[1]//div[1]//div[3]//a[1]"));
+		String textString = element.getText();
+		try {
+			javascriptExecutor = (JavascriptExecutor) driver;
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			javascriptExecutor.executeScript("arguments[0].scrollIntoView();", element);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			javascriptExecutor.executeScript("arguments[0].click();", element);
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+			alert = driver.switchTo().alert();
+
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			alert.accept();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		} catch (NoAlertPresentException e) {
+			logger.error("NoAlertPresentException");
+		}
+
+		return textString;
 	}
 
 	public By getMethodBy(String methodString, String tagName) {

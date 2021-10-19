@@ -1,5 +1,6 @@
 package com.project.testcases;
 
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -20,7 +21,6 @@ import com.project.pages.AdminPage;
 import com.project.pages.HomePage;
 import com.project.pages.LoginPage;
 import com.project.utils.TestUtils;
-
 public class AdminPageTest extends CommonBase
 {
 		AdminPage adminpage;
@@ -81,6 +81,7 @@ public class AdminPageTest extends CommonBase
 		{
 			   String status=adminpage.createCategory();
 			   Assert.assertEquals(status,"Electronics");
+
 			List<WebElement> elements=driver.findElements(By.xpath("//*[@id=\"DataTables_Table_0\"]/thead/tr/td[1]"));
 			Assert.assertEquals(0,elements.size());
 
@@ -98,7 +99,7 @@ public class AdminPageTest extends CommonBase
 		public void validateInsertProduct()
 		{
 			String actualOutput=adminpage.insertProduct();
-			String expectedOutput="×\\\\nWell done! Product Inserted Successfully !!";
+			String expectedOutput="Samsung";
 		    Assert.assertEquals(actualOutput, expectedOutput);
 		}
 		
@@ -109,7 +110,8 @@ public class AdminPageTest extends CommonBase
 			driver.close();
 		}
 		
-}
-		
 		
 	
+
+
+}
