@@ -1,34 +1,48 @@
 package com.project.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.project.base.CommonBase;
+import com.project.utils.TestUtils;
 
 public class ForgotPasswordPage extends CommonBase {
 
 	@FindBy(name = "email")
-	WebElement emailTxt;
+	public WebElement emailTxt;
 
 	@FindBy(id = "contact")
-	WebElement contactTxt;
+	public WebElement contactTxt;
 
 	@FindBy(name = "password")
-	WebElement passTxt;
+	public WebElement passTxt;
 
 	@FindBy(id = "confirmpassword")
-	WebElement confirmTxt;
+	public WebElement confirmTxt;
 
 	@FindBy(name = "change")
-	WebElement changePassbtn;
+	public WebElement changePassbtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Invalid email id or Contact no')]")
-	WebElement invalidUser;
-
+	public WebElement invalidUser;
+	
 	@FindBy(xpath = "//span[contains(text(),'Password Changed Successfully')]")
-	WebElement changeSuccess;
+	public WebElement changeSuccess;
 
+	
+	
+	public WebElement invaliduserElement()
+	{
+		return invalidUser;
+	}
+	
+	public WebElement changeSuccessElement()
+	{
+		return changeSuccess;
+	}
+	
 	public ForgotPasswordPage() {
 		PageFactory.initElements(driver, this);
 	}
@@ -37,20 +51,24 @@ public class ForgotPasswordPage extends CommonBase {
 		return driver.getTitle();
 	}
 	
-	public boolean changepassword(String email,String contact,String newpass,String cpass,String expected)
-	{
+	public String changepassword(String email,String contact,String newpass,String cpass)
+	{	
+		String msg="";
 		emailTxt.sendKeys(email);
 		contactTxt.sendKeys(contact);
 		passTxt.sendKeys(newpass);
 		confirmTxt.sendKeys(cpass);
 		changePassbtn.click();
-		boolean status;
-		if(expected.equals("Valid"))
-			status=changeSuccess.isDisplayed();
-		else
-			status = invalidUser.isDisplayed();
-		return status;
-
+		
+		if(TestUtils.isVisible(invalidUser))
+		{
+			msg=invalidUser.getText();
+		}
+		else if(TestUtils.isVisible(changeSuccess))
+			msg=changeSuccess.getText();
+		else if(!newpass.equals(cpass))
+			msg="New Password and Confirm Password should be same!!!";
+		return msg;
 	}
 
 }

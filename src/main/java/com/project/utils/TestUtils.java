@@ -10,16 +10,25 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
+import org.openqa.selenium.TimeoutException;
 
 import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.project.base.CommonBase;
 
@@ -29,22 +38,26 @@ public class TestUtils extends CommonBase {
 	static HttpURLConnection huc = null;
 	static int respCode = 200;
 
-	public static Object[][] getTestData(String filepath) throws IOException {
+	public static Object[][] getTestData(String filepath,String type) throws IOException {
 
 		File src = new File(filepath);
 		FileInputStream fileinput = new FileInputStream(src);
 		Workbook wb = new XSSFWorkbook(fileinput);
-		XSSFSheet sheet1 = (XSSFSheet) wb.getSheetAt(0);
+		XSSFSheet sheet1;
+		if(type.equals("Positive"))
+			sheet1= (XSSFSheet) wb.getSheetAt(0);
+		else
+			sheet1 = (XSSFSheet) wb.getSheetAt(1);
 
 		DataFormatter formatter = new DataFormatter();
 
 		int row_count = sheet1.getLastRowNum();
 		int column_count = sheet1.getRow(0).getLastCellNum();
-
 		Object data[][] = new Object[row_count][column_count];
 		for (int i = 0; i < row_count; i++) {
 			for (int j = 0; j < column_count; j++) {
-				data[i][j] = sheet1.getRow(i + 1).getCell(j).toString();
+				
+				data[i][j] =sheet1.getRow(i + 1).getCell(j).toString();
 			}
 
 		}
@@ -142,5 +155,45 @@ public class TestUtils extends CommonBase {
 		}
 
 	}
+	
+	
+	public static boolean isAlertPresent() 
+	{ 
+		
+	    try 
+	    { 	
+	    	WebDriverWait wait = new WebDriverWait(driver,50);
+			wait.until(ExpectedConditions.alertIsPresent()); 
+	        return true; 
+	    }
+	    catch(TimeoutException e)
+	    {	
+	    	return false;
+	    }
+	    
+	    
+	    
+		
+	}
+	
+	public static boolean isVisible(WebElement element)
+	{
+	  try {
+		  
+		  	if(element.isDisplayed())
+		  		{
+		  
+		  		return true;
+		  		}
+	  }
+	  catch(Exception e){
+		  	
+	  		return false;
+	  		}
+	return false;
+	}
+	
+	
+	
 
 }

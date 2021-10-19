@@ -1,0 +1,14 @@
+2021-10-19 10:13:07,248  INFO [main] CommonBase:54 - Testcase Passed!
+2021-10-19 10:13:07,857  INFO [main] CommonBase:61 - Validating Tracking order operation by providing correct emailid and orderid
+2021-10-19 10:13:07,857  INFO [main] CommonBase:62 - Order details: Orderid: {0} , Emailid: {1}
+2021-10-19 10:13:08,284  INFO [main] CommonBase:65 - Testcase Passed!
+2021-10-19 10:13:08,314  INFO [main] CommonBase:73 - Validating Tracking order operation by providing incorrect emailid or orderid
+2021-10-19 10:13:08,315  INFO [main] CommonBase:74 - Order details: Orderid: {0} , Emailid: {1}
+2021-10-19 10:13:08,640  INFO [main] CommonBase:77 - Testcase Passed!
+2021-10-19 10:13:08,641  INFO [main] CommonBase:73 - Validating Tracking order operation by providing incorrect emailid or orderid
+2021-10-19 10:13:08,641  INFO [main] CommonBase:74 - Order details: Orderid: {0} , Emailid: {1}
+2021-10-19 10:13:08,957  INFO [main] CommonBase:77 - Testcase Passed!
+2021-10-19 10:13:08,960  INFO [main] CommonBase:73 - Validating Tracking order operation by providing incorrect emailid or orderid
+2021-10-19 10:13:08,960  INFO [main] CommonBase:74 - Order details: Orderid: {0} , Emailid: {1}
+2021-10-19 10:13:09,276  INFO [main] CommonBase:77 - Testcase Passed!
+2021-10-19 10:13:09,277  INFO [main] CommonBase:82 - Closing Browser
