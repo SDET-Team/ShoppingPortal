@@ -1,24 +1,23 @@
 package com.project.testcases;
 
+import java.io.IOException;
+
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.google.common.base.Verify;
 import com.project.base.CommonBase;
 import com.project.pages.AfterLoginPage;
 import com.project.pages.HomePage;
 import com.project.pages.LoginPage;
 import com.project.pages.MyAccountPage;
+import com.project.utils.TestUtils;
 
 public class MyAccountPageTest extends CommonBase {
 	
-	LoginPage loginpage;
-	//HomePage homepage;
-	//AfterLoginPage afterLoginPage;
-	MyAccountPage myAccountPage;
+	AfterLoginPage afterLoginPage;
 	
 	
 	public MyAccountPageTest() {
@@ -26,40 +25,49 @@ public class MyAccountPageTest extends CommonBase {
 	}
 	
 	
-	@BeforeClass
+	@BeforeTest
 	public void setup() {	
 		initialization();
 		HomePage homepage=new HomePage();
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched.");
 		navbeforeLogin.navigatetologin();
 		
-		loginpage=new LoginPage();
+		LoginPage loginpage=new LoginPage();
 		Assert.assertEquals(loginpage.loginpageTitle(), "Shopping Portal | Signi-in | Signup", "Login Page Title Not Matched.");
+		
+		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";
+		Object[][] data;
+		try {
+			data = TestUtils.getTestData(file, 0);
+			String email = data[0][0].toString();
+			String password = data[0][1].toString();
+			
+			loginpage.loginOperation(email, password);
+			
+			afterLoginPage = new AfterLoginPage();
+			Assert.assertEquals(afterLoginPage.getTitle(), "My Cart");
+		} catch (IOException e) {  }
 	}
 	
-	
-	@Test(priority=1, dataProvider="login_data")
-	public void loginAndNavigateToMyAccount(String email, String password, String expectedResult) {
-		boolean actualResult = loginpage.loginOperation(email, password, expectedResult);
-		Assert.assertFalse(actualResult);
-		
-		AfterLoginPage afterLoginPage = new AfterLoginPage();
-		Assert.assertEquals(afterLoginPage.getTitle(), "My Cart");
+	@Test
+	public void checkMyProfileEmailFieldNotEditable() {
 		afterLoginPage.goToMyAccountPage();
 		
-		myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage();
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
-	}
-	
-	@Test(priority=2)
-	public void checkMyProfileEmailFieldNotEditable() {
+		
 		myAccountPage.returnToMyAccount();
 		myAccountPage.collapseMyProfileTab();
 		Assert.assertEquals(myAccountPage.getMyProfileEmailField().getAttribute("readOnly"), "true", "Email field in My Profile tab should be always inactive, but found active.");
 	}
 	
-	@Test(priority=3)
+	@Test
 	public void changeNameAndCheckIfWebpageUpdatesNameInWidgets() {
+		afterLoginPage.goToMyAccountPage();
+		
+		MyAccountPage myAccountPage = new MyAccountPage();
+		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
+		
 		myAccountPage.returnToMyAccount();
 		myAccountPage.collapseMyProfileTab();
 		String prevName = myAccountPage.getMyProfileNameField().getAttribute("value");
@@ -77,54 +85,68 @@ public class MyAccountPageTest extends CommonBase {
 		Assert.assertEquals(welcomeButtonText, expectedWelcomeButtonText, "Welcome button text not changed after name update in profile.");
 	}
 	
-	@Test(priority=4, dataProvider="change_password_data")
+	@Test(dataProvider="change_password_data")
 	public void changePasswordWithValidCurrentPassword(String curPass, String newPass) {
+		afterLoginPage.goToMyAccountPage();
+		
+		MyAccountPage myAccountPage = new MyAccountPage();
+		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
+		
 		myAccountPage.returnToMyAccount();
 		myAccountPage.collapseChangePasswordTab();
 		boolean output = myAccountPage.changeAccountPassword(curPass, newPass);
 		Assert.assertTrue(output, "Changing password of user account failed.");
 	}
 	
-	@Test(priority=5)
-	public void checkBillingAddressPinCodeOnlyAcceptNumbers() {
-		myAccountPage.returnToMyAccount();
-		myAccountPage.gotoAddressSettings();
-		myAccountPage.collapseBillingAddressTab();
-		String oldPinCode = myAccountPage.getBillingAddressPinCodeField().getAttribute("value");
-		String newPinCode = oldPinCode + "abc";
-		boolean output = myAccountPage.changeBillingAddressPinCode(newPinCode);
-		Assert.assertTrue(output, "Updating billing address Pin code failed.");
-		String updatedPinCode = myAccountPage.getBillingAddressPinCodeField().getAttribute("value");
-		String expectedPinCode = newPinCode;
-		expectedPinCode = extractStartingNumbers(expectedPinCode);
-		Assert.assertEquals(updatedPinCode, expectedPinCode, "New pin code is not updated.");
-	}
-	
-	@Test(priority=5)
-	public void checkShippingAddressPinCodeOnlyAcceptNumbers() {
-		myAccountPage.returnToMyAccount();
-		myAccountPage.gotoAddressSettings();
-		myAccountPage.collapseShippingAddressTab();
-		String oldPinCode = myAccountPage.getShippingAddressPinCodeField().getAttribute("value");
-		String newPinCode = oldPinCode + "abc";
-		boolean output = myAccountPage.changeShippingAddressPinCode(newPinCode);
-		Assert.assertTrue(output, "Updating shipping address Pin code failed.");
-		String updatedPinCode = myAccountPage.getShippingAddressPinCodeField().getAttribute("value");
-		String expectedPinCode = newPinCode;
-		expectedPinCode = extractStartingNumbers(expectedPinCode);
-		Assert.assertEquals(updatedPinCode, expectedPinCode, "New pin code is not updated.");
-	}
-	
-	@Test(priority=6)
-	public void checkBillingAddressStateCityAcceptOnlyCharacters() {
+	@Test(dataProvider="billing_address_pin_data")
+	public void checkBillingAddressPinCodeOnlyAcceptNumbers(String newPin) {
+		afterLoginPage.goToMyAccountPage();
+		
+		MyAccountPage myAccountPage = new MyAccountPage();
+		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
+		
 		myAccountPage.returnToMyAccount();
 		myAccountPage.gotoAddressSettings();
 		myAccountPage.collapseBillingAddressTab();
 		
-		String oldState = myAccountPage.getBillingAddressStateField().getAttribute("value");
-		String oldCity = myAccountPage.getBillingAddressCityField().getAttribute("value");
-		String newState = oldState + "123";
-		String newCity = oldCity + "123";
+		boolean output = myAccountPage.changeBillingAddressPinCode(newPin);
+		Assert.assertTrue(output, "Updating billing address Pin code failed.");
+		String updatedPinCode = myAccountPage.getBillingAddressPinCodeField().getAttribute("value");
+		String expectedPinCode = newPin;
+		expectedPinCode = extractStartingNumbers(expectedPinCode);
+		Assert.assertEquals(updatedPinCode, expectedPinCode, "New pin code with characters got accepted, which was not expected.");
+	}
+	
+	@Test(dataProvider="shipping_address_pin_data")
+	public void checkShippingAddressPinCodeOnlyAcceptNumbers(String newPin) {
+		afterLoginPage.goToMyAccountPage();
+		
+		MyAccountPage myAccountPage = new MyAccountPage();
+		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
+		
+		myAccountPage.returnToMyAccount();
+		myAccountPage.gotoAddressSettings();
+		myAccountPage.collapseShippingAddressTab();
+		
+		boolean output = myAccountPage.changeShippingAddressPinCode(newPin);
+		Assert.assertTrue(output, "Updating shipping address Pin code failed.");
+		String updatedPinCode = myAccountPage.getShippingAddressPinCodeField().getAttribute("value");
+		String expectedPinCode = newPin;
+		expectedPinCode = extractStartingNumbers(expectedPinCode);
+		Assert.assertEquals(updatedPinCode, expectedPinCode, "New pin code with characters got accepted, which was not expected.");
+	}
+	
+	@Test(dataProvider="billing_address_state_city_data")
+	public void checkBillingAddressStateCityAcceptOnlyCharacters(String newState, String newCity) {
+		afterLoginPage.goToMyAccountPage();
+		
+		MyAccountPage myAccountPage = new MyAccountPage();
+		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
+		
+		myAccountPage.returnToMyAccount();
+		myAccountPage.gotoAddressSettings();
+		myAccountPage.collapseBillingAddressTab();
+		
 		boolean output = myAccountPage.changeBillingAddressStateAndCity(newState, newCity);
 		Assert.assertTrue(output, "Updating billing address state and city failed.");
 		
@@ -135,19 +157,20 @@ public class MyAccountPageTest extends CommonBase {
 		String expectedCity = newCity;
 		expectedCity = extractStartingCharacters(expectedCity);
 		
-		Assert.assertTrue( (updatedState.equals(expectedState) && updatedCity.equals(expectedCity)), "State and city not updated.");
+		Assert.assertTrue( (updatedState.equals(expectedState) && updatedCity.equals(expectedCity)), "State and city got updated with numbers, which is not expected.");
 	}
 	
-	@Test(priority=6)
-	public void checkShippingAddressStateCityAcceptOnlyCharacters() {
+	@Test(dataProvider="shipping_address_state_city_data")
+	public void checkShippingAddressStateCityAcceptOnlyCharacters(String newState, String newCity) {
+		afterLoginPage.goToMyAccountPage();
+		
+		MyAccountPage myAccountPage = new MyAccountPage();
+		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
+		
 		myAccountPage.returnToMyAccount();
 		myAccountPage.gotoAddressSettings();
 		myAccountPage.collapseShippingAddressTab();
 		
-		String oldState = myAccountPage.getShippingAddressStateField().getAttribute("value");
-		String oldCity = myAccountPage.getShippingAddressCityField().getAttribute("value");
-		String newState = oldState + "123";
-		String newCity = oldCity + "123";
 		boolean output = myAccountPage.changeShippingAddressStateAndCity(newState, newCity);
 		Assert.assertTrue(output, "Updating shipping address state and city failed.");
 		
@@ -158,22 +181,80 @@ public class MyAccountPageTest extends CommonBase {
 		String expectedCity = newCity;
 		expectedCity = extractStartingCharacters(expectedCity);
 		
-		Assert.assertTrue( (updatedState.equals(expectedState) && updatedCity.equals(expectedCity)), "State and city not updated.");
+		Assert.assertTrue( (updatedState.equals(expectedState) && updatedCity.equals(expectedCity)), "State and city got updated with numbers, which is not expected.");
 	}
 	
-	
-	@DataProvider(name="login_data")
-	private Object[][] getLoginDetails() {
-		return new Object[][] { {"anuj.lpu1@gmail.com", "Test@123", "pass"} };
-	}
 	
 	@DataProvider(name="change_password_data")
 	private Object[][] getChangePasswordData() {
-		return new Object[][] { {"Test@123", "Test@123"} };
+		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";
+		Object[][] data;
+		try {
+			data = TestUtils.getTestData(file, 1);
+			String old_password = data[0][0].toString();
+			String new_password = data[0][1].toString();
+			return new Object[][] { { old_password, new_password } };
+		} catch (IOException e) {  }
+		
+		return new Object[][] { {"", ""} };
+	}
+	
+	@DataProvider(name="billing_address_pin_data")
+	private Object[][] getBillingAddressPinData() {
+		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";
+		Object[][] data;
+		try {
+			data = TestUtils.getTestData(file, 2);
+			String new_pin = data[0][0].toString();
+			return new Object[][] { { new_pin } };
+		} catch (IOException e) {  }
+		
+		return new Object[][] { {""} };
+	}
+	
+	@DataProvider(name="billing_address_state_city_data")
+	private Object[][] getBillingAddressStateCityData() {
+		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";
+		Object[][] data;
+		try {
+			data = TestUtils.getTestData(file, 2);
+			String new_state = data[0][1].toString();
+			String new_city = data[0][2].toString();
+			return new Object[][] { { new_state, new_city } };
+		} catch (IOException e) {  }
+		
+		return new Object[][] { {"", ""} };
+	}
+	
+	@DataProvider(name="shipping_address_pin_data")
+	private Object[][] getShippingAddressPinData() {
+		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";
+		Object[][] data;
+		try {
+			data = TestUtils.getTestData(file, 3);
+			String new_pin = data[0][0].toString();
+			return new Object[][] { { new_pin } };
+		} catch (IOException e) {  }
+		
+		return new Object[][] { {""} };
+	}
+	
+	@DataProvider(name="shipping_address_state_city_data")
+	private Object[][] getShippingAddressStateCityData() {
+		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";
+		Object[][] data;
+		try {
+			data = TestUtils.getTestData(file, 3);
+			String new_state = data[0][1].toString();
+			String new_city = data[0][2].toString();
+			return new Object[][] { { new_state, new_city } };
+		} catch (IOException e) {  }
+		
+		return new Object[][] { {"", ""} };
 	}
 	
 	
-	@AfterClass
+	@AfterTest
 	public void tearDown() {
 		//try { Thread.sleep(5*1000); } catch(Exception e) {}
 		driver.quit();

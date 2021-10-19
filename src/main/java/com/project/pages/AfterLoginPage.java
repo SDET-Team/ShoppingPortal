@@ -31,7 +31,7 @@ public class AfterLoginPage extends CommonBase{
 		myAccountButton.click();
 	}
 	
-	public void goToWishlistButton() {
+	public void goToWishlistPage() {
 		myWishlistButton.click();
 	}
 	

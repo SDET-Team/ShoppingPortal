@@ -1,6 +1,5 @@
 package com.project.pages;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +23,6 @@ public class BooksCategoryPage extends CommonBase {
 		String xpathToFindBookUrlLink = "//*[contains(text(),\"" + bookName + "\")]";
 		WebElement bookHyperLink = driver.findElement(By.xpath(xpathToFindBookUrlLink));
 		String urlInLink = bookHyperLink.getAttribute("href");
-		//System.out.println("######## " + urlInLink);
 		Map<String, String> params = getQueryMap(urlInLink);
 		String pid = params.get("pid");
 		String productAddToWishlistButtonHrefText = "category.php?pid=" + pid + "&&action=wishlist";
@@ -44,7 +42,6 @@ public class BooksCategoryPage extends CommonBase {
 	        String value = param.split("=")[1];
 	        map.put(name, value);
 	    }
-	    //System.out.println(Arrays.asList(map));
 	    return map;
 	}
 

@@ -254,5 +254,25 @@ public class TestUtils extends CommonBase {
 		}
 
 	}
+	
+	public static Object[][] getTestData(String filepath, int sheetIndex) throws IOException {
+		File src = new File(filepath);
+		FileInputStream fileinput = new FileInputStream(src);
+		Workbook wb = new XSSFWorkbook(fileinput);
+		XSSFSheet sheet = (XSSFSheet) wb.getSheetAt(sheetIndex);
+		
+		//DataFormatter formatter = new DataFormatter();
+		
+		int row_count = sheet.getLastRowNum();
+		int column_count = sheet.getRow(0).getLastCellNum();
+		Object data[][] = new Object[row_count][column_count];
+		for (int i = 0; i < row_count; i++) {
+			for (int j = 0; j < column_count; j++) {
+				data[i][j] = sheet.getRow(i+1).getCell(j).toString();
+			}
+		}
+		wb.close();
+		return data;
+	}
 
 }
