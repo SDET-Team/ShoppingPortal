@@ -1,6 +1,8 @@
 package com.project.pages;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -49,6 +51,20 @@ public class LoginPage extends CommonBase {
 	@FindBy(xpath = "//span[contains(text(),'Email already exists .')]")
 	WebElement duplicateEmail;
 
+	
+	
+	public WebElement invalidLoginElement()
+	{
+		return invalidLogin;
+	}
+	
+	public WebElement duplicateEmailElement()
+	{
+		return duplicateEmail;
+	}
+	
+	
+	
 	public LoginPage() {
 		PageFactory.initElements(driver, this);
 	}
@@ -58,15 +74,20 @@ public class LoginPage extends CommonBase {
 		return driver.getTitle();
 	}
 	
-	public boolean loginOperation(String email,String password,String expected) 
-	{
+	public String loginOperation(String email,String password) 
+	{	
+		String msg="";
 		loginEmail.sendKeys(email);
 		loginPass.sendKeys(password);
 		loginBtn.click();
-		boolean status=false;
-		if(expected.equals("fail"))
-			status=invalidLogin.isDisplayed();
-		return status;
+		if(driver.getTitle().equals("Shopping Portal | Signi-in | Signup") && TestUtils.isVisible(invalidLoginElement()))
+			msg=invalidLogin.getText();
+		else if(TestUtils.isVisible(navafterLogin.welcomeElement()))
+		 msg=navafterLogin.welcomeUser();
+		
+		return msg;
+		
+		
 	}
 
 	// forgot
@@ -79,6 +100,7 @@ public class LoginPage extends CommonBase {
 		fpassLink.click();
 	}
 
+	
 	// registration
 
 	public void regFormclear() {
@@ -90,52 +112,35 @@ public class LoginPage extends CommonBase {
 	}
  
 	
-	public boolean regOperation(String fname,String email,String contact,String pass,String cpass,String expected)
+	public String regOperation(String fname,String email,String contact,String pass,String cpass)
 	{
-		Alert alert;
-		boolean status = false, btnStatus = true;
-
+		
+		String msg="";
 		fullName.sendKeys(fname);
 		regEmail.sendKeys(email);
 		contactNo.sendKeys(contact);
 		newPass.sendKeys(pass);
 		confirmPass.sendKeys(cpass);
-		if(expected.equals("Duplicate email") && !(signupBtn.isEnabled()) && duplicateEmail.isDisplayed())
-		{
+		if(!(signupBtn.isEnabled()) && TestUtils.isVisible(duplicateEmailElement()))
+		{	
+			msg= duplicateEmail.getText();
 			regFormclear();
-			return true;
+			return msg;
 		}
 		signupBtn.click();
-
-		WebDriverWait wait = new WebDriverWait(driver,10);
 		
-		if(expected.equals("Password and Confirm Password Field do not match  !!"))
+		if(TestUtils.isAlertPresent())
 		{
-			wait.until(ExpectedConditions.alertIsPresent());
-			alert = TestUtils.switchToAlert();
-			String msg = alert.getText();
+			
+			Alert alert = TestUtils.switchToAlert();
+			msg = alert.getText();
 			alert.accept();
-			if(msg.equals(expected))
-				status=true;
-			else 
-				status= false;
+			regFormclear();
 			
 		}
-		else
-		{
-			wait.until(ExpectedConditions.alertIsPresent());
-			alert = TestUtils.switchToAlert();
-			String msg = alert.getText();
-			alert.accept();
-			if(msg.equals(expected))
-				status=true;
-			else 
-				status= false;
+		
+		return msg;
 			
-		}
-
-		regFormclear();
-		return status;
 	}
 
 }

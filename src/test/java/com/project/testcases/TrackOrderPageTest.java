@@ -34,36 +34,52 @@ public class TrackOrderPageTest extends CommonBase {
 	}
 
 	@DataProvider(name = "testdata")
-	public Object[][] getloginData(Method m) throws IOException {
-
-		filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\trackTestdata.xlsx";
-		Object data[][] = TestUtils.getTestData(filepath);
+	public Object[][] getPositiveData(Method m) throws IOException {
+		String type="Negative";
+			filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\TrackorderTestdata.xlsx";
+		if (m.getName().equals("validatePositiveTrackorderOperation"))
+			type="Positive";
+		Object data[][] = TestUtils.getTestData(filepath,type);
 		return data;
 	}
-
+	
+	
 
 	@Test(priority=1)
 	public void validateTitle()
-	{
+	{	log.info("Validating Loginpage Title");
 		trackorderpage=new TrackOrderPage();
 		String title=trackorderpage.title();
 		Assert.assertEquals(title, "Track Orders","Title Not Matched");
-		
+		log.info("Testcase Passed!");
 		
 	}
 	
 	@Test(priority=2,dataProvider="testdata")
-	public void validatTrackorderOperation(String orderid,String emailid,String expected)
+	public void validatePositiveTrackorderOperation(String orderid,String emailid)
 	{
-		boolean status=trackorderpage.trackingOption(orderid, emailid, expected);
-		if(expected.equals("Invalid"))
-			Assert.assertTrue(status);
-		else
-			Assert.assertFalse(status);
+		log.info("Validating Tracking order operation by providing correct emailid and orderid");
+		log.info("Order details: Orderid: {0} , Emailid: {1}");
+		int col=trackorderpage.trackingOption(orderid, emailid);
+		Assert.assertEquals(col,9,"Error message displayed for correct orderid and emailid!!!");
+		log.info("Testcase Passed!");
+		
+	}
+	
+
+	@Test(priority=3,dataProvider="testdata")
+	public void validateNegativeTrackorderOperation(String orderid,String emailid)
+	{
+		log.info("Validating Tracking order operation by providing incorrect emailid or orderid");
+		log.info("Order details: Orderid: {0} , Emailid: {1}");
+		int col=trackorderpage.trackingOption(orderid, emailid);
+		Assert.assertEquals(col,1,"No error message displayed for incorrect orderid or emailid!!");
+		log.info("Testcase Passed!");
 	}
 
 	@AfterTest
 	public void tearDown() {
+		log.info("Closing Browser");
 		driver.close();
 	}
 

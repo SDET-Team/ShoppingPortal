@@ -20,20 +20,23 @@ public class FogotPasswordPageTest extends CommonBase {
 	LoginPage loginpage;
 	HomePage homepage;
 	ForgotPasswordPage forgotpasspage;
-	String filepath;
+	String filepath,msg;
 
 	public FogotPasswordPageTest() {
 		super();
 	}
 
 	@DataProvider(name = "testdata")
-	public Object[][] getloginData(Method m) throws IOException {
-
-		filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\forgotpassTestdata.xlsx";
-		Object data[][] = TestUtils.getTestData(filepath);
+	public Object[][] getPositiveData(Method m) throws IOException {
+		String type="Negative";
+			filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\ForgotPasswordTestdata.xlsx";
+		if (m.getName().equals("validatepositiveForgotPassword"))
+			type="Positive";
+		Object data[][] = TestUtils.getTestData(filepath,type);
 		return data;
 	}
-
+	
+	
 	@BeforeTest
 	public void setup() {
 		initialization();
@@ -48,22 +51,48 @@ public class FogotPasswordPageTest extends CommonBase {
 
 	@Test(priority = 1)
 	public void validateTitle() {
+		log.info("Validating Loginpage Title");
 		forgotpasspage = new ForgotPasswordPage();
 		String title = forgotpasspage.title();
 		Assert.assertEquals(title, "Shopping Portal | Forgot Password", "Forgot Password Page Title Not Matched");
-
+		log.info("Testcase Passed!");
 	}
 
 	
 	@Test(priority=2,dataProvider="testdata")
-	public void validateForgotPassword(String email,String contact,String newpass, String cpass,String expected)
+	public void validatepositiveForgotPassword(String email,String contact,String newpass, String cpass)
 	{
-		boolean status=forgotpasspage.changepassword(email, contact, newpass, cpass,expected);
-		Assert.assertTrue(status);
+		log.info("Validating Forgot password operation by providing valid emailid and contact number");
+		log.info("User details: Email: {0} , ContactNo: {1}");
+		msg=forgotpasspage.changepassword(email, contact, newpass, cpass);
+		
+		Assert.assertEquals(msg,"Password Changed Successfully",msg);
+		log.info("Testcase Passed!");
 	}
+	
+	@Test(priority=3,dataProvider="testdata")
+	public void validatenegativeForgotPassword(String email,String contact,String newpass, String cpass)
+	{
+		log.info("Validating Forgot password operation by providing invalid emailid or contact number");
+		log.info("User details: Email: {0} , ContactNo: {1}");
+		msg=forgotpasspage.changepassword(email, contact, newpass, cpass);
+		
+		
+		if(TestUtils.isVisible(forgotpasspage.invaliduserElement()))
+			Assert.assertEquals(msg,"Invalid email id or Contact no",msg);
+		else if(!newpass.equals(cpass))
+			Assert.assertEquals(msg,"New password and Confirm password should be same!!",msg);
+		else
+			Assert.assertEquals(msg, "Invalid User or Password not match",msg);
+		log.info("Testcase Passed!");
+	
+	}
+
+
 
 	@AfterTest
 	public void tearDown() {
+		log.info("Closing browser");
 
 		driver.close();
 	}
