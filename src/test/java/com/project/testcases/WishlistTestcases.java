@@ -52,6 +52,9 @@ public class WishlistTestcases extends CommonBase {
 	
 	@Test(priority=1, dataProvider="product_type_name_data")
 	public void addProductToWishList(String category, String productTitle) {
+		Assert.assertFalse(category.equals(""), "Product category is found empty.");
+		Assert.assertFalse(productTitle.equals(""), "Product title is found empty.");
+		
 		if(category.equals("Books")) {
 			afterLoginPage.goToBooksCategory();
 			BooksCategoryPage booksCategoryPage = new BooksCategoryPage();
@@ -63,23 +66,33 @@ public class WishlistTestcases extends CommonBase {
 	
 	@Test(priority=2, dataProvider="product_name_data")
 	public void deleteProductFromWishList(String productTitle) {
-		afterLoginPage.goToWishlistButton();
+		Assert.assertFalse(productTitle.equals(""), "Product title is found empty.");
+		
+		afterLoginPage.goToWishlistPage();
 		MyWishlistPage myWishlistPage = new MyWishlistPage();
 		myWishlistPage.visit();
 		//Assert.assertEquals(myWishlistPage.findOccurencesOfProduct(productTitle), 1, "Product to remove from wishlist is actually not present in wishlist.");
+		Assert.assertTrue(myWishlistPage.findOccurencesOfProduct(productTitle) > 0, "Product to remove from wishlist is actually not present in wishlist.");
 		Assert.assertTrue(myWishlistPage.removeProductFromWishlist(productTitle), "Removing product from wishlist failed.");
 	}
 	
 	@Test(priority=3, dataProvider="product_type_name_data")
 	public void checkProductAddToWishlistOnlyOnce(String category, String productTitle) {
+		Assert.assertFalse(category.equals(""), "Product category is found empty.");
+		Assert.assertFalse(productTitle.equals(""), "Product title is found empty.");
+		
 		if(category.equals("Books")) {
-			afterLoginPage.goToBooksCategory();
+			afterLoginPage.goToWishlistPage();
+			
+			MyWishlistPage myWishlistPage = new MyWishlistPage();
+			Assert.assertEquals(myWishlistPage.findOccurencesOfProduct(productTitle), 0, "Product already present in wishlist page, precondition failed.");
+			myWishlistPage.goToBooksCategoryPage();
 			
 			BooksCategoryPage booksCategoryPage = new BooksCategoryPage();
 			booksCategoryPage.addBookToWishList(productTitle);
 			
-			MyWishlistPage myWishlistPage = new MyWishlistPage();
-			//Assert.assertEquals(1, myWishlistPage.findOccurencesOfProduct(productTitle), "Either product did not got added to wishlist OR multiple entries of same product in wishlist.");
+			myWishlistPage = new MyWishlistPage();
+			//Assert.assertEquals(myWishlistPage.findOccurencesOfProduct(productTitle), 1, "Either product did not got added to wishlist OR multiple entries of same product in wishlist.");
 			myWishlistPage.goToBooksCategoryPage();
 			
 			booksCategoryPage = new BooksCategoryPage();
@@ -102,7 +115,7 @@ public class WishlistTestcases extends CommonBase {
 			return new Object[][] { { type, title } };
 		} catch (IOException e) {  }
 		
-		return new Object[][] { {"Books", "The Wimpy Kid Do -It- Yourself Book"} };
+		return new Object[][] { {"", ""} };
 	}
 	
 	@DataProvider(name="product_name_data")
@@ -115,7 +128,7 @@ public class WishlistTestcases extends CommonBase {
 			return new Object[][] { { title } };
 		} catch (IOException e) {  }
 		
-		return new Object[][] { {"The Wimpy Kid Do -It- Yourself Book"} };
+		return new Object[][] { {""} };
 	}
 	
 	

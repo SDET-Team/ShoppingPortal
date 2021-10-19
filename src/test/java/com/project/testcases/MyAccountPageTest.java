@@ -209,7 +209,7 @@ public class MyAccountPageTest extends CommonBase {
 			return new Object[][] { { new_pin } };
 		} catch (IOException e) {  }
 		
-		return new Object[][] { {"110092abc"} };
+		return new Object[][] { {""} };
 	}
 	
 	@DataProvider(name="billing_address_state_city_data")
@@ -223,7 +223,7 @@ public class MyAccountPageTest extends CommonBase {
 			return new Object[][] { { new_state, new_city } };
 		} catch (IOException e) {  }
 		
-		return new Object[][] { {"New Delhi123", "Delhi123"} };
+		return new Object[][] { {"", ""} };
 	}
 	
 	@DataProvider(name="shipping_address_pin_data")
@@ -236,7 +236,7 @@ public class MyAccountPageTest extends CommonBase {
 			return new Object[][] { { new_pin } };
 		} catch (IOException e) {  }
 		
-		return new Object[][] { {"110001abc"} };
+		return new Object[][] { {""} };
 	}
 	
 	@DataProvider(name="shipping_address_state_city_data")
@@ -250,7 +250,7 @@ public class MyAccountPageTest extends CommonBase {
 			return new Object[][] { { new_state, new_city } };
 		} catch (IOException e) {  }
 		
-		return new Object[][] { {"New Delhi123", "Delhi123"} };
+		return new Object[][] { {"", ""} };
 	}
 	
 	
