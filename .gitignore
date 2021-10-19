@@ -3,3 +3,4 @@
 .settings/
 bin/
 test-output/
+.log

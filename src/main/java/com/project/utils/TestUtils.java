@@ -46,14 +46,14 @@ public class TestUtils extends CommonBase {
 	static CartActivity cartActivity;
 	static MyCartPage myCartPage;
 
-	public static Object[][] getTestData(String filepath,String type) throws IOException {
+	public static Object[][] getTestData(String filepath, String type) throws IOException {
 
 		File src = new File(filepath);
 		FileInputStream fileinput = new FileInputStream(src);
 		Workbook wb = new XSSFWorkbook(fileinput);
 		XSSFSheet sheet1;
-		if(type.equals("Positive"))
-			sheet1= (XSSFSheet) wb.getSheetAt(0);
+		if (type.equals("Positive"))
+			sheet1 = (XSSFSheet) wb.getSheetAt(0);
 		else
 			sheet1 = (XSSFSheet) wb.getSheetAt(1);
 
@@ -64,8 +64,8 @@ public class TestUtils extends CommonBase {
 		Object data[][] = new Object[row_count][column_count];
 		for (int i = 0; i < row_count; i++) {
 			for (int j = 0; j < column_count; j++) {
-				
-				data[i][j] =sheet1.getRow(i + 1).getCell(j).toString();
+
+				data[i][j] = sheet1.getRow(i + 1).getCell(j).toString();
 			}
 
 		}
@@ -83,14 +83,12 @@ public class TestUtils extends CommonBase {
 		boolean isValid = false;
 
 		if (!isTextFormated(urlString)) {
-			String errorString = "Either url is not configured or it is empty";
-			logger.error(urlString + " => " + errorString);
+			log.error(urlString + " => " + "Either url is not configured or it is empty");
 			return isValid;
 		}
 
 		if (!urlString.startsWith(baseUrl)) {
-			String errorString = "belongs to another domain, skipping it";
-			logger.error(urlString + " => " + errorString);
+			log.error(urlString + " => " + "belongs to another domain, skipping it");
 			return isValid;
 		}
 
@@ -100,21 +98,19 @@ public class TestUtils extends CommonBase {
 			huc.connect();
 			respCode = huc.getResponseCode();
 			if (respCode >= 400) {
-				String errorString = "is a broken link";
-				logger.error(urlString + " => " + errorString);
+				log.error(urlString + " => " + "is a broken link");
 				return isValid;
 			} else {
-				String infoString = "is a valid link";
-				logger.error(urlString + " => " + infoString);
+				log.info(urlString + " => " + "is a valid link");
 				isValid = true;
 				return isValid;
 			}
 		} catch (MalformedURLException e) {
-			logger.fatal("MalformedURLException");
+			log.error("MalformedURLException");
 		} catch (IOException e) {
-			logger.fatal("IOException");
+			log.error("IOException");
 		} catch (Exception e) {
-			logger.fatal("Error");
+			log.error("Error");
 		}
 		return isValid;
 	}
@@ -138,7 +134,7 @@ public class TestUtils extends CommonBase {
 				InputStream inputStream = new FileInputStream(file);
 				workbook = new XSSFWorkbook(inputStream);
 			} catch (IOException e) {
-				logger.error("IOException");
+				log.error("IOException");
 			}
 		}
 
@@ -181,85 +177,73 @@ public class TestUtils extends CommonBase {
 			workbook.write(out);
 			out.close();
 		} catch (FileNotFoundException e) {
-			logger.error("FileNotFoundException");
+			log.error("FileNotFoundException");
 		} catch (IOException e) {
-			logger.error("IOException");
+			log.error("IOException");
 		}
 
 	}
-	
-	
-	public static boolean isAlertPresent() 
-	{ 
-		
-	    try 
-	    { 	
-	    	WebDriverWait wait = new WebDriverWait(driver,50);
-			wait.until(ExpectedConditions.alertIsPresent()); 
-	        return true; 
-	    }
-	    catch(TimeoutException e)
-	    {	
-	    	return false;
-	    }
-	    
-	    
-	    
-		
+
+	public static boolean isAlertPresent() {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 50);
+			wait.until(ExpectedConditions.alertIsPresent());
+			return true;
+		} catch (TimeoutException e) {
+			return false;
+		}
+
 	}
-	
-	public static boolean isVisible(WebElement element)
-	{
-	  try {
-		  
-		  	if(element.isDisplayed())
-		  		{
-		  
-		  		return true;
-		  		}
-	  }
-	  catch(Exception e){
-		  	
-	  		return false;
-	  		}
-	return false;
+
+	public static boolean isVisible(WebElement element) {
+		try {
+			if (element.isDisplayed()) {
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
 	}
-	
-	
-	
 
 	public static void addToCartProduct(int numberOfproducts, int numberOfTimes) {
 		cartActivity = new CartActivity();
 		List<WebElement> featureProductList = cartActivity.getfeatureProductListElement();
-
+		
+		if(numberOfproducts >= featureProductList.size()) {
+			numberOfproducts = featureProductList.size();
+		} else if(numberOfproducts <= 0) {
+			numberOfproducts = 0;
+		}
+		
+		if (numberOfTimes >= featureProductList.size()) {
+			numberOfTimes = featureProductList.size();
+		} else if (numberOfTimes <= featureProductList.size()) {
+			numberOfTimes = 1;
+		} 
+		
 		for (int i = 1; i <= numberOfproducts + 1; i++) {
-
 			for (int j = 1; j <= numberOfTimes; j++) {
 				driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
 				WebElement firstElement = featureProductList.get(i);
-				String actualString = cartActivity.handleClickActionOnWebElement(firstElement, i);
-
-				try {
-					Assert.assertEquals(actualString, "ADD TO CART");
-
-				} catch (AssertionError e) {
-					logger.error("AssertionError");
-				}
+				cartActivity.handleClickActionOnWebElement(firstElement, i);
 
 				try {
 					navbeforeLogin.clickOnLogoImage();
 				} catch (ElementNotInteractableException e) {
-					logger.error("ElementNotInteractableException");
+					log.error("ElementNotInteractableException");
 				}
 
 			}
-			
+
 		}
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		navbeforeLogin.clickOnMyCartImage();
+		log.info(numberOfproducts + "Products added to cart");
 	}
 
-	public static void removalProductFromCart(int count) throws AssertionError {
+	public static void removeProductFromCart(int count) throws AssertionError {
 		myCartPage = new MyCartPage();
 		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
 

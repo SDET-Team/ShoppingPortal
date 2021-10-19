@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.LogManager;
+import org.bouncycastle.asn1.eac.Flags;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -33,16 +35,22 @@ public class CartActivityTest extends CommonBase {
 	@BeforeTest
 	public void setup() {
 		initialization();
+		log.info("driver initialization");
 		homepage = new HomePage();
-		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
-//		navbeforeLogin.navigatetologin();
+		try {
+			Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
+		} catch (AssertionError e) {
+			log.error("Assertion Error");
+		} catch (Exception e) {
+			log.error("Error");
+		}
 	}
 
 	@AfterTest
 	public void afterTest() {
+		log.info("driver closed");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.close();
-//		System.out.println("driver.close()");
 	}
 
 	@Test(priority = 1)
@@ -52,10 +60,13 @@ public class CartActivityTest extends CommonBase {
 		try {
 			Assert.assertEquals(title, "Shopping Portal Home Page", "Home Page Title Not Matched");
 		} catch (AssertionError e) {
-			logger.error("Assertion Error");
+			log.error("Assertion Error");
 		} catch (Exception e) {
-			logger.error("Error");
+			log.error("Error");
+
 		}
+
+		log.info("Validate Page Title test case execution completed");
 
 	}
 
@@ -67,10 +78,12 @@ public class CartActivityTest extends CommonBase {
 		try {
 			Assert.assertEquals(title, "FEATURED PRODUCTS", "FEATURED PRODUCTS Title Not Matched");
 		} catch (AssertionError e) {
-			System.out.println("Assertion Error");
+			log.error("Assertion Error");
 		} catch (Exception e) {
-			logger.error("Error");
+			log.error("Error");
 		}
+
+		log.info("Validate Feature Product list test case execution completed");
 
 	}
 
@@ -86,13 +99,13 @@ public class CartActivityTest extends CommonBase {
 				String expectedString = strArray[i];
 				Assert.assertEquals(actualString, expectedString);
 			} catch (AssertionError e) {
-				logger.error("Assertion Error");
+				log.error("Assertion Error");
 			} catch (Exception e) {
-				logger.error("Error");
-			} finally {
-
+				log.error("Error");
 			}
 		}
+
+		log.info("validate Feature Product Sort function test case execution completed");
 
 	}
 
@@ -115,7 +128,7 @@ public class CartActivityTest extends CommonBase {
 					tempList.add("null");
 					continue;
 				}
-				if (j == 1) {
+				if (j == 1 || j == 2) {
 					if (TestUtils.isLinkValid(detailsString)) {
 						tempList.add(detailsString);
 						continue;
@@ -131,13 +144,15 @@ public class CartActivityTest extends CommonBase {
 		}
 
 		try {
-			String fileString = filePath + testDataDirectoryPath + "\\" + "ProductsData.xlsx";
-			TestUtils.setTestData(fileString, "Featured Products Details", productDataMap, columnNamesList);
+			String file = testDataDirectoryPath + "ProductsData.xlsx";
+			TestUtils.setTestData(file, "Featured Products Details", productDataMap, columnNamesList);
 		} catch (FileNotFoundException e) {
-			logger.error("FileNotFoundException");
+			log.error("FileNotFoundException");
 		} catch (Exception e) {
-			logger.error("Exception");
+			log.error("Exception");
 		}
+
+		log.info("validate Feature Product List test case execution completed");
 
 	}
 
@@ -170,7 +185,7 @@ public class CartActivityTest extends CommonBase {
 						tempList.add("null");
 						continue;
 					}
-					if (j == 1) {
+					if (k == 1 || k == 2) {
 						if (TestUtils.isLinkValid(detailsString)) {
 							tempList.add(detailsString);
 							continue;
@@ -187,42 +202,83 @@ public class CartActivityTest extends CommonBase {
 		}
 
 		try {
-			String fileString = filePath + testDataDirectoryPath + "\\" + "ProductsData.xlsx";
-			TestUtils.setTestData(fileString, "Other Products Details", productDataMap, columnNamesList);
+			String file = testDataDirectoryPath + "ProductsData.xlsx";
+			TestUtils.setTestData(file, "Other Products Details", productDataMap, columnNamesList);
 		} catch (FileNotFoundException e) {
-			logger.error("FileNotFoundException");
+			log.error("FileNotFoundException");
 		} catch (Exception e) {
-			logger.error("Exception");
+			log.error("Exception");
 		}
+
+		log.info("validateFeatureProductList test case execution completed");
 
 	}
 
 	@Test(priority = 6)
 	public void validateAddToCartButton() {
 		cartActivity = new CartActivity();
+		ArrayList<String> tempList;
+		String[] columnNamesList = { "imageSrc", "productLink", "productText", "productPrice", "discountPrice",
+				"Add-to-Cart" };
+		Map<Integer, ArrayList<String>> productDataMap = new TreeMap<Integer, ArrayList<String>>();
+
 		List<WebElement> featureProductList = cartActivity.getfeatureProductListElement();
-		for (int i = 1; i < featureProductList.size() - 1; i++) {
+		for (int i = 1; i < featureProductList.size(); i++) {
 			driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
 			WebElement firstElement = featureProductList.get(i);
-			String actualString = cartActivity.handleClickActionOnWebElement(firstElement, i);
-			try {
-				Assert.assertEquals(actualString, "ADD TO CART");
-			} catch (AssertionError e) {
-				logger.error("AssertionError");
-			}
+			ArrayList<String> productDetailsArrayList = cartActivity.getProductDetails(firstElement);
 
+			tempList = new ArrayList<>();
+			for (int j = 0; j < productDetailsArrayList.size(); j++) {
+				String detailsString = productDetailsArrayList.get(j);
+
+				if (!TestUtils.isTextFormated(detailsString)) {
+					tempList.add("null");
+					continue;
+				}
+				if (j == 1 || j == 2) {
+					if (TestUtils.isLinkValid(detailsString)) {
+						tempList.add(detailsString);
+						continue;
+					} else {
+						tempList.add(null);
+						continue;
+					}
+				}
+				tempList.add(detailsString);
+			}
+			driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+			productDataMap.put(i, tempList);
+
+			cartActivity.handleClickActionOnWebElement(firstElement, i);
 			try {
 				navbeforeLogin.clickOnLogoImage();
 			} catch (ElementNotInteractableException e) {
-				logger.error("ElementNotInteractableException");
+				log.error("ElementNotInteractableException");
 			}
 		}
+
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		navbeforeLogin.clickOnMyCartImage();
-//		driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
-//		TestUtils.removalProductFromCart(featureProductList.size());
+
+		try {
+			String file = testDataDirectoryPath + "InCartProducts.xlsx";
+			TestUtils.setTestData(file, "Products Details", productDataMap, columnNamesList);
+		} catch (FileNotFoundException e) {
+			log.error("FileNotFoundException");
+		} catch (Exception e) {
+			log.error("Exception");
+		}
+
+		log.info(featureProductList.size() + " products added to cart");
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.MINUTES);
+		TestUtils.removeProductFromCart(18);
+		log.info(featureProductList.size() + " products removed from cart");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		navbeforeLogin.clickOnLogoImage();
+
+		log.info("validate add to cart button for products test case execution completed");
+
 	}
 
 	@Test(priority = 7)
@@ -234,20 +290,12 @@ public class CartActivityTest extends CommonBase {
 		for (int i = 1; i < numOfTimes; i++) {
 			driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
 			WebElement firstElement = featureProductList.get(productNumber);
-			String actualString = cartActivity.handleClickActionOnWebElement(firstElement, productNumber);
-
-			try {
-				Assert.assertEquals(actualString, "ADD TO CART");
-			} catch (AssertionError e) {
-				logger.error("AssertionError");
-//				System.out.println("AssertionError");
-			}
+			cartActivity.handleClickActionOnWebElement(firstElement, productNumber);
 
 			try {
 				navbeforeLogin.clickOnLogoImage();
 			} catch (ElementNotInteractableException e) {
-				logger.error("ElementNotInteractableException");
-//				System.out.println("ElementNotInteractableException");
+				log.error("ElementNotInteractableException");
 			}
 
 		}
@@ -255,7 +303,9 @@ public class CartActivityTest extends CommonBase {
 		navbeforeLogin.clickOnMyCartImage();
 
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
-		TestUtils.removalProductFromCart(featureProductList.size());
+		TestUtils.removeProductFromCart(featureProductList.size() - 1);
+
+		log.info("validate add to cart button for the same products test case execution completed");
 
 	}
 

@@ -57,19 +57,17 @@ public class HomePageTest extends CommonBase {
 			WebElement webElement = list.get(i);
 			String link = homepage.getAnchorTagLink(webElement);
 			if (TestUtils.isLinkValid(link)) {
-				logger.info(link);
-//				System.out.println(link);
+				log.info(link);
 			} else {
-				logger.info(" INVALID " + link);
-//				System.out.println(" INVALID " + link);
+				log.info(" INVALID " + link);
+
 			}
 
 			String actualString = webElement.getText();
 			try {
 				assertEquals(actualString, expectedStrArray[i]);
 			} catch (AssertionError e) {
-				logger.error("AssertionError");
-//				System.out.println("AssertionError");
+				log.error("AssertionError");
 			}
 
 			actions = new Actions(driver);
@@ -87,11 +85,9 @@ public class HomePageTest extends CommonBase {
 		for (WebElement webElement : brandList) {
 			String link = homepage.getAnchorTagLink(webElement);
 			if (TestUtils.isLinkValid(link)) {
-				logger.info(link);
-//				System.out.println(link);
+				log.info(link);
 			} else {
-				logger.info(" INVALID " + link);
-//				System.out.println(" INVALID " + link);
+				log.info(" INVALID " + link);
 
 			}
 			actions = new Actions(driver);
@@ -110,10 +106,10 @@ public class HomePageTest extends CommonBase {
 			javascriptExecutor.executeScript("arguments[0].scrollIntoView();", webElement);
 			String link = webElement.getAttribute("href");
 			if (TestUtils.isLinkValid(link)) {
-				logger.info(link);
+				log.info(link);
 //				System.out.println(link);
 			} else {
-				logger.info(" INVALID " + link);
+				log.info(" INVALID " + link);
 //				System.out.println(" INVALID " + link);
 			}
 			

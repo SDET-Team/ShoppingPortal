@@ -98,6 +98,9 @@ public class CartActivity extends CommonBase {
 	}
 
 	public ArrayList<String> getProductDetails(WebElement webElement) {
+		javascriptExecutor = (JavascriptExecutor) driver;
+		javascriptExecutor.executeScript("arguments[0].scrollIntoView();", webElement);
+
 		ArrayList<String> productDetailsList = new ArrayList<>();
 
 		WebElement element1 = this.getWebElement("tagname", "img", webElement);
@@ -108,8 +111,6 @@ public class CartActivity extends CommonBase {
 		productDetailsList.add(element3.getAttribute("href"));
 		productDetailsList.add(element3.getAttribute("innerHTML"));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		javascriptExecutor = (JavascriptExecutor) driver;
-		javascriptExecutor.executeScript("arguments[0].scrollIntoView();", element3);
 
 		List<WebElement> priceList = this.getWebElements("tagname", "span", productPriceSection);
 		for (WebElement e : priceList) {
@@ -121,29 +122,28 @@ public class CartActivity extends CommonBase {
 
 		return productDetailsList;
 	}
-	
-	public String handleClickActionOnWebElement(WebElement webElement, int i) throws ElementNotInteractableException {
 
+	public void handleClickActionOnWebElement(WebElement webElement, int i) throws ElementNotInteractableException {
+
+		javascriptExecutor = (JavascriptExecutor) driver;
+		javascriptExecutor.executeScript("arguments[0].scrollIntoView();", webElement);
+		
 		WebElement element = webElement.findElement(By.xpath("//div[" + i + "]//div[1]//div[1]//div[1]//div[3]//a[1]"));
-		String textString = element.getText();
+
 		try {
-			javascriptExecutor = (JavascriptExecutor) driver;
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			javascriptExecutor.executeScript("arguments[0].scrollIntoView();", element);
+
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			javascriptExecutor.executeScript("arguments[0].click();", element);
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			alert = driver.switchTo().alert();
-
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			alert.accept();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		} catch (NoAlertPresentException e) {
-			logger.error("NoAlertPresentException");
+			log.error("NoAlertPresentException");
 		}
 
-		return textString;
 	}
 
 	public By getMethodBy(String methodString, String tagName) {

@@ -34,9 +34,10 @@ public class CommonBase {
 	public static JavascriptExecutor javascriptExecutor = null;
 	public static Alert alert = null;
 	public static Actions actions = null;	
-	public static Logger logger = LogManager.getLogger(CommonBase.class.getName());
+	
 	public static Logger log;
 	
+	public static String testDataDirectoryPath = filePath + "\\src\\resources\\testdata\\";
 	
 	// Create a constructor and initialize the variables
 	public CommonBase() {
@@ -53,9 +54,9 @@ public class CommonBase {
 			logconfig.load(input);
 			PropertyConfigurator.configure(logconfig);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			log.error("FileNotFoundException");	
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("IOException");
 		}
 	}
 
@@ -94,9 +95,9 @@ public class CommonBase {
 			
 			driver.get(config.getProperty("url"));
 		} catch (WebDriverException e) {
-			logger.error("WebDriverException");
+			log.error("WebDriverException");
 		} catch (Exception e) {
-			logger.error("WebDriverException");
+			log.error("Exception");
 		}
 
 		navbeforeLogin = new NavbarBeforeLogin(driver);
@@ -141,9 +142,9 @@ public class CommonBase {
 				driver.get(config.getProperty("adminurl"));
 			}
 		} catch (WebDriverException e) {
-			logger.error("WebDriverException");
+			log.error("WebDriverException");
 		} catch (Exception e) {
-			logger.error("WebDriverException");
+			log.error("Exception");
 		}
 
 		navbeforeLogin = new NavbarBeforeLogin(driver);
