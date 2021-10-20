@@ -52,7 +52,7 @@ public class ReviewPage extends CommonBase
         a.accept();
         
         driver.findElement(By.name("ordersubmit")).click();
-	    //orderSubmit.click();
+	    
 	    loginEmail.click();
 	    loginEmail.sendKeys("anuj.lpu1@gmail.com");
 	    pwd.click();
@@ -71,7 +71,7 @@ public class ReviewPage extends CommonBase
         
         
 	    driver.findElement(By.cssSelector("tr:nth-child(9) > td:nth-child(10) > a")).click();
-	   // driver.close();
+	
 	    driver.findElement(By.cssSelector("tbody")).click();
 	    String status=driver.findElement(By.cssSelector("tr:nth-child(7) b")).getText();
 	    
@@ -135,12 +135,14 @@ public class ReviewPage extends CommonBase
         driver.findElement(By.cssSelector("li:nth-child(1) > a > .label")).click();
         driver.findElement(By.cssSelector("tbody")).click();
         driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/a[1]/i[2]")).click();
-      //body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[10]/td[9]/a[1]/i[1]
+     
         JavascriptExecutor js=(JavascriptExecutor)driver;
         js.executeScript("window.scrollBy(0,800)");
-        driver.findElement(By.xpath("//tbody/tr[8]/td[9]/a[1]/i[1]")).click();    //After each test execution tr value needs to be changed
+	
+	//After each test execution tr value needs to be changed
+        driver.findElement(By.xpath("//tbody/tr[8]/td[9]/a[1]/i[1]")).click();    
      
-      //tbody/tr[6]/td[9]/a[1]/i[1]
+      
         Set<String> allWindows = driver.getWindowHandles();
         for(String curWindow : allWindows){
             driver.switchTo().window(curWindow);
@@ -160,8 +162,7 @@ public class ReviewPage extends CommonBase
         driver.switchTo().window(child);
         js.executeScript("window.scrollBy(0,-800)");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //driver.findElement(By.cssSelector(".icon-chevron-down")).click();
-        //driver.close();
+        
         driver.get("http://localhost/OnlineShoppingPortal/shopping/");
         driver.findElement(By.xpath("//*[@id=\"top-banner-and-menu\"]/div/div/div[1]/div[1]/div/nav/ul/li/a[1]")).click();
         driver.findElement(By.xpath("//*[@id=\"grid-container\"]/div/div/div[1]/div/div/div[1]/div/a/img")).click();
