@@ -57,6 +57,11 @@ public class TestUtils extends CommonBase {
 		else
 			sheet1 = (XSSFSheet) wb.getSheetAt(1);
 
+		if(type.equals("ReviewAutoFillName")||type.equals("ValidateUserName"))
+			sheet1=(XSSFSheet) wb.getSheetAt(1);
+		else if(type.equals("AddReview"))
+			sheet1=(XSSFSheet) wb.getSheetAt(0);
+		
 		DataFormatter formatter = new DataFormatter();
 
 		int row_count = sheet1.getLastRowNum();
