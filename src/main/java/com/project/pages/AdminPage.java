@@ -37,7 +37,6 @@ public class AdminPage extends CommonBase
 	
 	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/ul[1]/li[3]/a[1]")
 	WebElement deliveredOrders;
-
 	
 	@FindBy(linkText="Create Category")
 	WebElement createCategoryBtn;
@@ -78,7 +77,7 @@ public class AdminPage extends CommonBase
 	@FindBy(id="subcategory")
 	WebElement selectsubCategory;
 	
-	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[7]/div[1]/div[2]/div[1]")
+	@FindBy(xpath="//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[7]/div[1]/textarea[1]")
 	WebElement productDescriptionField;
 	
 	@FindBy(name="productShippingcharge")
@@ -115,13 +114,9 @@ public class AdminPage extends CommonBase
 		adminLoginBtn.click();
 		
 	}
-
 	
 	public boolean orderManagement()
 	{
-
-
-
 		orderManagementList.click();
 		boolean status=deliveredOrders.isDisplayed();
 		return status;
@@ -130,18 +125,17 @@ public class AdminPage extends CommonBase
 	{
 		return colorCode.getCssValue("color");
 	}
-
-	public String createCategory()
+	public String createCategory(String category,String desc)
 	{
 		
 		createCategoryBtn.click();
 		inputCategoryName.click();
 		boolean isEditable = inputCategoryName.isEnabled() && inputCategoryName.getAttribute("readonly") == null;
 	    Assert.assertTrue(isEditable); 
-		inputCategoryName.sendKeys("Electronics");
-		String categoryName="Electronics";
+		inputCategoryName.sendKeys(category);
+		String categoryName=category;
 		descriptionBox.click();
-		descriptionBox.sendKeys("Regular electronic products");
+		descriptionBox.sendKeys(desc);
 		{
 		List<WebElement> elements=driver.findElements(By.name("submit"));
 		assert(elements.size()>0);
@@ -156,14 +150,14 @@ public class AdminPage extends CommonBase
 	   
 	    
 	    inputCategoryName.click();
-	    inputCategoryName.sendKeys("Electronics");
+	    inputCategoryName.sendKeys(category);
 	    if(driver.getPageSource().contains(categoryName))
 	    {
 	    	status=false;
 	    	System.out.println("Category already exists");
 	    }
 	    descriptionBox.click();
-	    descriptionBox.sendKeys("Regular electronics item");
+	    descriptionBox.sendKeys(desc);
 	    createBtn.click();
 		
 		return categoryName;
@@ -197,7 +191,7 @@ public class AdminPage extends CommonBase
 		 if(driver.getPageSource().contains(expectedTestData))
 		    {
 
-		    	System.out.println("Product Image Added successfull");
+		    	System.out.println("Product Image Added successfully");
 		    }
 		      
 		return expectedTestData;
@@ -211,7 +205,7 @@ public class AdminPage extends CommonBase
 	    driver.findElement(By.cssSelector("li:nth-child(1) > a > .label")).click();
 	    return status;
 	}
-	public String insertProduct()
+	public String insertProduct(String company,String model,String desc,String priceBD, String priceAD,String shippCharge,String searchKey)
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		JavascriptExecutor js=(JavascriptExecutor)driver;
@@ -230,13 +224,13 @@ public class AdminPage extends CommonBase
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//option[. = 'Television']")));
         dropdown2.findElement(By.xpath("//option[. = 'Television']")).click();
 		
-		productNameField.sendKeys("Samsung");
+		productNameField.sendKeys(company);
 		productCompanyField.click();
-		productCompanyField.sendKeys("Samsung");
+		productCompanyField.sendKeys(model);
 		productPriceBDField.click();
-		productPriceBDField.sendKeys("52500");
+		productPriceBDField.sendKeys(priceBD);
 		productPriceField.click();
-		productPriceField.sendKeys("49500");
+		productPriceField.sendKeys(priceAD);
 		productDescriptionField.click();
 		WebElement element=productDescriptionField;
 		js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = 'Basic Tv'}", element);
@@ -244,7 +238,7 @@ public class AdminPage extends CommonBase
 		js.executeScript("window.scrollBy(0,800)");
 		
 		productShippingChargeField.click();
-		productShippingChargeField.sendKeys("0");
+		productShippingChargeField.sendKeys(shippCharge);
 	    productAvailabilityField.click();
 	    WebElement dropdown3=productAvailabilityField;
 	    dropdown3.findElement(By.xpath("//option[. = 'In Stock']")).click();
@@ -273,10 +267,7 @@ public class AdminPage extends CommonBase
 		insertProductBtn.click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         
-		/*wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]"), "×\\\\\\\\nWell done! Product Inserted Successfully !!"));
-		String output=driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]")).getText();
-        */
-
+		
 		driver.get("http://localhost/OnlineShoppingPortal/shopping/");
 		driver.findElement(By.cssSelector(".dropdown:nth-child(3) > a")).click();
 	    driver.findElement(By.cssSelector(".dropdown:nth-child(6) > a")).click();
@@ -290,12 +281,11 @@ public class AdminPage extends CommonBase
 	      assert(elements.size() > 0);
 	    }
 	    driver.findElement(By.name("product")).click();
-	    driver.findElement(By.name("product")).sendKeys("samsung");
+	    driver.findElement(By.name("product")).sendKeys(searchKey);
 	    driver.findElement(By.cssSelector(".search-button")).click();
 	    output=driver.findElement(By.linkText("Samsung")).getText();
 	    System.out.println(output);
 		return output;
-
 		
 	}
 	//AutoIt
@@ -322,7 +312,4 @@ public class AdminPage extends CommonBase
 	         e.printStackTrace();
 	        }
 	}
-
 }
-
-
