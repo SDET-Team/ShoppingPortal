@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -25,15 +26,20 @@ public class WishlistTestcases extends CommonBase {
 		super();
 	}
 	
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
 	
 	@BeforeTest
 	public void setup() {
 		initialization();
-		HomePage homepage=new HomePage();
+		HomePage homepage=new HomePage(driver);
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched.");
 		navbeforeLogin.navigatetologin();
 		
-		LoginPage loginpage=new LoginPage();
+		LoginPage loginpage=new LoginPage(driver);
 		Assert.assertEquals(loginpage.loginpageTitle(), "Shopping Portal | Signi-in | Signup", "Login Page Title Not Matched.");
 		
 		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";
@@ -45,7 +51,7 @@ public class WishlistTestcases extends CommonBase {
 			
 			loginpage.loginOperation(email, password);
 			
-			afterLoginPage = new AfterLoginPage();
+			afterLoginPage = new AfterLoginPage(driver);
 			Assert.assertEquals(afterLoginPage.getTitle(), "My Cart");
 			log.info("Login to website successful.");
 		} catch (IOException e) { 
@@ -66,13 +72,13 @@ public class WishlistTestcases extends CommonBase {
 		
 		if(category.equals("Books")) {
 			afterLoginPage.goToBooksCategory();
-			BooksCategoryPage booksCategoryPage = new BooksCategoryPage();
+			BooksCategoryPage booksCategoryPage = new BooksCategoryPage(driver);
 			log.info(testcase + "Navigated to Books category page.");
 			
 			booksCategoryPage.addBookToWishList(productTitle);
 			log.info(testcase + "Product '" + productTitle + "' successfully added to wishlist.");
 			
-			MyWishlistPage myWishlistPage = new MyWishlistPage();
+			MyWishlistPage myWishlistPage = new MyWishlistPage(driver);
 			boolean output = myWishlistPage.findOccurencesOfProduct(productTitle) > 0;
 			if(output == true) {
 				log.info(testcase + "Wishlisted product found on Wishlist page.");
@@ -96,7 +102,7 @@ public class WishlistTestcases extends CommonBase {
 		Assert.assertFalse(productTitle.equals(""), "Product title is found empty.");
 		
 		afterLoginPage.goToWishlistPage();
-		MyWishlistPage myWishlistPage = new MyWishlistPage();
+		MyWishlistPage myWishlistPage = new MyWishlistPage(driver);
 		myWishlistPage.visit();
 		log.info(testcase + "Navigated to Wishlist page.");
 		
@@ -133,7 +139,7 @@ public class WishlistTestcases extends CommonBase {
 		
 		if(category.equals("Books")) {
 			afterLoginPage.goToWishlistPage();
-			MyWishlistPage myWishlistPage = new MyWishlistPage();
+			MyWishlistPage myWishlistPage = new MyWishlistPage(driver);
 			log.info(testcase + "Navigated to Wishlist page.");
 			
 			boolean output = (myWishlistPage.findOccurencesOfProduct(productTitle) == 0);
@@ -146,20 +152,20 @@ public class WishlistTestcases extends CommonBase {
 			Assert.assertTrue(output, "Product already present in wishlist page, precondition failed.");
 			
 			myWishlistPage.goToBooksCategoryPage();
-			BooksCategoryPage booksCategoryPage = new BooksCategoryPage();
+			BooksCategoryPage booksCategoryPage = new BooksCategoryPage(driver);
 			log.info(testcase + "Navigated to Books category page.");
 			booksCategoryPage.addBookToWishList(productTitle);
 			log.info(testcase + "Product '" + productTitle + "' successfully added to wishlist.");
 			
-			myWishlistPage = new MyWishlistPage();
+			myWishlistPage = new MyWishlistPage(driver);
 			//Assert.assertEquals(myWishlistPage.findOccurencesOfProduct(productTitle), 1, "Either product did not got added to wishlist OR multiple entries of same product in wishlist.");
 			myWishlistPage.goToBooksCategoryPage();
-			booksCategoryPage = new BooksCategoryPage();
+			booksCategoryPage = new BooksCategoryPage(driver);
 			log.info(testcase + "Navigated to Books category page.");
 			
 			booksCategoryPage.addBookToWishList(productTitle);
 			log.info(testcase + "Product '" + productTitle + "' successfully added to wishlist.");
-			myWishlistPage = new MyWishlistPage();
+			myWishlistPage = new MyWishlistPage(driver);
 			output = myWishlistPage.findOccurencesOfProduct(productTitle) == 1;
 			if(output == true) {
 				log.info(testcase + "Only one entry of wishlisted product found on Wishlist page.");
@@ -173,6 +179,7 @@ public class WishlistTestcases extends CommonBase {
 	}
 	
 	
+
 	@DataProvider(name="product_type_name_data")
 	private Object[][] getProductTypeTitle() {
 		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";

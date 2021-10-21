@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -23,15 +24,20 @@ public class OrderHistoryPageTest extends CommonBase {
 		super();
 	}
 	
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
 	
 	@BeforeTest
 	public void setup() {
 		initialization();
-		HomePage homepage=new HomePage();
+		HomePage homepage=new HomePage(driver);
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched.");
 		navbeforeLogin.navigatetologin();
 		
-		LoginPage loginpage=new LoginPage();
+		LoginPage loginpage=new LoginPage(driver);
 		Assert.assertEquals(loginpage.loginpageTitle(), "Shopping Portal | Signi-in | Signup", "Login Page Title Not Matched.");
 		
 		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";
@@ -43,7 +49,7 @@ public class OrderHistoryPageTest extends CommonBase {
 			
 			loginpage.loginOperation(email, password);
 			
-			afterLoginPage = new AfterLoginPage();
+			afterLoginPage = new AfterLoginPage(driver);
 			Assert.assertEquals(afterLoginPage.getTitle(), "My Cart");
 			log.info("Login to website successful.");
 		} catch (IOException e) { 
@@ -56,12 +62,12 @@ public class OrderHistoryPageTest extends CommonBase {
 		String testcase = "Verify_New_Orders_Present_On_Top_In_Order_History :: ";
 		
 		afterLoginPage.goToMyAccountPage();
-		MyAccountPage myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
 		log.info(testcase + "Navigated to My Account page.");
 		
 		myAccountPage.gotoOrderHistoryPageButton();
-		OrderHistoryPage orderHistoryPage = new OrderHistoryPage();
+		OrderHistoryPage orderHistoryPage = new OrderHistoryPage(driver);
 		Assert.assertEquals(orderHistoryPage.getTitle(), "Order History");
 		log.info(testcase + "Naviagetd to Order History page.");
 		
@@ -81,12 +87,12 @@ public class OrderHistoryPageTest extends CommonBase {
 		String testcase = "Verify_All_Orders_In_Order_History_Contain_Product_Details :: ";
 		
 		afterLoginPage.goToMyAccountPage();
-		MyAccountPage myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
 		log.info(testcase + "Navigated to My Account page.");
 		
 		myAccountPage.gotoOrderHistoryPageButton();
-		OrderHistoryPage orderHistoryPage = new OrderHistoryPage();
+		OrderHistoryPage orderHistoryPage = new OrderHistoryPage(driver);
 		Assert.assertEquals(orderHistoryPage.getTitle(), "Order History");
 		log.info(testcase + "Navigated to Order History page.");
 		

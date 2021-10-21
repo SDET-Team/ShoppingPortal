@@ -2,17 +2,23 @@ package com.project.testcases;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.Alert;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;  
+import org.testng.annotations.AfterClass; 
 
 import com.project.base.CommonBase;
 import com.project.pages.HomePage;
@@ -30,11 +36,29 @@ public class LoginPageTest extends CommonBase {
 	public LoginPageTest() {
 		super();
 	}
+	
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
+	
 
-	@BeforeTest
+	@BeforeClass(groups="BrowserActivity")
 	public void setup() {
+		
+		/*log=Logger.getLogger(LoginPageTest.class);
+		String timeStamp = new SimpleDateFormat(" yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String currDate=new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+		dir1=currDate;
+		dir2="TestLog "+timeStamp;
+		String logFilename=LoginPageTest.class.getSimpleName()+timeStamp+".log";
+		System.setProperty("logfile.name",filePath+"\\src\\resources\\log\\"+dir1+"\\"+dir2+"\\"+logFilename);
+		PropertyConfigurator.configure(logconfig);
+		*/
 		initialization();
-		homepage = new HomePage();
+		homepage = new HomePage(driver);
+		loginpage=new LoginPage(driver);
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 		navbeforeLogin.navigatetologin();
 	}
@@ -58,16 +82,15 @@ public class LoginPageTest extends CommonBase {
 	public void validateTitle() {
 		
 		log.info("Validating Loginpage Title");
-		loginpage = new LoginPage();
 		String title = loginpage.loginpageTitle();
 		Assert.assertEquals(title, "Shopping Portal | Signi-in | Signup", "Login Page Title Not Matched");
 		log.info("Testcase Passed!");
 	}
 	
-	@Test(priority=2,dataProvider="testdata")
+	@Test(priority=2,dataProvider="testdata",groups="Login")
 	public void validatecorrectLogin(String email,String password) 
 	{	log.info("Validating Login operation using correct Credentials");
-		log.info("Logging using Username:{0} , Password:{1}");
+		log.info("Logging using email: "+email+" , Password: "+password);
 		msg=loginpage.loginOperation(email, password);
 		Assert.assertEquals(msg,"Welcome","Authentication Failed!!!");
 		log.info("Testcase Passed!");
@@ -77,10 +100,10 @@ public class LoginPageTest extends CommonBase {
 		navbeforeLogin.navigatetologin();
 		
 	}
-	@Test(priority=3,dataProvider="testdata")
+	@Test(priority=3,dataProvider="testdata",groups="Login")
 	public void validateincorrectLogin(String email,String password) 
 	{	log.info("Validating Login operation using incorrect Credentials");
-		log.info("Logging using Username:{0} , Password: {1}");
+		log.info("Logging using email: "+email+" , Password: "+password);
 		msg=loginpage.loginOperation(email, password);
 	
 		if(msg.equals("Welcome"))
@@ -107,7 +130,7 @@ public class LoginPageTest extends CommonBase {
 	}
 
 	
-	@Test(priority=4, dataProvider="testdata")
+	@Test(priority=4, dataProvider="testdata",groups="Registration")
 	public void validatecorrectRegistration(String fullname,String email,String contact,String newpass,String cpass)
 	{	
 		log.info("Validating registration operation by providing all correct details");
@@ -118,7 +141,7 @@ public class LoginPageTest extends CommonBase {
 		log.info("Testcase Passed!");
 	}
 	
-	@Test(priority=5, dataProvider="testdata")
+	@Test(priority=5, dataProvider="testdata",groups="Registration")
 	public void validateincorrectRegistration(String fullname,String email,String contact,String newpass,String cpass)
 	{
 		log.info("Validating registration operation by providing some incorrect details");
@@ -136,7 +159,7 @@ public class LoginPageTest extends CommonBase {
 
 	}
 
-	@AfterTest
+	@AfterClass(groups="BrowserActivity")
 	public void tearDown() {
 		log.info("Closing the Browser");
 		driver.close();

@@ -9,13 +9,19 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -28,6 +34,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,6 +48,7 @@ import com.project.pages.MyCartPage;
 
 public class TestUtils extends CommonBase {
 
+	public static long PAGE_LOAD_TIMEOUT =30;
 	public static long IMPLICIT_WAIT = 5;
 	static HttpURLConnection huc = null;
 	static int respCode = 200;
@@ -78,12 +87,12 @@ public class TestUtils extends CommonBase {
 
 	}
 
-	public static Alert switchToAlert() {
+	public static Alert switchToAlert(WebDriver driver) {
 		Alert alert = driver.switchTo().alert();
 		return alert;
 	}
 
-	public static boolean isLinkValid(String urlString) {
+	public static boolean isLinkValid(String urlString,WebDriver driver) {
 		String baseUrl = config.getProperty("url");
 		boolean isValid = false;
 
@@ -189,17 +198,24 @@ public class TestUtils extends CommonBase {
 
 	}
 
-	public static boolean isAlertPresent() {
-
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, 50);
-			wait.until(ExpectedConditions.alertIsPresent());
-			return true;
-		} catch (TimeoutException e) {
-			return false;
-		}
-
-	}
+	
+	
+	public static boolean isAlertPresent(WebDriver driver) 
+	{ 
+		
+	    try 
+	    { 	
+	    	WebDriverWait wait = new WebDriverWait(driver,50);
+			wait.until(ExpectedConditions.alertIsPresent()); 
+	        return true; 
+	    }
+	    catch(TimeoutException e)
+	    {	
+	    	return false;
+	    }
+	    
+	    
+}
 
 	public static boolean isVisible(WebElement element) {
 		try {
@@ -259,7 +275,7 @@ public class TestUtils extends CommonBase {
 		}
 
 	}
-	
+
 	public static Object[][] getTestData(String filepath, int sheetIndex) throws IOException {
 		File src = new File(filepath);
 		FileInputStream fileinput = new FileInputStream(src);
@@ -279,5 +295,31 @@ public class TestUtils extends CommonBase {
 		wb.close();
 		return data;
 	}
-
+	
+	
+	
+	public static String getscreenShot(WebDriver driver,String filename)
+	{
+	
+		TakesScreenshot scrshot=(TakesScreenshot) driver ;
+		
+		File srcfile=scrshot.getScreenshotAs(OutputType.FILE);
+		String timeStamp = new SimpleDateFormat(" yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String currDate=new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+		dir1=currDate;
+		String newfilename=filename+" "+timeStamp+".png";
+		String filepath=System.getProperty("user.dir")+"\\automation test output\\screenshots\\"+dir1+"\\Testscreenshots "+timeStamp+"\\"+newfilename;
+		try { 
+			FileUtils.copyFile(srcfile, new File(filepath));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return filepath;
+	}
+	
+	
 }
+
+
+

@@ -3,6 +3,7 @@ package com.project.pages;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -65,8 +66,9 @@ public class LoginPage extends CommonBase {
 	
 	
 	
-	public LoginPage() {
+	public LoginPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
+		this.driver=driver;
 	}
 
 	// Login
@@ -129,10 +131,10 @@ public class LoginPage extends CommonBase {
 		}
 		signupBtn.click();
 		
-		if(TestUtils.isAlertPresent())
+		if(TestUtils.isAlertPresent(driver))
 		{
 			
-			Alert alert = TestUtils.switchToAlert();
+			Alert alert = TestUtils.switchToAlert(driver);
 			msg = alert.getText();
 			alert.accept();
 			regFormclear();

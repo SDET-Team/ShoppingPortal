@@ -1,0 +1,43 @@
+2021-10-21 18:08:56,393 CommonBase.java INFO  [main] base.CommonBase 121 - Starting Browser
+2021-10-21 18:08:58,922 CommonBase.java INFO  [main] base.CommonBase 128 - Maximizing the browser
+2021-10-21 18:08:59,057 CommonBase.java INFO  [main] base.CommonBase 132 - Deleting all cookies
+2021-10-21 18:08:59,070 CommonBase.java INFO  [main] base.CommonBase 136 - Adding implicit wait
+2021-10-21 18:08:59,083 CommonBase.java INFO  [main] base.CommonBase 142 - Loading URL
+2021-10-21 18:09:01,701 MyAccountPageTest.java INFO  [main] base.CommonBase 56 - Login to website successful.
+2021-10-21 18:09:01,969 MyAccountPageTest.java INFO  [main] base.CommonBase 93 - Verify_My_Profile_Name_Change_Reflects_In_Webpage :: Navigated to My Profile page.
+2021-10-21 18:09:02,171 MyAccountPageTest.java INFO  [main] base.CommonBase 97 - Verify_My_Profile_Name_Change_Reflects_In_Webpage :: My Profile section expanded.
+2021-10-21 18:09:02,452 MyAccountPageTest.java INFO  [main] base.CommonBase 109 - Verify_My_Profile_Name_Change_Reflects_In_Webpage :: My Profile name updated.
+2021-10-21 18:09:02,597 MyAccountPageTest.java ERROR [main] base.CommonBase 122 - Verify_My_Profile_Name_Change_Reflects_In_Webpage :: Updated My Profile name not reflected on website.
+2021-10-21 18:09:02,597 MyAccountPageTest.java INFO  [main] base.CommonBase 123 - Verify_My_Profile_Name_Change_Reflects_In_Webpage :: Testcase failed.
+2021-10-21 18:09:02,875 MyAccountPageTest.java INFO  [main] base.CommonBase 135 - Verify_Account_Password_Change_Only_With_Valid_Current_Password :: Navigated to My Account page.
+2021-10-21 18:09:03,784 MyAccountPageTest.java INFO  [main] base.CommonBase 139 - Verify_Account_Password_Change_Only_With_Valid_Current_Password :: Change Password section in My Account page expanded.
+2021-10-21 18:09:04,298 MyAccountPageTest.java INFO  [main] base.CommonBase 143 - Verify_Account_Password_Change_Only_With_Valid_Current_Password :: Account password successfully changed.
+2021-10-21 18:09:04,299 MyAccountPageTest.java INFO  [main] base.CommonBase 144 - Verify_Account_Password_Change_Only_With_Valid_Current_Password :: Testcase passed.
+2021-10-21 18:09:04,653 MyAccountPageTest.java INFO  [main] base.CommonBase 159 - Verify_Billing_Address_Pin_Code_Field_Accept_Only_Numbers :: Navigated to My Account page.
+2021-10-21 18:09:04,949 MyAccountPageTest.java INFO  [main] base.CommonBase 163 - Verify_Billing_Address_Pin_Code_Field_Accept_Only_Numbers :: Navigated to Billing/Shipping address page.
+2021-10-21 18:09:04,971 MyAccountPageTest.java INFO  [main] base.CommonBase 165 - Verify_Billing_Address_Pin_Code_Field_Accept_Only_Numbers :: Billing address section expanded.
+2021-10-21 18:09:05,267 MyAccountPageTest.java INFO  [main] base.CommonBase 169 - Verify_Billing_Address_Pin_Code_Field_Accept_Only_Numbers :: Billing address pin code changed successfully.
+2021-10-21 18:09:05,380 MyAccountPageTest.java INFO  [main] base.CommonBase 180 - Verify_Billing_Address_Pin_Code_Field_Accept_Only_Numbers :: Billing address pin code field accepted and updated only numbers.
+2021-10-21 18:09:05,380 MyAccountPageTest.java INFO  [main] base.CommonBase 181 - Verify_Billing_Address_Pin_Code_Field_Accept_Only_Numbers :: Testcase passed.
+2021-10-21 18:09:05,662 MyAccountPageTest.java INFO  [main] base.CommonBase 233 - Verify_Billing_Address_State_City_Fields_Accept_Only_Alphabets :: Navigated to My Account page.
+2021-10-21 18:09:05,980 MyAccountPageTest.java INFO  [main] base.CommonBase 237 - Verify_Billing_Address_State_City_Fields_Accept_Only_Alphabets :: Navigated to Billing/Shipping address page.
+2021-10-21 18:09:05,999 MyAccountPageTest.java INFO  [main] base.CommonBase 239 - Verify_Billing_Address_State_City_Fields_Accept_Only_Alphabets :: Billing address section expanded.
+2021-10-21 18:09:06,382 MyAccountPageTest.java INFO  [main] base.CommonBase 243 - Verify_Billing_Address_State_City_Fields_Accept_Only_Alphabets :: Billing address state and city changed successfully.
+2021-10-21 18:09:06,538 MyAccountPageTest.java ERROR [main] base.CommonBase 261 - Verify_Billing_Address_State_City_Fields_Accept_Only_Alphabets :: Billing address state and city fields accepted and updated one or more characters which are not alphabets.
+2021-10-21 18:09:06,539 MyAccountPageTest.java INFO  [main] base.CommonBase 262 - Verify_Billing_Address_State_City_Fields_Accept_Only_Alphabets :: Testcase failed.
+2021-10-21 18:09:06,749 MyAccountPageTest.java INFO  [main] base.CommonBase 69 - Verify_My_Profile_Email_Field_Not_Editable :: Navigated to My Account page.
+2021-10-21 18:09:06,912 MyAccountPageTest.java INFO  [main] base.CommonBase 73 - Verify_My_Profile_Email_Field_Not_Editable :: My Profile section expanded.
+2021-10-21 18:09:06,934 MyAccountPageTest.java INFO  [main] base.CommonBase 77 - Verify_My_Profile_Email_Field_Not_Editable :: Email field found read-only.
+2021-10-21 18:09:06,934 MyAccountPageTest.java INFO  [main] base.CommonBase 78 - Verify_My_Profile_Email_Field_Not_Editable :: Testcase passed.
+2021-10-21 18:09:07,137 MyAccountPageTest.java INFO  [main] base.CommonBase 196 - Verify_Shipping_Address_Pin_Code_Field_Accept_Only_Numbers :: Navigated to My Account page.
+2021-10-21 18:09:07,435 MyAccountPageTest.java INFO  [main] base.CommonBase 200 - Verify_Shipping_Address_Pin_Code_Field_Accept_Only_Numbers :: Navigated to Billing/Shipping address page.
+2021-10-21 18:09:08,222 MyAccountPageTest.java INFO  [main] base.CommonBase 202 - Verify_Shipping_Address_Pin_Code_Field_Accept_Only_Numbers :: Shipping address section expanded.
+2021-10-21 18:09:08,461 MyAccountPageTest.java INFO  [main] base.CommonBase 206 - Verify_Shipping_Address_Pin_Code_Field_Accept_Only_Numbers :: Shipping address pin code changed successfully.
+2021-10-21 18:09:08,586 MyAccountPageTest.java INFO  [main] base.CommonBase 217 - Verify_Shipping_Address_Pin_Code_Field_Accept_Only_Numbers :: Shipping address pin code field accepted and updated only numbers.
+2021-10-21 18:09:08,587 MyAccountPageTest.java INFO  [main] base.CommonBase 218 - Verify_Shipping_Address_Pin_Code_Field_Accept_Only_Numbers :: Testcase passed.
+2021-10-21 18:09:08,835 MyAccountPageTest.java INFO  [main] base.CommonBase 274 - Verify_Shipping_Address_State_City_Fields_Accept_Only_Alphabets :: Navigated to My Account page.
+2021-10-21 18:09:09,152 MyAccountPageTest.java INFO  [main] base.CommonBase 278 - Verify_Shipping_Address_State_City_Fields_Accept_Only_Alphabets :: Navigated to Billing/Shipping address page.
+2021-10-21 18:09:09,869 MyAccountPageTest.java INFO  [main] base.CommonBase 280 - Verify_Shipping_Address_State_City_Fields_Accept_Only_Alphabets :: Shipping address section expanded.
+2021-10-21 18:09:10,264 MyAccountPageTest.java INFO  [main] base.CommonBase 284 - Verify_Shipping_Address_State_City_Fields_Accept_Only_Alphabets :: Shipping address state and city changed successfully.
+2021-10-21 18:09:10,396 MyAccountPageTest.java ERROR [main] base.CommonBase 302 - Verify_Shipping_Address_State_City_Fields_Accept_Only_Alphabets :: Shipping address state and city fields accepted and updated one or more characters which are not alphabets.
+2021-10-21 18:09:10,397 MyAccountPageTest.java INFO  [main] base.CommonBase 303 - Verify_Shipping_Address_State_City_Fields_Accept_Only_Alphabets :: Testcase failed.

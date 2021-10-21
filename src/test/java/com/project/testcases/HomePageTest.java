@@ -2,7 +2,12 @@ package com.project.testcases;
 
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import static org.testng.Assert.assertEquals;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -15,25 +20,48 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterClass; 
 
 import com.project.base.CommonBase;
 import com.project.pages.HomePage;
 import com.project.utils.TestUtils;
 
-public class HomePageTest extends CommonBase {
+public class HomePageTest extends CommonBase{
+	
 	HomePage homepage;
 	
 	
 			
 	public HomePageTest() {
 		super();
-		//log=Logger.getLogger(HomePageTest.class);
+		
+		
 	}
+	
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
+	
 
-	@BeforeTest
+	@BeforeClass
 	public void setup() {
+		
+		/*log=Logger.getLogger(HomePageTest.class);
+		String timeStamp = new SimpleDateFormat(" yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String currDate=new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+		dir1=currDate;
+		dir2="TestLog "+timeStamp;
+		String logFilename=HomePageTest.class.getSimpleName()+timeStamp+".log";
+		System.setProperty("logfile.name",filePath+"\\src\\resources\\log\\"+dir1+"\\"+dir2+"\\"+logFilename);
+		PropertyConfigurator.configure(logconfig);*/
+		
 		initialization();
-		homepage = new HomePage();
+		homepage = new HomePage(driver);
+		
 
 	}
 
@@ -50,16 +78,20 @@ public class HomePageTest extends CommonBase {
 
 	@Test(priority = 2)
 	public void validateHomePageDropDwnElements() throws AssertionError {
-		homepage = new HomePage();
+	
 		String[] expectedStrArray = new String[] { "HOME", "BOOKS", "ELECTRONICS", "FURNITURE", "FASHION" };
 		List<WebElement> list = homepage.getHomePageDropDwnElements();
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size()-2; i++) {
+	
 			WebElement webElement = list.get(i);
 			String link = homepage.getAnchorTagLink(webElement);
-			if (TestUtils.isLinkValid(link)) {
-				log.info(link);
+
+			if (TestUtils.isLinkValid(link,driver)) {
+				//logger.info(link);
+//				System.out.println(link);
 			} else {
-				log.info(" INVALID " + link);
+				//logger.info(" INVALID " + link);
+//				System.out.println(" INVALID " + link);
 
 			}
 
@@ -67,7 +99,9 @@ public class HomePageTest extends CommonBase {
 			try {
 				assertEquals(actualString, expectedStrArray[i]);
 			} catch (AssertionError e) {
+
 				log.error("AssertionError");
+
 			}
 
 			actions = new Actions(driver);
@@ -80,12 +114,15 @@ public class HomePageTest extends CommonBase {
 
 	@Test(priority = 3)
 	public void validateBrandElementLink() {
-		homepage = new HomePage();
+		
 		List<WebElement> brandList = homepage.getBrandWebElements();
 		for (WebElement webElement : brandList) {
 			String link = homepage.getAnchorTagLink(webElement);
-			if (TestUtils.isLinkValid(link)) {
+
+			if (TestUtils.isLinkValid(link,driver)) {
 				log.info(link);
+
+
 			} else {
 				log.info(" INVALID " + link);
 
@@ -99,14 +136,15 @@ public class HomePageTest extends CommonBase {
 
 	@Test(priority = 4)
 	public void validateSocialMediaIconElementsLink() {
-		homepage = new HomePage();
 		javascriptExecutor = (JavascriptExecutor) driver;
 		List<WebElement> brandList = homepage.getsocialMediaIconElements();
 		for (WebElement webElement : brandList) {
 			javascriptExecutor.executeScript("arguments[0].scrollIntoView();", webElement);
 			String link = webElement.getAttribute("href");
-			if (TestUtils.isLinkValid(link)) {
+
+			if (TestUtils.isLinkValid(link,driver)) {
 				log.info(link);
+
 //				System.out.println(link);
 			} else {
 				log.info(" INVALID " + link);
@@ -122,7 +160,7 @@ public class HomePageTest extends CommonBase {
 	}
 	
 	
-	@AfterTest
+	@AfterClass
 	public void tearDown() {
 		log.info("Closing Browser");
 		driver.close();

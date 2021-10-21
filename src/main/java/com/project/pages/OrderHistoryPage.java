@@ -118,10 +118,11 @@ public class OrderHistoryPage extends CommonBase {
 	
 	private By tableXPath;
 	
-	public OrderHistoryPage() {
+	public OrderHistoryPage(WebDriver driver) {
 		Assert.assertEquals(driver.getTitle(), "Order History", "Page title is not as expected.");
 		Assert.assertEquals(driver.getCurrentUrl(), "http://localhost/shopping/order-history.php", "Page URL is not as expected.");
 		PageFactory.initElements(driver, this);
+		this.driver=driver;
 		
 		tableXPath = By.xpath(".//*[@class='shopping-cart']/div/div/form/table");
 	}

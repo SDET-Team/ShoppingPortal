@@ -1,0 +1,18 @@
+2021-10-21 16:40:04,286 CommonBase.java INFO  [main] base.CommonBase 120 - Starting Browser
+2021-10-21 16:40:08,425 CommonBase.java INFO  [main] base.CommonBase 127 - Maximizing the browser
+2021-10-21 16:40:08,573 CommonBase.java INFO  [main] base.CommonBase 131 - Deleting all cookies
+2021-10-21 16:40:08,590 CommonBase.java INFO  [main] base.CommonBase 135 - Adding implicit wait
+2021-10-21 16:40:08,631 CommonBase.java INFO  [main] base.CommonBase 141 - Loading URL
+2021-10-21 16:40:10,351 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 84 - Validating Loginpage Title
+2021-10-21 16:40:10,356 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 87 - Testcase Passed!
+2021-10-21 16:40:11,244 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 94 - Validating Forgot password operation by providing valid emailid and contact number
+2021-10-21 16:40:11,244 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 95 - User details: Email: fake@g.com , ContactNo: 1.23456789E9
+2021-10-21 16:40:12,272 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 94 - Validating Forgot password operation by providing valid emailid and contact number
+2021-10-21 16:40:12,273 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 95 - User details: Email: fake10@g.com , ContactNo: 4.567321231E9
+2021-10-21 16:40:13,098 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 105 - Validating Forgot password operation by providing invalid emailid or contact number
+2021-10-21 16:40:13,098 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 106 - User details: Email: wk@g.com , ContactNo: 1.23456789E9
+2021-10-21 16:40:13,564 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 116 - Testcase Passed!
+2021-10-21 16:40:13,567 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 105 - Validating Forgot password operation by providing invalid emailid or contact number
+2021-10-21 16:40:13,567 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 106 - User details: Email: sk@g.com , ContactNo: 123.0
+2021-10-21 16:40:14,051 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 116 - Testcase Passed!
+2021-10-21 16:40:14,052 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 124 - Closing browser

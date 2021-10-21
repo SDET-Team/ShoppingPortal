@@ -59,7 +59,7 @@ public class ReviewPageTest extends CommonBase
 	public void setup()
 	{	
 		initialization();
-		homepage=new HomePage();
+		homepage=new HomePage(driver);
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page","Home Page Title Not Matched");
 		navbeforeLogin.navigatetologin();
 	}

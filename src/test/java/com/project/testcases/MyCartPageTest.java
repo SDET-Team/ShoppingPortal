@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeTest;
 import static org.testng.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
-import java.lang.ProcessHandle.Info;
+//import java.lang.ProcessHandle.Info;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,16 +24,26 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 
 public class MyCartPageTest extends CommonBase {
 
 	CartActivity cartActivity;
 	MyCartPage myCartPage;
+	
+
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
 
 	@BeforeTest
 	public void setup() {
+		
 		initialization();
 		log.info("Driver initialization");
+		myCartPage = new MyCartPage(driver);
 		driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
 		TestUtils.addToCartProduct(7, 3);
 		log.info("7 Products are already present in the cart as pre-condition");
@@ -48,7 +58,7 @@ public class MyCartPageTest extends CommonBase {
 
 	@Test(priority = 1)
 	public void validateCartPageTitle() throws AssertionError {
-		myCartPage = new MyCartPage();
+	
 		try {
 			Assert.assertEquals(myCartPage.getPageTitle(), "My Cart", "My Cart Page Title Not Matched");
 		} catch (AssertionError e) {
@@ -61,7 +71,6 @@ public class MyCartPageTest extends CommonBase {
 
 	@Test(priority = 2)
 	public void validateTableHeadSectionList() throws AssertionError {
-		myCartPage = new MyCartPage();
 		String[] strArray = new String[] { "Remove", "Image", "Product Name", "Quantity", "Price Per unit",
 				"Shipping Charge", "GrandTotal" };
 		List<WebElement> headList = myCartPage.getTableHeadColumnNames();
@@ -81,7 +90,7 @@ public class MyCartPageTest extends CommonBase {
 
 	@Test(priority = 3)
 	public void validateTableBodysectionList() throws AssertionError {
-		myCartPage = new MyCartPage();
+	
 		String[] columnNamesList = { "productSelected", "imageSrc", "productLink", "productText", "Quantity",
 				"product Price per Unit", "Shipping Charge", "Grandtotal" };
 		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
@@ -101,8 +110,10 @@ public class MyCartPageTest extends CommonBase {
 		}
 
 		try {
-			String file = testDataDirectoryPath + "InCartProductsData.xlsx";
-			TestUtils.setTestData(file, "In Cart Products Details", inCartProductMap, columnNamesList);
+
+			String fileString = filePath +"\\src\\resources\\testdata\\" + "InCartProductsData.xlsx";
+			TestUtils.setTestData(fileString, "In Cart Products Details", inCartProductMap, columnNamesList);
+
 		} catch (FileNotFoundException e) {
 			log.error("FileNotFoundException");
 		} catch (Exception e) {
@@ -115,7 +126,7 @@ public class MyCartPageTest extends CommonBase {
 	@Test(priority = 4)
 	public void validateProductRemovalFromCart() throws AssertionError {
 		int productsToBeRemoved = 2;
-		myCartPage = new MyCartPage();
+	
 		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
 
 		boolean isSelected = myCartPage.selectElementToBDeleted(bodyElements, productsToBeRemoved);
@@ -131,7 +142,7 @@ public class MyCartPageTest extends CommonBase {
 
 	@Test(priority = 5)
 	public void validateUpdatedGrandTotalCart() throws AssertionError {
-		myCartPage = new MyCartPage();
+
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
 		Map<Integer, ArrayList<WebElement>> bodyElements1 = myCartPage.getTableBodyData();
 
@@ -175,7 +186,7 @@ public class MyCartPageTest extends CommonBase {
 
 	@Test(priority = 6)
 	public void validateQuantityLimit() throws AssertionError {
-		myCartPage = new MyCartPage();
+	
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
 
 		Map<Integer, ArrayList<WebElement>> bodyElements1 = myCartPage.getTableBodyData();

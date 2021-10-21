@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import com.project.base.CommonBase;
 import com.project.pages.CartActivity;
 import com.project.pages.HomePage;
-import com.project.pages.common.NavbarBeforeLogin;
+import com.project.pages.commonnavbar.NavbarBeforeLogin;
 
 import org.testng.annotations.BeforeTest;
 
@@ -25,18 +25,37 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+
 import com.project.utils.TestUtils;
 
 public class CartActivityTest extends CommonBase {
 
 	CartActivity cartActivity;
 	HomePage homepage;
+	
+	public CartActivityTest()
+	{
+		super();
+	}
 
+	
+
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
+	
 	@BeforeTest
 	public void setup() {
+		
 		initialization();
+
 		log.info("driver initialization");
-		homepage = new HomePage();
+
+		homepage = new HomePage(driver);
+		cartActivity = new CartActivity(driver);
 		try {
 			Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 		} catch (AssertionError e) {
@@ -55,7 +74,7 @@ public class CartActivityTest extends CommonBase {
 
 	@Test(priority = 1)
 	public void validateTitle() throws AssertionError {
-		cartActivity = new CartActivity();
+		
 		String title = cartActivity.indexPageTitle();
 		try {
 			Assert.assertEquals(title, "Shopping Portal Home Page", "Home Page Title Not Matched");
@@ -72,7 +91,7 @@ public class CartActivityTest extends CommonBase {
 
 	@Test(priority = 2)
 	public void validateFeatureProductTitle() throws AssertionError {
-		cartActivity = new CartActivity();
+	
 		String title = cartActivity.getFeatureProductText();
 
 		try {
@@ -89,7 +108,7 @@ public class CartActivityTest extends CommonBase {
 
 	@Test(priority = 3)
 	public void validateFeatureProductSort() throws AssertionError {
-		cartActivity = new CartActivity();
+
 		String[] strArray = new String[] { "ALL", "BOOKS", "FURNITURE" };
 		ArrayList<String> sortProductList = cartActivity.getfeatureProductSortElement();
 
@@ -111,7 +130,7 @@ public class CartActivityTest extends CommonBase {
 
 	@Test(priority = 4)
 	public void validateFeatureProductList() throws AssertionError {
-		cartActivity = new CartActivity();
+
 		String[] columnNamesList = { "imageSrc", "productLink", "productText", "productPrice", "discountPrice",
 				"Add-to-Cart" };
 		ArrayList<String> tempList;
@@ -129,7 +148,7 @@ public class CartActivityTest extends CommonBase {
 					continue;
 				}
 				if (j == 1 || j == 2) {
-					if (TestUtils.isLinkValid(detailsString)) {
+					if (TestUtils.isLinkValid(detailsString,driver)) {
 						tempList.add(detailsString);
 						continue;
 					} else {
@@ -144,8 +163,10 @@ public class CartActivityTest extends CommonBase {
 		}
 
 		try {
-			String file = testDataDirectoryPath + "ProductsData.xlsx";
-			TestUtils.setTestData(file, "Featured Products Details", productDataMap, columnNamesList);
+
+			String fileString = filePath +"\\src\\resources\\testdata\\" + "ProductsData.xlsx";
+			TestUtils.setTestData(fileString, "Featured Products Details", productDataMap, columnNamesList);
+
 		} catch (FileNotFoundException e) {
 			log.error("FileNotFoundException");
 		} catch (Exception e) {
@@ -158,7 +179,7 @@ public class CartActivityTest extends CommonBase {
 
 	@Test(priority = 5)
 	public void validateOtherProductList() throws AssertionError {
-		cartActivity = new CartActivity();
+	
 		int key = 0;
 		String[] sectionList = { "Smart Phone", "Laptops" };
 		String[] columnNamesList = { "Section", "imageSrc", "productLink", "productText", "productPrice",
@@ -186,7 +207,7 @@ public class CartActivityTest extends CommonBase {
 						continue;
 					}
 					if (k == 1 || k == 2) {
-						if (TestUtils.isLinkValid(detailsString)) {
+						if (TestUtils.isLinkValid(detailsString,driver)) {
 							tempList.add(detailsString);
 							continue;
 						} else {
@@ -202,8 +223,10 @@ public class CartActivityTest extends CommonBase {
 		}
 
 		try {
-			String file = testDataDirectoryPath + "ProductsData.xlsx";
-			TestUtils.setTestData(file, "Other Products Details", productDataMap, columnNamesList);
+
+			String fileString = filePath + "\\src\\resources\\testdata\\" + "ProductsData.xlsx";
+			TestUtils.setTestData(fileString, "Other Products Details", productDataMap, columnNamesList);
+
 		} catch (FileNotFoundException e) {
 			log.error("FileNotFoundException");
 		} catch (Exception e) {
@@ -216,7 +239,7 @@ public class CartActivityTest extends CommonBase {
 
 	@Test(priority = 6)
 	public void validateAddToCartButton() {
-		cartActivity = new CartActivity();
+
 		ArrayList<String> tempList;
 		String[] columnNamesList = { "imageSrc", "productLink", "productText", "productPrice", "discountPrice",
 				"Add-to-Cart" };
@@ -237,7 +260,7 @@ public class CartActivityTest extends CommonBase {
 					continue;
 				}
 				if (j == 1 || j == 2) {
-					if (TestUtils.isLinkValid(detailsString)) {
+					if (TestUtils.isLinkValid(detailsString,driver)) {
 						tempList.add(detailsString);
 						continue;
 					} else {
@@ -262,7 +285,7 @@ public class CartActivityTest extends CommonBase {
 		navbeforeLogin.clickOnMyCartImage();
 
 		try {
-			String file = testDataDirectoryPath + "InCartProducts.xlsx";
+			String file = System.getProperty("user.dir")+"\\src\\resources\\testdata\\" + "InCartProducts.xlsx";
 			TestUtils.setTestData(file, "Products Details", productDataMap, columnNamesList);
 		} catch (FileNotFoundException e) {
 			log.error("FileNotFoundException");
@@ -283,7 +306,6 @@ public class CartActivityTest extends CommonBase {
 
 	@Test(priority = 7)
 	public void validateAddToCartForSameProduct() {
-		cartActivity = new CartActivity();
 		int productNumber = 1, numOfTimes = 4;
 		List<WebElement> featureProductList = cartActivity.getfeatureProductListElement();
 

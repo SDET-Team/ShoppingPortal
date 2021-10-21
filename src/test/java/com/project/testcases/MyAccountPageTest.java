@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -24,15 +25,21 @@ public class MyAccountPageTest extends CommonBase {
 		super();
 	}
 	
+
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
 	
 	@BeforeTest
 	public void setup() {	
 		initialization();
-		HomePage homepage=new HomePage();
+		HomePage homepage=new HomePage(driver);
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched.");
 		navbeforeLogin.navigatetologin();
 		
-		LoginPage loginpage=new LoginPage();
+		LoginPage loginpage=new LoginPage(driver);
 		Assert.assertEquals(loginpage.loginpageTitle(), "Shopping Portal | Signi-in | Signup", "Login Page Title Not Matched.");
 		
 		String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\myAccountTestData.xlsx";
@@ -44,7 +51,7 @@ public class MyAccountPageTest extends CommonBase {
 			
 			loginpage.loginOperation(email, password);
 			
-			afterLoginPage = new AfterLoginPage();
+			afterLoginPage = new AfterLoginPage(driver);
 			Assert.assertEquals(afterLoginPage.getTitle(), "My Cart");
 			log.info("Login to website successful.");
 		} catch (IOException e) { 
@@ -55,9 +62,9 @@ public class MyAccountPageTest extends CommonBase {
 	@Test
 	public void checkMyProfileEmailFieldNotEditable() {
 		String testcase = "Verify_My_Profile_Email_Field_Not_Editable :: ";
-		
+
 		afterLoginPage.goToMyAccountPage();
-		MyAccountPage myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
 		log.info(testcase + "Navigated to My Account page.");
 		
@@ -81,7 +88,7 @@ public class MyAccountPageTest extends CommonBase {
 		String testcase = "Verify_My_Profile_Name_Change_Reflects_In_Webpage :: ";
 		
 		afterLoginPage.goToMyAccountPage();
-		MyAccountPage myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
 		log.info(testcase + "Navigated to My Profile page.");
 		
@@ -123,7 +130,7 @@ public class MyAccountPageTest extends CommonBase {
 		String testcase = "Verify_Account_Password_Change_Only_With_Valid_Current_Password :: ";
 		
 		afterLoginPage.goToMyAccountPage();
-		MyAccountPage myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
 		log.info(testcase + "Navigated to My Account page.");
 		
@@ -147,7 +154,7 @@ public class MyAccountPageTest extends CommonBase {
 		String testcase = "Verify_Billing_Address_Pin_Code_Field_Accept_Only_Numbers :: ";
 		
 		afterLoginPage.goToMyAccountPage();
-		MyAccountPage myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
 		log.info(testcase + "Navigated to My Account page.");
 		
@@ -184,7 +191,7 @@ public class MyAccountPageTest extends CommonBase {
 		String testcase = "Verify_Shipping_Address_Pin_Code_Field_Accept_Only_Numbers :: ";
 		
 		afterLoginPage.goToMyAccountPage();
-		MyAccountPage myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
 		log.info(testcase + "Navigated to My Account page.");
 		
@@ -221,7 +228,7 @@ public class MyAccountPageTest extends CommonBase {
 		String testcase = "Verify_Billing_Address_State_City_Fields_Accept_Only_Alphabets :: ";
 		
 		afterLoginPage.goToMyAccountPage();
-		MyAccountPage myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
 		log.info(testcase + "Navigated to My Account page.");
 		
@@ -262,7 +269,7 @@ public class MyAccountPageTest extends CommonBase {
 		String testcase = "Verify_Shipping_Address_State_City_Fields_Accept_Only_Alphabets :: ";
 		
 		afterLoginPage.goToMyAccountPage();
-		MyAccountPage myAccountPage = new MyAccountPage();
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
 		log.info(testcase + "Navigated to My Account page.");
 		
