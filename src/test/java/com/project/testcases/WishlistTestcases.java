@@ -40,9 +40,9 @@ public class WishlistTestcases extends CommonBase {
 	
 	
 	@Test(priority=1, dataProvider="login_data")
-	public void login(String email, String password, String expectedResult) {
-		boolean actualResult = loginpage.loginOperation(email, password, expectedResult);
-		Assert.assertFalse(actualResult);
+	public void login(String email, String password) {
+		String msg=loginpage.loginOperation(email, password);
+		Assert.assertEquals(msg,"Welcome","Authentication Failed!!!");
 		
 		afterLoginPage = new AfterLoginPage();
 		Assert.assertEquals(afterLoginPage.getTitle(), "My Cart");
@@ -88,7 +88,7 @@ public class WishlistTestcases extends CommonBase {
 	
 	@DataProvider(name="login_data")
 	private Object[][] getLoginDetails() {
-		return new Object[][] { {"anuj.lpu1@gmail.com", "Test@123", "pass"} };
+		return new Object[][] { {"anuj.lpu1@gmail.com", "Test@123"} };
 	}
 	
 	@DataProvider(name="product_type_name_data")

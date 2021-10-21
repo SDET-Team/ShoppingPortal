@@ -1,0 +1,32 @@
+2021-10-21 10:14:05,043 LoginPageTest.java INFO  [main] base.CommonBase 76 - Validating Loginpage Title
+2021-10-21 10:14:05,047 LoginPageTest.java INFO  [main] base.CommonBase 79 - Testcase Passed!
+2021-10-21 10:14:05,571 LoginPageTest.java INFO  [main] base.CommonBase 84 - Validating Login operation using correct Credentials
+2021-10-21 10:14:05,571 LoginPageTest.java INFO  [main] base.CommonBase 85 - Logging using email: sk@g.com , Password: sk@12345
+2021-10-21 10:14:05,952 LoginPageTest.java INFO  [main] base.CommonBase 84 - Validating Login operation using correct Credentials
+2021-10-21 10:14:05,952 LoginPageTest.java INFO  [main] base.CommonBase 85 - Logging using email: ok@g.com , Password: ok@12345
+2021-10-21 10:14:06,308 LoginPageTest.java INFO  [main] base.CommonBase 84 - Validating Login operation using correct Credentials
+2021-10-21 10:14:06,308 LoginPageTest.java INFO  [main] base.CommonBase 85 - Logging using email: pk@g.com , Password: pk@12345
+2021-10-21 10:14:06,575 LoginPageTest.java INFO  [main] base.CommonBase 84 - Validating Login operation using correct Credentials
+2021-10-21 10:14:06,575 LoginPageTest.java INFO  [main] base.CommonBase 85 - Logging using email: fake9@g.com , Password: fake@12345
+2021-10-21 10:14:06,828 LoginPageTest.java INFO  [main] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 10:14:06,828 LoginPageTest.java INFO  [main] base.CommonBase 98 - Logging using email: abc@f.com , Password: abc#123
+2021-10-21 10:14:07,058 LoginPageTest.java INFO  [main] base.CommonBase 108 - Testcase Passed!
+2021-10-21 10:14:07,060 LoginPageTest.java INFO  [main] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 10:14:07,060 LoginPageTest.java INFO  [main] base.CommonBase 98 - Logging using email: def@g.com , Password: df@456
+2021-10-21 10:14:07,279 LoginPageTest.java INFO  [main] base.CommonBase 108 - Testcase Passed!
+2021-10-21 10:14:07,281 LoginPageTest.java INFO  [main] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 10:14:07,281 LoginPageTest.java INFO  [main] base.CommonBase 98 - Logging using email: ghi@g.com , Password: jk789
+2021-10-21 10:14:07,517 LoginPageTest.java INFO  [main] base.CommonBase 108 - Testcase Passed!
+2021-10-21 10:14:07,520 LoginPageTest.java INFO  [main] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 10:14:07,520 LoginPageTest.java INFO  [main] base.CommonBase 98 - Logging using email: hjk@g.com , Password: sk@12345
+2021-10-21 10:14:07,748 LoginPageTest.java INFO  [main] base.CommonBase 108 - Testcase Passed!
+2021-10-21 10:14:07,750 LoginPageTest.java INFO  [main] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 10:14:07,750 LoginPageTest.java INFO  [main] base.CommonBase 98 - Logging using email: sk@g.com , Password: we@123
+2021-10-21 10:14:07,964 LoginPageTest.java INFO  [main] base.CommonBase 108 - Testcase Passed!
+2021-10-21 10:14:07,966 LoginPageTest.java INFO  [main] base.CommonBase 114 - Validating that link for forgot password page is not broken
+2021-10-21 10:14:08,079 LoginPageTest.java INFO  [main] base.CommonBase 118 - Testcase Passed!
+2021-10-21 10:14:08,226 LoginPageTest.java INFO  [main] base.CommonBase 128 - Validating registration operation by providing all correct details
+2021-10-21 10:14:08,656 LoginPageTest.java INFO  [main] base.CommonBase 128 - Validating registration operation by providing all correct details
+2021-10-21 10:14:09,061 LoginPageTest.java INFO  [main] base.CommonBase 139 - Validating registration operation by providing some incorrect details
+2021-10-21 10:14:14,479 LoginPageTest.java INFO  [main] base.CommonBase 139 - Validating registration operation by providing some incorrect details
+2021-10-21 10:14:19,932 LoginPageTest.java INFO  [main] base.CommonBase 156 - Closing the Browser

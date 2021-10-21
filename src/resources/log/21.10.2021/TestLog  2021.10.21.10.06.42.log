@@ -1,0 +1,50 @@
+2021-10-21 10:06:43,008 HomePageTest.java INFO  [TestNG-test=Test-1] base.CommonBase 64 - Validating Homepage Title
+2021-10-21 10:06:43,032 HomePageTest.java INFO  [TestNG-test=Test-1] base.CommonBase 67 - Validation Testcase Passed
+2021-10-21 10:06:43,181 TrackOrderPageTest.java INFO  [TestNG-test=Test-4] base.CommonBase 71 - Validating Loginpage Title
+2021-10-21 10:06:43,338 TestUtils.java ERROR [TestNG-test=Test-7] base.CommonBase 114 - http://localhost//shopping/index.php => is a valid link
+2021-10-21 10:06:43,540 TestUtils.java ERROR [TestNG-test=Test-7] base.CommonBase 114 - http://localhost//shopping/category.php?cid=3 => is a valid link
+2021-10-21 10:06:43,743 TestUtils.java ERROR [TestNG-test=Test-7] base.CommonBase 114 - http://localhost//shopping/category.php?cid=4 => is a valid link
+2021-10-21 10:06:43,914 TrackOrderPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 81 - Validating Tracking order operation by providing correct emailid and orderid
+2021-10-21 10:06:43,914 TrackOrderPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 82 - Order details: Orderid: 9.0 , Emailid: sk@g.com
+2021-10-21 10:06:43,944 TestUtils.java ERROR [TestNG-test=Test-7] base.CommonBase 114 - http://localhost//shopping/category.php?cid=5 => is a valid link
+2021-10-21 10:06:44,115 TestUtils.java ERROR [TestNG-test=Test-7] base.CommonBase 114 - http://localhost//shopping/category.php?cid=6 => is a valid link
+2021-10-21 10:06:49,020 TrackOrderPageTest.java INFO  [TestNG-test=Test-5] base.CommonBase 93 - Validating Tracking order operation by providing incorrect emailid or orderid
+2021-10-21 10:06:49,021 TrackOrderPageTest.java INFO  [TestNG-test=Test-5] base.CommonBase 94 - Order details: Orderid: {0} , Emailid: {1}
+2021-10-21 10:06:49,114 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:49,115 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:49,278 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:49,278 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:49,444 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:49,444 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:49,608 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:49,608 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:49,778 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:49,778 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:49,943 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:49,943 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:50,108 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:50,108 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:50,274 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:50,275 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:50,437 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:50,437 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:50,590 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:50,590 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:50,771 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:50,771 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:50,940 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:50,940 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:51,108 TestUtils.java ERROR [TestNG-test=Test-14] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:51,108 HomePageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 111 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:54,106 TrackOrderPageTest.java INFO  [TestNG-test=Test-5] base.CommonBase 102 - Closing Browser
+2021-10-21 10:06:54,218 TestUtils.java ERROR [TestNG-test=Test-6] base.CommonBase 99 - http://facebook.com/transvelo => belongs to another domain, skipping it
+2021-10-21 10:06:54,218 HomePageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 136 -  INVALID http://facebook.com/transvelo
+2021-10-21 10:06:54,358 TestUtils.java ERROR [TestNG-test=Test-6] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:54,358 HomePageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 133 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:54,511 TestUtils.java ERROR [TestNG-test=Test-6] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:54,511 HomePageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 133 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:54,656 TestUtils.java ERROR [TestNG-test=Test-6] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:54,657 HomePageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 133 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:54,806 TestUtils.java ERROR [TestNG-test=Test-6] base.CommonBase 114 - http://localhost//shopping/track-orders.php# => is a valid link
+2021-10-21 10:06:54,806 HomePageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 133 - http://localhost//shopping/track-orders.php#
+2021-10-21 10:06:54,919 HomePageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 151 - Closing Browser

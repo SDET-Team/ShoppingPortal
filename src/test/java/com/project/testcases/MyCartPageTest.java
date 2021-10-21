@@ -91,7 +91,7 @@ public class MyCartPageTest extends CommonBase {
 		}
 
 		try {
-			String fileString = filePath + testDataDirectoryPath + "\\" + "InCartProductsData.xlsx";
+			String fileString = filePath +"\\src\\resources\\testdata\\" + "InCartProductsData.xlsx";
 			TestUtils.setTestData(fileString, "In Cart Products Details", inCartProductMap, columnNamesList);
 		} catch (FileNotFoundException e) {
 			logger.error("FileNotFoundException");

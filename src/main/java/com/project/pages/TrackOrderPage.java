@@ -3,6 +3,7 @@ package com.project.pages;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,8 +33,9 @@ public class TrackOrderPage extends CommonBase {
 		return invalidOrder;
 	}
 
-	public TrackOrderPage() {
+	public TrackOrderPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
+		this.driver=driver;
 	}
 
 	public String title() {

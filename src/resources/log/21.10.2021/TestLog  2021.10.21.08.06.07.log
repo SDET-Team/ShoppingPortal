@@ -1,0 +1,70 @@
+2021-10-21 08:06:07,387 HomePageTest.java INFO  [TestNG-test=Test-1] base.CommonBase 64 - Validating Homepage Title
+2021-10-21 08:06:07,406 HomePageTest.java INFO  [TestNG-test=Test-1] base.CommonBase 67 - Validation Testcase Passed
+2021-10-21 08:06:07,637 LoginPageTest.java INFO  [TestNG-test=Test-2] base.CommonBase 76 - Validating Loginpage Title
+2021-10-21 08:06:07,653 LoginPageTest.java INFO  [TestNG-test=Test-2] base.CommonBase 79 - Testcase Passed!
+2021-10-21 08:06:07,829 TestUtils.java ERROR [TestNG-test=Test-5] base.CommonBase 110 - http://localhost//shopping/index.php => is a valid link
+2021-10-21 08:06:08,104 TestUtils.java ERROR [TestNG-test=Test-5] base.CommonBase 110 - http://localhost//shopping/category.php?cid=3 => is a valid link
+2021-10-21 08:06:08,401 TestUtils.java ERROR [TestNG-test=Test-5] base.CommonBase 110 - http://localhost//shopping/category.php?cid=4 => is a valid link
+2021-10-21 08:06:08,624 TestUtils.java ERROR [TestNG-test=Test-5] base.CommonBase 110 - http://localhost//shopping/category.php?cid=5 => is a valid link
+2021-10-21 08:06:08,859 TestUtils.java ERROR [TestNG-test=Test-5] base.CommonBase 110 - http://localhost//shopping/category.php?cid=6 => is a valid link
+2021-10-21 08:06:09,089 LoginPageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 84 - Validating Login operation using correct Credentials
+2021-10-21 08:06:09,089 LoginPageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 85 - Logging using email: sk@g.com , Password: sk@12345
+2021-10-21 08:06:11,299 LoginPageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 84 - Validating Login operation using correct Credentials
+2021-10-21 08:06:11,300 LoginPageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 85 - Logging using email: ok@g.com , Password: ok@12345
+2021-10-21 08:06:11,761 LoginPageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 84 - Validating Login operation using correct Credentials
+2021-10-21 08:06:11,761 LoginPageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 85 - Logging using email: pk@g.com , Password: pk@12345
+2021-10-21 08:06:12,116 LoginPageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 84 - Validating Login operation using correct Credentials
+2021-10-21 08:06:12,117 LoginPageTest.java INFO  [TestNG-test=Test-6] base.CommonBase 85 - Logging using email: fake9@g.com , Password: fake@12345
+2021-10-21 08:06:12,537 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 08:06:12,537 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 98 - Logging using email: abc@f.com , Password: abc#123
+2021-10-21 08:06:12,645 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:12,645 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:12,868 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:12,868 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:13,097 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 108 - Testcase Passed!
+2021-10-21 08:06:13,101 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 08:06:13,101 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 98 - Logging using email: def@g.com , Password: df@456
+2021-10-21 08:06:13,139 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:13,139 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:13,369 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:13,369 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:13,552 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:13,553 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:13,637 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 108 - Testcase Passed!
+2021-10-21 08:06:13,642 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 08:06:13,642 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 98 - Logging using email: ghi@g.com , Password: jk789
+2021-10-21 08:06:13,727 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:13,728 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:13,899 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:13,899 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:14,021 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 108 - Testcase Passed!
+2021-10-21 08:06:14,024 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 08:06:14,024 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 98 - Logging using email: hjk@g.com , Password: sk@12345
+2021-10-21 08:06:14,085 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:14,086 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:14,286 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:14,286 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:14,397 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 108 - Testcase Passed!
+2021-10-21 08:06:14,400 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 97 - Validating Login operation using incorrect Credentials
+2021-10-21 08:06:14,400 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 98 - Logging using email: sk@g.com , Password: we@123
+2021-10-21 08:06:14,473 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:14,473 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:14,643 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:14,644 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:14,742 LoginPageTest.java INFO  [TestNG-test=Test-10] base.CommonBase 108 - Testcase Passed!
+2021-10-21 08:06:14,817 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:14,817 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:14,987 TestUtils.java ERROR [TestNG-test=Test-9] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:14,987 HomePageTest.java INFO  [TestNG-test=Test-9] base.CommonBase 111 - http://localhost//shopping/login.php#
+2021-10-21 08:06:15,117 LoginPageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 114 - Validating that link for forgot password page is not broken
+2021-10-21 08:06:15,167 TestUtils.java ERROR [TestNG-test=Test-13] base.CommonBase 95 - http://facebook.com/transvelo => belongs to another domain, skipping it
+2021-10-21 08:06:15,168 HomePageTest.java INFO  [TestNG-test=Test-13] base.CommonBase 136 -  INVALID http://facebook.com/transvelo
+2021-10-21 08:06:15,311 LoginPageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 118 - Testcase Passed!
+2021-10-21 08:06:15,332 TestUtils.java ERROR [TestNG-test=Test-13] base.CommonBase 110 - http://localhost//shopping/login.php# => is a valid link
+2021-10-21 08:06:15,333 HomePageTest.java INFO  [TestNG-test=Test-13] base.CommonBase 133 - http://localhost//shopping/login.php#
+2021-10-21 08:06:15,469 HomePageTest.java INFO  [TestNG-test=Test-13] base.CommonBase 151 - Closing Browser
+2021-10-21 08:06:15,596 LoginPageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 128 - Validating registration operation by providing all correct details
+2021-10-21 08:06:20,678 LoginPageTest.java INFO  [TestNG-test=Test-14] base.CommonBase 128 - Validating registration operation by providing all correct details
+2021-10-21 08:06:25,772 LoginPageTest.java INFO  [TestNG-test=Test-15] base.CommonBase 139 - Validating registration operation by providing some incorrect details
+2021-10-21 08:06:30,833 LoginPageTest.java INFO  [TestNG-test=Test-15] base.CommonBase 139 - Validating registration operation by providing some incorrect details
+2021-10-21 08:06:35,857 LoginPageTest.java INFO  [TestNG-test=Test-15] base.CommonBase 156 - Closing the Browser

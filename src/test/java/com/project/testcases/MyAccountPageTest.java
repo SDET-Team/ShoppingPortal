@@ -39,10 +39,10 @@ public class MyAccountPageTest extends CommonBase {
 	
 	
 	@Test(priority=1, dataProvider="login_data")
-	public void loginAndNavigateToMyAccount(String email, String password, String expectedResult) {
-		boolean actualResult = loginpage.loginOperation(email, password, expectedResult);
-		Assert.assertFalse(actualResult);
+	public void loginAndNavigateToMyAccount(String email, String password) {
 		
+		String msg=loginpage.loginOperation(email, password);
+		Assert.assertEquals(msg,"Welcome","Authentication Failed!!!");
 		AfterLoginPage afterLoginPage = new AfterLoginPage();
 		Assert.assertEquals(afterLoginPage.getTitle(), "My Cart");
 		afterLoginPage.goToMyAccountPage();

@@ -15,7 +15,11 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -28,6 +32,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,6 +46,7 @@ import com.project.pages.MyCartPage;
 
 public class TestUtils extends CommonBase {
 
+	public static long PAGE_LOAD_TIMEOUT =30;
 	public static long IMPLICIT_WAIT = 5;
 	static HttpURLConnection huc = null;
 	static int respCode = 200;
@@ -73,12 +80,12 @@ public class TestUtils extends CommonBase {
 
 	}
 
-	public static Alert switchToAlert() {
+	public static Alert switchToAlert(WebDriver driver) {
 		Alert alert = driver.switchTo().alert();
 		return alert;
 	}
 
-	public static boolean isLinkValid(String urlString) {
+	public static boolean isLinkValid(String urlString,WebDriver driver) {
 		String baseUrl = config.getProperty("url");
 		boolean isValid = false;
 
@@ -189,7 +196,7 @@ public class TestUtils extends CommonBase {
 	}
 	
 	
-	public static boolean isAlertPresent() 
+	public static boolean isAlertPresent(WebDriver driver) 
 	{ 
 		
 	    try 
@@ -270,5 +277,7 @@ public class TestUtils extends CommonBase {
 		}
 
 	}
+	
+	
 
 }

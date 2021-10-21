@@ -1,0 +1,44 @@
+2021-10-21 08:05:04,132 HomePageTest.java INFO  [main] base.CommonBase 64 - Validating Homepage Title
+2021-10-21 08:05:04,151 HomePageTest.java INFO  [main] base.CommonBase 67 - Validation Testcase Passed
+2021-10-21 08:05:04,367 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/index.php => is a valid link
+2021-10-21 08:05:04,767 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/category.php?cid=3 => is a valid link
+2021-10-21 08:05:05,038 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/category.php?cid=4 => is a valid link
+2021-10-21 08:05:05,300 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/category.php?cid=5 => is a valid link
+2021-10-21 08:05:05,537 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/category.php?cid=6 => is a valid link
+2021-10-21 08:05:05,773 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:05,773 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:05,951 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:05,951 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:06,121 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:06,122 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:06,297 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:06,297 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:06,534 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:06,535 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:06,715 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:06,715 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:06,890 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:06,890 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:07,061 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:07,062 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:07,252 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:07,252 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:07,426 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:07,426 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:07,605 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:07,605 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:07,794 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:07,794 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:07,958 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:07,958 HomePageTest.java INFO  [main] base.CommonBase 111 - http://localhost//shopping/#
+2021-10-21 08:05:08,123 TestUtils.java ERROR [main] base.CommonBase 95 - http://facebook.com/transvelo => belongs to another domain, skipping it
+2021-10-21 08:05:08,123 HomePageTest.java INFO  [main] base.CommonBase 136 -  INVALID http://facebook.com/transvelo
+2021-10-21 08:05:08,292 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:08,292 HomePageTest.java INFO  [main] base.CommonBase 133 - http://localhost//shopping/#
+2021-10-21 08:05:08,470 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:08,470 HomePageTest.java INFO  [main] base.CommonBase 133 - http://localhost//shopping/#
+2021-10-21 08:05:08,638 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:08,639 HomePageTest.java INFO  [main] base.CommonBase 133 - http://localhost//shopping/#
+2021-10-21 08:05:08,797 TestUtils.java ERROR [main] base.CommonBase 110 - http://localhost//shopping/# => is a valid link
+2021-10-21 08:05:08,797 HomePageTest.java INFO  [main] base.CommonBase 133 - http://localhost//shopping/#
+2021-10-21 08:05:08,918 HomePageTest.java INFO  [main] base.CommonBase 151 - Closing Browser

@@ -1,0 +1,13 @@
+2021-10-21 10:35:43,780 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 77 - Validating Loginpage Title
+2021-10-21 10:35:43,785 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 80 - Testcase Passed!
+2021-10-21 10:35:44,423 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 87 - Validating Forgot password operation by providing valid emailid and contact number
+2021-10-21 10:35:44,423 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 88 - User details: Email: fake@g.com , ContactNo: 1.23456789E9
+2021-10-21 10:35:45,028 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 87 - Validating Forgot password operation by providing valid emailid and contact number
+2021-10-21 10:35:45,029 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 88 - User details: Email: fake10@g.com , ContactNo: 4.567321231E9
+2021-10-21 10:35:45,512 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 98 - Validating Forgot password operation by providing invalid emailid or contact number
+2021-10-21 10:35:45,512 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 99 - User details: Email: wk@g.com , ContactNo: 1.23456789E9
+2021-10-21 10:35:45,880 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 109 - Testcase Passed!
+2021-10-21 10:35:45,882 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 98 - Validating Forgot password operation by providing invalid emailid or contact number
+2021-10-21 10:35:45,882 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 99 - User details: Email: sk@g.com , ContactNo: 123.0
+2021-10-21 10:35:46,229 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 109 - Testcase Passed!
+2021-10-21 10:35:46,230 ForgotPasswordPageTest.java INFO  [main] base.CommonBase 117 - Closing browser

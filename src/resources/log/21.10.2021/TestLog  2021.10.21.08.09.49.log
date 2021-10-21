@@ -1,0 +1,6 @@
+2021-10-21 08:09:49,396 LoginPageTest.java INFO  [TestNG-test=Test-2] base.CommonBase 76 - Validating Loginpage Title
+2021-10-21 08:09:49,424 LoginPageTest.java INFO  [TestNG-test=Test-2] base.CommonBase 79 - Testcase Passed!
+2021-10-21 08:09:49,539 HomePageTest.java INFO  [TestNG-test=Test-1] base.CommonBase 64 - Validating Homepage Title
+2021-10-21 08:09:49,553 HomePageTest.java INFO  [TestNG-test=Test-1] base.CommonBase 67 - Validation Testcase Passed
+2021-10-21 08:09:49,741 ForgotPasswordPageTest.java INFO  [TestNG-test=Test-3] base.CommonBase 77 - Validating Loginpage Title
+2021-10-21 08:09:49,747 ForgotPasswordPageTest.java INFO  [TestNG-test=Test-3] base.CommonBase 80 - Testcase Passed!

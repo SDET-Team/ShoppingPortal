@@ -1,0 +1,4 @@
+2021-10-21 10:48:14,796 HomePageTest.java INFO  [TestNG-test=Test-1] base.CommonBase 64 - Validating Homepage Title
+2021-10-21 10:48:14,931 HomePageTest.java INFO  [TestNG-test=Test-1] base.CommonBase 67 - Validation Testcase Passed
+2021-10-21 10:48:15,108 LoginPageTest.java INFO  [TestNG-test=Test-2] base.CommonBase 76 - Validating Loginpage Title
+2021-10-21 10:48:15,125 LoginPageTest.java INFO  [TestNG-test=Test-2] base.CommonBase 79 - Testcase Passed!

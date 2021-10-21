@@ -2,12 +2,18 @@ package com.project.testcases;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;  
+import org.testng.annotations.AfterClass; 
 
 import com.project.base.CommonBase;
 import com.project.pages.HomePage;
@@ -23,12 +29,27 @@ public class TrackOrderPageTest extends CommonBase {
 
 	public TrackOrderPageTest() {
 		super();
+		
 	}
 
-	@BeforeTest
+	@BeforeClass
 	public void setup() {
+		
+		/*log=Logger.getLogger(TrackOrderPageTest.class);
+		String timeStamp = new SimpleDateFormat(" yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String currDate=new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+		dir1=currDate;
+		dir2="TestLog "+timeStamp;
+		String logFilename=TrackOrderPageTest.class.getSimpleName()+timeStamp+".log";
+		System.setProperty("logfile.name",filePath+"\\src\\resources\\log\\"+dir1+"\\"+dir2+"\\"+logFilename);
+		PropertyConfigurator.configure(logconfig);
+		*/
+		
 		initialization();
-		homepage = new HomePage();
+		
+		homepage = new HomePage(driver);
+		trackorderpage=new TrackOrderPage(driver);
+		
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 		navbeforeLogin.clickontrackorder();
 	}
@@ -48,7 +69,6 @@ public class TrackOrderPageTest extends CommonBase {
 	@Test(priority=1)
 	public void validateTitle()
 	{	log.info("Validating Loginpage Title");
-		trackorderpage=new TrackOrderPage();
 		String title=trackorderpage.title();
 		Assert.assertEquals(title, "Track Orders","Title Not Matched");
 		log.info("Testcase Passed!");
@@ -59,7 +79,7 @@ public class TrackOrderPageTest extends CommonBase {
 	public void validatePositiveTrackorderOperation(String orderid,String emailid)
 	{
 		log.info("Validating Tracking order operation by providing correct emailid and orderid");
-		log.info("Order details: Orderid: {0} , Emailid: {1}");
+		log.info("Order details: Orderid: "+orderid+" , Emailid: "+emailid);
 		int col=trackorderpage.trackingOption(orderid, emailid);
 		Assert.assertEquals(col,9,"Error message displayed for correct orderid and emailid!!!");
 		log.info("Testcase Passed!");
@@ -77,7 +97,7 @@ public class TrackOrderPageTest extends CommonBase {
 		log.info("Testcase Passed!");
 	}
 
-	@AfterTest
+	@AfterClass
 	public void tearDown() {
 		log.info("Closing Browser");
 		driver.close();

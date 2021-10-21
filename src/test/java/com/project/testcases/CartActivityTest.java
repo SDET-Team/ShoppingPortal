@@ -29,10 +29,17 @@ public class CartActivityTest extends CommonBase {
 
 	CartActivity cartActivity;
 	HomePage homepage;
+	
+	public CartActivityTest()
+	{
+		super();
+	}
 
 	@BeforeTest
 	public void setup() {
+		
 		initialization();
+		System.out.print("\n\nHii");
 		homepage = new HomePage();
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 //		navbeforeLogin.navigatetologin();
@@ -131,7 +138,7 @@ public class CartActivityTest extends CommonBase {
 		}
 
 		try {
-			String fileString = filePath + testDataDirectoryPath + "\\" + "ProductsData.xlsx";
+			String fileString = filePath +"\\src\\resources\\testdata\\" + "ProductsData.xlsx";
 			TestUtils.setTestData(fileString, "Featured Products Details", productDataMap, columnNamesList);
 		} catch (FileNotFoundException e) {
 			logger.error("FileNotFoundException");
@@ -187,7 +194,7 @@ public class CartActivityTest extends CommonBase {
 		}
 
 		try {
-			String fileString = filePath + testDataDirectoryPath + "\\" + "ProductsData.xlsx";
+			String fileString = filePath + "\\src\\resources\\testdata\\" + "ProductsData.xlsx";
 			TestUtils.setTestData(fileString, "Other Products Details", productDataMap, columnNamesList);
 		} catch (FileNotFoundException e) {
 			logger.error("FileNotFoundException");
