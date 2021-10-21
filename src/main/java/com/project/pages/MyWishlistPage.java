@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -13,10 +14,11 @@ import com.project.base.CommonBase;
 
 public class MyWishlistPage extends CommonBase {
 	
-	public MyWishlistPage() {
+	public MyWishlistPage(WebDriver driver) {
 		Assert.assertEquals(driver.getTitle(), "My Wishlist", "Page title is not as expected.");
 		Assert.assertTrue(driver.getCurrentUrl().startsWith("http://localhost/shopping/my-wishlist.php"), "Page URL is not as expected.");
 		PageFactory.initElements(driver, this);
+		this.driver=driver;
 	}
 	
 	

@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
@@ -23,6 +24,8 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.project.base.CommonBase;
+import com.project.utils.TestUtils;
 
 public class Reporting extends TestListenerAdapter
 {
@@ -42,7 +45,7 @@ public class Reporting extends TestListenerAdapter
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());//time stamp
 		String repName="Test-Report-"+timeStamp+".html";
 		
-		htmlReporter=new ExtentHtmlReporter(System.getProperty("user.dir")+ "\\src\\resources\\report\\"+repName);//specify location of the report
+		htmlReporter=new ExtentHtmlReporter(System.getProperty("user.dir")+ "\\automation test output\\reports\\"+repName);//specify location of the report
 		htmlReporter.loadXMLConfig(System.getProperty("user.dir")+ "\\src\\main\\java\\com\\project\\config\\extentconfig.xml");
 		
 		extent=new ExtentReports();
@@ -110,9 +113,11 @@ public class Reporting extends TestListenerAdapter
 		}*/
 
 try {
-		String screenshotPath=System.getProperty("user.dir")+"\\src\\resources\\screenshots\\"+result.getName()+".png";
-		String filename=result.getName()+".png";
-		test.get().fail(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromPath("ss.png").build());
+		
+		String filename=result.getName()+"_Failed";
+		WebDriver browserDriver=CommonBase.getDriver();
+		test.get().fail(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromPath(TestUtils.getscreenShot(browserDriver, filename)).build());
+		//test.get().addScreenCaptureFromPath("demo.png");
 		} catch (IOException e) {
 			System.err.println("Exception thrown while updating test fail status " + Arrays.toString(e.getStackTrace()));
 		}
@@ -127,9 +132,10 @@ try {
 		//logger.log(Status.SKIP,MarkupHelper.createLabel(result.getName(),ExtentColor.ORANGE));
 	
 		try {
-			String screenshotPath=System.getProperty("user.dir")+"\\src\\resources\\screenshots\\";
-			String filename=result.getName()+".png";
-			test.get().skip(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromPath("ss.png").build());
+			
+			String filename=result.getName()+"_Skipped";
+			WebDriver browserDriver=CommonBase.getDriver();
+			test.get().skip(result.getThrowable(),MediaEntityBuilder.createScreenCaptureFromPath(TestUtils.getscreenShot(browserDriver, filename)).build());
 		} catch (IOException e) {
 			System.err.println("Exception thrown while updating test skip status " + Arrays.toString(e.getStackTrace()));
 		}

@@ -12,7 +12,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeClass;  
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterClass; 
 
 import com.project.base.CommonBase;
@@ -31,6 +32,13 @@ public class TrackOrderPageTest extends CommonBase {
 		super();
 		
 	}
+	
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
+	
 
 	@BeforeClass
 	public void setup() {

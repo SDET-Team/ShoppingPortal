@@ -20,7 +20,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
-import org.testng.annotations.BeforeClass;  
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterClass; 
 
 import com.project.base.CommonBase;
@@ -38,6 +39,13 @@ public class HomePageTest extends CommonBase{
 		
 		
 	}
+	
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
+	
 
 	@BeforeClass
 	public void setup() {
@@ -77,20 +85,23 @@ public class HomePageTest extends CommonBase{
 	
 			WebElement webElement = list.get(i);
 			String link = homepage.getAnchorTagLink(webElement);
+
 			if (TestUtils.isLinkValid(link,driver)) {
 				//logger.info(link);
 //				System.out.println(link);
 			} else {
 				//logger.info(" INVALID " + link);
 //				System.out.println(" INVALID " + link);
+
 			}
 
 			String actualString = webElement.getText();
 			try {
 				assertEquals(actualString, expectedStrArray[i]);
 			} catch (AssertionError e) {
-				//logger.error("AssertionError");
-//				System.out.println("AssertionError");
+
+				log.error("AssertionError");
+
 			}
 
 			actions = new Actions(driver);
@@ -107,12 +118,13 @@ public class HomePageTest extends CommonBase{
 		List<WebElement> brandList = homepage.getBrandWebElements();
 		for (WebElement webElement : brandList) {
 			String link = homepage.getAnchorTagLink(webElement);
+
 			if (TestUtils.isLinkValid(link,driver)) {
-				logger.info(link);
-//				System.out.println(link);
+				log.info(link);
+
+
 			} else {
-				logger.info(" INVALID " + link);
-//				System.out.println(" INVALID " + link);
+				log.info(" INVALID " + link);
 
 			}
 			actions = new Actions(driver);
@@ -129,11 +141,13 @@ public class HomePageTest extends CommonBase{
 		for (WebElement webElement : brandList) {
 			javascriptExecutor.executeScript("arguments[0].scrollIntoView();", webElement);
 			String link = webElement.getAttribute("href");
+
 			if (TestUtils.isLinkValid(link,driver)) {
-				logger.info(link);
+				log.info(link);
+
 //				System.out.println(link);
 			} else {
-				logger.info(" INVALID " + link);
+				log.info(" INVALID " + link);
 //				System.out.println(" INVALID " + link);
 			}
 			

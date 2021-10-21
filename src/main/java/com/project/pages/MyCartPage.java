@@ -16,6 +16,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -56,8 +57,9 @@ public class MyCartPage extends CommonBase {
 	@FindBy(xpath = "//div[@class='shopping-cart']//div[4]//tbody//button")
 	WebElement proccedToCheckoutBtn;
 
-	public MyCartPage() {
+	public MyCartPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
+		this.driver=driver;
 	}
 
 	public String getPageTitle() {
@@ -87,7 +89,7 @@ public class MyCartPage extends CommonBase {
 		try {
 			list = webElement.findElements(methodBy);
 		} catch (NoSuchElementException e) {
-			logger.error("NoSuchElementException");
+			log.error("NoSuchElementException");
 		}
 		return list;
 	}
@@ -161,7 +163,7 @@ public class MyCartPage extends CommonBase {
 		List<Integer> keyList = new ArrayList<Integer>(KeySet);
 
 		if (keyList.size() == 0) {
-			logger.info("Shopping cart is Empty" + keyList.size() + "products present in cart");
+			log.info("Shopping cart is Empty" + keyList.size() + "products present in cart");
 		} else {
 			for (int i = 0; i < keyList.size(); i++) {
 				int key = keyList.get(i);
@@ -190,7 +192,7 @@ public class MyCartPage extends CommonBase {
 		List<Integer> keyList = new ArrayList<Integer>(KeySet);
 
 		if (keyList.size() == 0) {
-			logger.info("Shopping cart is Empty" + keyList.size() + "products present in cart");
+			log.info("Shopping cart is Empty" + keyList.size() + "products present in cart");
 		} else {
 			for (int i = 0; i < keyList.size(); i++) {
 				int key = keyList.get(i);
@@ -218,7 +220,7 @@ public class MyCartPage extends CommonBase {
 		List<Integer> keyList = new ArrayList<Integer>(KeySet);
 
 		if (keyList.size() == 0) {
-			logger.info("Shopping cart is Empty" + keyList.size() + "products present in cart");
+			log.info("Shopping cart is Empty" + keyList.size() + "products present in cart");
 			return false;
 		} else {
 			for (int i = 0; i < keyList.size(); i++) {
@@ -252,7 +254,7 @@ public class MyCartPage extends CommonBase {
 		List<Integer> keyList = new ArrayList<Integer>(KeySet);
 
 		if (keyList.size() == 0) {
-			logger.info("Shopping cart is Empty" + keyList.size() + "products present in cart");
+			log.info("Shopping cart is Empty" + keyList.size() + "products present in cart");
 		} else {
 			for (int i = 0; i < count; i++) {
 				int key = keyList.get(i);
@@ -262,17 +264,17 @@ public class MyCartPage extends CommonBase {
 				WebElement firstElement = tdElements.get(0);
 				By methodBy = this.getMethodBy("tagName", "input");
 				WebElement checkBoxElement = firstElement.findElement(methodBy);
-//				System.out.println(checkBoxElement.isSelected());
+				
 				if (!checkBoxElement.isSelected()) {
 					try {
 						checkBoxElement.click();
 					} catch (ElementNotInteractableException e) {
-						logger.error("ElementNotInteractableException");
+						log.error("ElementNotInteractableException");
 						return false;
 					}
 
 				}
-//				System.out.println(checkBoxElement.isSelected());
+
 			}
 
 		}
@@ -284,6 +286,8 @@ public class MyCartPage extends CommonBase {
 		updateCartBtn.click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		Alert alert = driver.switchTo().alert();
+		alert.accept();
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		alert.accept();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
