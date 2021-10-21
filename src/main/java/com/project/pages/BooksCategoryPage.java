@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -12,10 +13,11 @@ import com.project.base.CommonBase;
 
 public class BooksCategoryPage extends CommonBase {
 	
-	public BooksCategoryPage() {
+	public BooksCategoryPage(WebDriver driver) {
 		Assert.assertEquals(driver.getTitle(), "Product Category", "Page title is not as expected.");
 		Assert.assertEquals(driver.getCurrentUrl(), "http://localhost/shopping/category.php?cid=3", "Page URL is not as expected.");
 		PageFactory.initElements(driver, this);
+		this.driver=driver;
 	}
 	
 	

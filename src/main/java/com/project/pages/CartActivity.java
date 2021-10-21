@@ -9,6 +9,7 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -56,8 +57,9 @@ public class CartActivity extends CommonBase {
 	@FindBy(xpath = "//div[@class='sections prod-slider-small outer-top-small']//div[@class='row']//div[@class=\"owl-wrapper\"]")
 	List<WebElement> otherSectionElements;
 
-	public CartActivity() {
+	public CartActivity(WebDriver driver) {
 		PageFactory.initElements(driver, this);
+		this.driver=driver;
 	}
 
 	public String indexPageTitle() {
@@ -97,6 +99,12 @@ public class CartActivity extends CommonBase {
 		return webArrayList;
 	}
 
+//	0 src
+//	1 href
+//	2 innerHTml
+//	3 price
+//	4 discount
+//	5 add to cart
 	public ArrayList<String> getProductDetails(WebElement webElement) {
 		javascriptExecutor = (JavascriptExecutor) driver;
 		javascriptExecutor.executeScript("arguments[0].scrollIntoView();", webElement);

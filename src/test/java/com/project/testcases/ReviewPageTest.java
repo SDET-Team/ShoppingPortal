@@ -4,8 +4,10 @@ import com.project.base.CommonBase;
 import com.project.pages.HomePage;
 import com.project.pages.LoginPage;
 import com.project.pages.ReviewPage;
+import com.project.utils.TestUtils;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -21,53 +23,76 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.project.utils.TestUtils;
-
-public class ReviewPageTest extends CommonBase
-{
+public class ReviewPageTest extends CommonBase {
 	LoginPage loginpage;
 	HomePage homepage;
 	ReviewPage reviewpage;
 	String filepath;
+
+	@DataProvider(name = "testdata")
+	public Object[][] getpositivetestData(Method m) throws IOException {
+		String type="AddReview";
+		if (m.getName().equals("validateReview"))
+			filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\productReviewData.xlsx";
+		
+		else if(m.getName().equals("validateReviewUserNameFormat"))
+		{
+			  filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\productReviewData.xlsx";
+			  type="ValidateUserName";
+		}
+		else if(m.getName().equals("validateAutoFillUserName"))
+		{
+			  filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\productReviewData.xlsx";
+			  type="ReviewAutoFillName";
+		}
+		     
+		Object data[][] = TestUtils.getTestData(filepath,type);
+		return data;
+	}
+	
+
 	@BeforeTest
-	public void setup()
-	{	
+	public void setup() throws AssertionError {
 		initialization();
-		homepage=new HomePage();
-		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page","Home Page Title Not Matched");
+		homepage = new HomePage();
+		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 		navbeforeLogin.navigatetologin();
 	}
 	
-	@Test(priority=1)
-	public void validateReview()
+	@Test(priority=1,dataProvider="testdata")
+	public void validateReviewUserNameFormat(String userName,String summary,String review,String searchKey,String expUserName)
 	{
+		log.info("Validating user name format in review");
 		reviewpage=new ReviewPage();
-		reviewpage.addReview();
+		String name=reviewpage.verifyUserName(userName,summary,review,searchKey,expUserName);
+		Assert.assertEquals(name,expUserName);
+		log.info("test case passed");
 	}
 	
-	@Test(priority=2)
-	public void validateReviewUserNameFormat()
-	{
+	@Test(priority=2,dataProvider="testdata")
+	public void validateAutoFillUserName(String userName,String summary,String review,String searchKey,String expUserName){
+		log.info("Validating autofill in username");
 		reviewpage=new ReviewPage();
-		String name=reviewpage.verifyUserName();
-		Assert.assertEquals(name,"Anuj");
-		
-	
-	}
-	@Test(priority=3)
-	public void validateAutoFillUserName()
-	{
-		reviewpage=new ReviewPage();
-		boolean status=reviewpage.verifyAutoFillUserName();
+		boolean status=reviewpage.verifyAutoFillUserName(userName,summary,review,searchKey,expUserName);
 		Assert.assertTrue(status);
+		log.info("test case passed");
 	}
-	/*
+	
+	@Test(priority=3, dataProvider="testdata")
+	public void validateReview(String emailId, String pwd, String orderStatus, String name, String summary, String review){
+		log.info("Validating review");
+		reviewpage=new ReviewPage();
+		reviewpage.addReview(emailId,pwd,orderStatus,name,summary,review);
+		log.info("Testcase passed");
+	}
+	
+
 	@AfterTest
-	public void tearDown()
-	{
+	public void tearDown() {
 		driver.close();
 	}
-*/
+
 }

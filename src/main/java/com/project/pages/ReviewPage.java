@@ -52,7 +52,7 @@ public class ReviewPage extends CommonBase
         a.accept();
         
         driver.findElement(By.name("ordersubmit")).click();
-	    //orderSubmit.click();
+	 
 	    loginEmail.click();
 	    loginEmail.sendKeys("anuj.lpu1@gmail.com");
 	    pwd.click();
@@ -71,7 +71,7 @@ public class ReviewPage extends CommonBase
         
         
 	    driver.findElement(By.cssSelector("tr:nth-child(9) > td:nth-child(10) > a")).click();
-	   // driver.close();
+	
 	    driver.findElement(By.cssSelector("tbody")).click();
 	    String status=driver.findElement(By.cssSelector("tr:nth-child(7) b")).getText();
 	    
@@ -96,7 +96,8 @@ public class ReviewPage extends CommonBase
 	    driver.findElement(By.cssSelector(".author")).click();
 	    driver.findElement(By.linkText("Logout")).click();
 	}
-    public void addReview()
+	
+    public void addReview(String emailId,String pwd,String orderStatus,String name,String summary,String review )
     {
     	
     	driver.get("http://localhost/OnlineShoppingPortal/shopping/");
@@ -112,9 +113,9 @@ public class ReviewPage extends CommonBase
         driver.findElement(By.name("ordersubmit")).click();
         driver.findElement(By.id("exampleInputEmail1")).click();
 
-        driver.findElement(By.id("exampleInputEmail1")).sendKeys("anuj.lpu1@gmail.com");
+        driver.findElement(By.id("exampleInputEmail1")).sendKeys(emailId);
         driver.findElement(By.id("exampleInputPassword1")).click();
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("Test@123");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys(pwd);
         driver.findElement(By.name("login")).click();
         driver.findElement(By.name("ordersubmit")).click();
         driver.findElement(By.cssSelector("input:nth-child(2)")).click();
@@ -125,9 +126,9 @@ public class ReviewPage extends CommonBase
         driver.manage().window().maximize();
         
         driver.findElement(By.id("inputEmail")).click();
-        driver.findElement(By.id("inputEmail")).sendKeys("admin");
+        driver.findElement(By.id("inputEmail")).sendKeys(config.getProperty("adminUserName"));
         driver.findElement(By.name("password")).click();
-        driver.findElement(By.name("password")).sendKeys("Test@123");
+        driver.findElement(By.name("password")).sendKeys(config.getProperty("adminPassword"));
         driver.findElement(By.name("submit")).click();
         //Window Handle
         String child=driver.getWindowHandle();
@@ -135,12 +136,14 @@ public class ReviewPage extends CommonBase
         driver.findElement(By.cssSelector("li:nth-child(1) > a > .label")).click();
         driver.findElement(By.cssSelector("tbody")).click();
         driver.findElement(By.xpath("//body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/a[1]/i[2]")).click();
-      //body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[10]/td[9]/a[1]/i[1]
+
         JavascriptExecutor js=(JavascriptExecutor)driver;
         js.executeScript("window.scrollBy(0,800)");
-        driver.findElement(By.xpath("//tbody/tr[8]/td[9]/a[1]/i[1]")).click();    //After each test execution tr value needs to be changed
-     
-      //tbody/tr[6]/td[9]/a[1]/i[1]
+       
+      //After each test execution tr value needs to be changed
+        driver.findElement(By.xpath("//tbody/tr[2]/td[9]/a[1]/i[1]")).click();    
+      
+      
         Set<String> allWindows = driver.getWindowHandles();
         for(String curWindow : allWindows){
             driver.switchTo().window(curWindow);
@@ -151,7 +154,7 @@ public class ReviewPage extends CommonBase
           dropdown.findElement(By.xpath("//option[. = 'Delivered']")).click();
         }
         driver.findElement(By.name("remark")).click();
-        driver.findElement(By.name("remark")).sendKeys("delivered");
+        driver.findElement(By.name("remark")).sendKeys(orderStatus);
         driver.findElement(By.name("submit2")).click();
         Alert a2=driver.switchTo().alert();
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -160,8 +163,7 @@ public class ReviewPage extends CommonBase
         driver.switchTo().window(child);
         js.executeScript("window.scrollBy(0,-800)");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //driver.findElement(By.cssSelector(".icon-chevron-down")).click();
-        //driver.close();
+      
         driver.get("http://localhost/OnlineShoppingPortal/shopping/");
         driver.findElement(By.xpath("//*[@id=\"top-banner-and-menu\"]/div/div/div[1]/div[1]/div/nav/ul/li/a[1]")).click();
         driver.findElement(By.xpath("//*[@id=\"grid-container\"]/div/div/div[1]/div/div/div[1]/div/a/img")).click();
@@ -171,11 +173,11 @@ public class ReviewPage extends CommonBase
         driver.findElement(By.cssSelector("tr:nth-child(2) > td:nth-child(4) > .radio")).click();
         driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(5) > .radio")).click();
         driver.findElement(By.id("exampleInputName")).click();
-        driver.findElement(By.id("exampleInputName")).sendKeys("Anuj");
+        driver.findElement(By.id("exampleInputName")).sendKeys(name);
         driver.findElement(By.id("exampleInputSummary")).click();
-        driver.findElement(By.id("exampleInputSummary")).sendKeys("Nice book");
+        driver.findElement(By.id("exampleInputSummary")).sendKeys(summary);
         driver.findElement(By.id("exampleInputReview")).click();
-        driver.findElement(By.id("exampleInputReview")).sendKeys("Everyone should read it.");
+        driver.findElement(By.id("exampleInputReview")).sendKeys(review);
         driver.findElement(By.name("submit")).click();
         driver.findElement(By.linkText("REVIEW")).click();
         driver.findElement(By.cssSelector(".author")).click();
@@ -185,11 +187,11 @@ public class ReviewPage extends CommonBase
         driver.findElement(By.linkText("Logout")).click();
     }
     
-    public String verifyUserName()
+    public String verifyUserName(String userName,String summary,String review,String searchKey,String expUserName)
     {
     	driver.get("http://localhost/OnlineShoppingPortal/shopping/");
          driver.findElement(By.name("product")).click();
-        driver.findElement(By.name("product")).sendKeys("samsung");
+        driver.findElement(By.name("product")).sendKeys(searchKey);
         driver.findElement(By.cssSelector(".search-button")).click();
         driver.findElement(By.cssSelector(".image > a > img")).click();
         driver.findElement(By.linkText("REVIEW")).click();
@@ -197,24 +199,24 @@ public class ReviewPage extends CommonBase
         driver.findElement(By.cssSelector("tr:nth-child(2) > td:nth-child(5) > .radio")).click();
         driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(4) > .radio")).click();
         driver.findElement(By.id("exampleInputName")).click();
-        driver.findElement(By.id("exampleInputName")).sendKeys("Anuj#123");
+        driver.findElement(By.id("exampleInputName")).sendKeys(userName);
         driver.findElement(By.id("exampleInputSummary")).click();
-        driver.findElement(By.id("exampleInputSummary")).sendKeys("Nice product");
+        driver.findElement(By.id("exampleInputSummary")).sendKeys(summary);
         driver.findElement(By.id("exampleInputReview")).click();
-        driver.findElement(By.id("exampleInputReview")).sendKeys("Nice product.");
+        driver.findElement(By.id("exampleInputReview")).sendKeys(review);
         driver.findElement(By.name("submit")).click();
         driver.findElement(By.linkText("REVIEW")).click();
         driver.findElement(By.cssSelector(".name:nth-child(2)")).click();
-        String userName=driver.findElement(By.cssSelector(".name:nth-child(2)")).getText();
-        return userName;
+        String actualUserName=driver.findElement(By.cssSelector(".name:nth-child(2)")).getText();
+        return actualUserName;
     }
     
-    public boolean verifyAutoFillUserName()
+	public boolean verifyAutoFillUserName(String userName,String summary,String review,String searchKey,String expUserName)
     {
     	driver.get("http://localhost/OnlineShoppingPortal/shopping/");
         
         driver.findElement(By.name("product")).click();
-        driver.findElement(By.name("product")).sendKeys("samsung");
+        driver.findElement(By.name("product")).sendKeys(searchKey);
         driver.findElement(By.cssSelector(".search-button")).click();
         driver.findElement(By.cssSelector(".image > a > img")).click();
         driver.findElement(By.linkText("REVIEW")).click();
@@ -223,14 +225,15 @@ public class ReviewPage extends CommonBase
         driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(4) > .radio")).click();
 
         driver.findElement(By.id("exampleInputSummary")).click();
-        driver.findElement(By.id("exampleInputSummary")).sendKeys("Nice product");
+        driver.findElement(By.id("exampleInputSummary")).sendKeys(summary);
         driver.findElement(By.id("exampleInputReview")).click();
-        driver.findElement(By.id("exampleInputReview")).sendKeys("Nice product.");
+        driver.findElement(By.id("exampleInputReview")).sendKeys(review);
         driver.findElement(By.name("submit")).click();
         driver.findElement(By.cssSelector(".form-group:nth-child(2)")).click();
         driver.findElement(By.id("exampleInputName")).click();
         driver.findElement(By.name("submit")).click();
-        boolean status=driver.findElement(By.xpath("//body/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/label[1]/span[1]")).isDisplayed();
+        boolean status=driver.findElement(By.id("exampleInputName")).getAttribute("value")!="";
+        boolean status1=driver.findElement(By.xpath("//body/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/label[1]/span[1]")).isDisplayed();
         return status;
     }
 

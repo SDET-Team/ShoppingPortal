@@ -9,37 +9,41 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.http.HttpTimeoutException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 import org.openqa.selenium.TimeoutException;
-import java.util.concurrent.TimeUnit;
-import org.apache.poi.sl.usermodel.Sheet;
+import org.openqa.selenium.WebDriver;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import org.openqa.selenium.ElementNotVisibleException;
 import com.project.base.CommonBase;
 import com.project.pages.CartActivity;
 import com.project.pages.MyCartPage;
 
+/**
+ * \file TestUtils.java \author nikhil varavadekar \author shivam k \author
+ * nishant nair \author nikhil pawar \data 20/10/2021
+ */
 public class TestUtils extends CommonBase {
 
+	public static long PAGE_LOAD_TIMEOUT = 30;
 	public static long IMPLICIT_WAIT = 5;
 	static HttpURLConnection huc = null;
 	static int respCode = 200;
@@ -57,10 +61,19 @@ public class TestUtils extends CommonBase {
 		else
 			sheet1 = (XSSFSheet) wb.getSheetAt(1);
 
+		if (type.equals("ReviewAutoFillName") || type.equals("ValidateUserName"))
+			sheet1 = (XSSFSheet) wb.getSheetAt(1);
+		else if (type.equals("AddReview"))
+			sheet1 = (XSSFSheet) wb.getSheetAt(0);
+
 		DataFormatter formatter = new DataFormatter();
 
 		int row_count = sheet1.getLastRowNum();
 		int column_count = sheet1.getRow(0).getLastCellNum();
+
+		System.out.println("row_count => " + row_count);
+		System.out.println("column_count => " + column_count);
+
 		Object data[][] = new Object[row_count][column_count];
 		for (int i = 0; i < row_count; i++) {
 			for (int j = 0; j < column_count; j++) {
@@ -73,12 +86,32 @@ public class TestUtils extends CommonBase {
 
 	}
 
-	public static Alert switchToAlert() {
+	/**
+	 * @return Alert
+	 * @throws NoAlertPresentException
+	 */
+	public static Alert switchToAlert() throws NoAlertPresentException {
 		Alert alert = driver.switchTo().alert();
 		return alert;
 	}
 
-	public static boolean isLinkValid(String urlString) {
+	public static Alert switchToAlert(WebDriver driver) {
+		Alert alert = driver.switchTo().alert();
+		return alert;
+	}
+
+	/**
+	 * \brief logs and returns if the link is broken or not
+	 * 
+	 * \bug No known bugs
+	 * 
+	 * @param urlString
+	 * @return boolean
+	 * @throws NullPointerException
+	 * @throws HttpTimeoutException
+	 */
+	public static boolean isLinkValid(String urlString)
+			throws NullPointerException, HttpTimeoutException {
 		String baseUrl = config.getProperty("url");
 		boolean isValid = false;
 
@@ -86,7 +119,6 @@ public class TestUtils extends CommonBase {
 			log.error(urlString + " => " + "Either url is not configured or it is empty");
 			return isValid;
 		}
-
 		if (!urlString.startsWith(baseUrl)) {
 			log.error(urlString + " => " + "belongs to another domain, skipping it");
 			return isValid;
@@ -115,15 +147,34 @@ public class TestUtils extends CommonBase {
 		return isValid;
 	}
 
-	public static boolean isTextFormated(String string) {
+	/**
+	 * \bug No known bugs
+	 * 
+	 * @param string
+	 * @return boolean
+	 * @throws NullPointerException
+	 */
+	public static boolean isTextFormated(String string) throws NullPointerException {
 		if (string == null || string.isEmpty() || string == "#") {
 			return false;
 		}
 		return true;
 	}
 
+	/**
+	 * \bug No known bugs
+	 * 
+	 * @param fileName
+	 * @param sheetName
+	 * @param dataMap
+	 * @param columnNames
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws NullPointerException
+	 */
 	public static void setTestData(String fileName, String sheetName, Map<Integer, ArrayList<String>> dataMap,
-			String[] columnNames) throws FileNotFoundException {
+			String[] columnNames) throws FileNotFoundException, IOException, NullPointerException {
 
 		File file = new File(fileName);
 		XSSFWorkbook workbook = null;
@@ -184,7 +235,26 @@ public class TestUtils extends CommonBase {
 
 	}
 
-	public static boolean isAlertPresent() {
+	/**
+	 * \bug No known bugs
+	 * 
+	 * @return boolean
+	 * @throws NoAlertPresentException
+	 * @throws TimeoutException
+	 */
+	public static boolean isAlertPresent() throws NoAlertPresentException, TimeoutException {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			wait.until(ExpectedConditions.alertIsPresent());
+			return true;
+		} catch (TimeoutException e) {
+			return false;
+		}
+
+	}
+
+	public static boolean isAlertPresent(WebDriver driver) {
 
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 50);
@@ -196,7 +266,14 @@ public class TestUtils extends CommonBase {
 
 	}
 
-	public static boolean isVisible(WebElement element) {
+	/**
+	 * \bug No known bugs
+	 * 
+	 * @param WebElement
+	 * @return boolean
+	 * @throws ElementNotVisibleException
+	 */
+	public static boolean isVisible(WebElement element) throws ElementNotVisibleException {
 		try {
 			if (element.isDisplayed()) {
 				return true;
@@ -207,72 +284,92 @@ public class TestUtils extends CommonBase {
 		return false;
 	}
 
-	public static void addToCartProduct(int numberOfproducts, int numberOfTimes) {
-		cartActivity = new CartActivity();
-		List<WebElement> featureProductList = cartActivity.getfeatureProductListElement();
-		
-		if(numberOfproducts >= featureProductList.size()) {
-			numberOfproducts = featureProductList.size();
-		} else if(numberOfproducts <= 0) {
-			numberOfproducts = 0;
-		}
-		
-		if (numberOfTimes >= featureProductList.size()) {
-			numberOfTimes = featureProductList.size();
-		} else if (numberOfTimes <= featureProductList.size()) {
-			numberOfTimes = 1;
-		} 
-		
-		for (int i = 1; i <= numberOfproducts + 1; i++) {
-			for (int j = 1; j <= numberOfTimes; j++) {
-				driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
-				WebElement firstElement = featureProductList.get(i);
-				cartActivity.handleClickActionOnWebElement(firstElement, i);
+//	public static void addToCartProduct(int numberOfproducts, int numberOfTimes) {
+//		cartActivity = new CartActivity();
+//		List<WebElement> featureProductList = cartActivity.getfeatureProductListElement();
+//
+//		if (numberOfproducts >= featureProductList.size()) {
+//			numberOfproducts = featureProductList.size();
+//		} else if (numberOfproducts <= 0) {
+//			numberOfproducts = 0;
+//		}
+//
+//		if (numberOfTimes >= featureProductList.size()) {
+//			numberOfTimes = featureProductList.size();
+//		} else if (numberOfTimes <= featureProductList.size()) {
+//			numberOfTimes = 1;
+//		}
+//
+//		for (int i = 1; i <= numberOfproducts + 1; i++) {
+//			for (int j = 1; j <= numberOfTimes; j++) {
+//				driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
+//				WebElement firstElement = featureProductList.get(i);
+//				cartActivity.handleClickActionOnWebElement(firstElement, i);
+//
+//				try {
+//					navbeforeLogin.clickOnLogoImage();
+//				} catch (ElementNotInteractableException e) {
+//					log.error("ElementNotInteractableException");
+//				}
+//
+//			}
+//
+//		}
+//		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//		navbeforeLogin.clickOnMyCartImage();
+//		log.info(numberOfproducts + "Products added to cart");
+//	}
 
-				try {
-					navbeforeLogin.clickOnLogoImage();
-				} catch (ElementNotInteractableException e) {
-					log.error("ElementNotInteractableException");
-				}
+//	public static void removeProductFromCart(int count) throws AssertionError {
+//		myCartPage = new MyCartPage(driver);
+//		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
+//
+//		boolean isSelected = myCartPage.selectElementToBDeleted(bodyElements, count);
+//		if (isSelected) {
+//			driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
+//			myCartPage.updateShoppingCartClick();
+//		}
+//	}
 
-			}
 
-		}
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		navbeforeLogin.clickOnMyCartImage();
-		log.info(numberOfproducts + "Products added to cart");
-	}
-
-	public static void removeProductFromCart(int count) throws AssertionError {
-		myCartPage = new MyCartPage();
-		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
-
-		boolean isSelected = myCartPage.selectElementToBDeleted(bodyElements, count);
-		if (isSelected) {
-			driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
-			myCartPage.updateShoppingCartClick();
-		}
-
-	}
-	
 	public static Object[][] getTestData(String filepath, int sheetIndex) throws IOException {
 		File src = new File(filepath);
 		FileInputStream fileinput = new FileInputStream(src);
 		Workbook wb = new XSSFWorkbook(fileinput);
 		XSSFSheet sheet = (XSSFSheet) wb.getSheetAt(sheetIndex);
-		
-		//DataFormatter formatter = new DataFormatter();
-		
+
+		// DataFormatter formatter = new DataFormatter();
+
 		int row_count = sheet.getLastRowNum();
 		int column_count = sheet.getRow(0).getLastCellNum();
 		Object data[][] = new Object[row_count][column_count];
 		for (int i = 0; i < row_count; i++) {
 			for (int j = 0; j < column_count; j++) {
-				data[i][j] = sheet.getRow(i+1).getCell(j).toString();
+				data[i][j] = sheet.getRow(i + 1).getCell(j).toString();
 			}
 		}
 		wb.close();
 		return data;
+	}
+
+	public static String getscreenShot(WebDriver driver, String filename) {
+
+		TakesScreenshot scrshot = (TakesScreenshot) driver;
+
+		File srcfile = scrshot.getScreenshotAs(OutputType.FILE);
+		String timeStamp = new SimpleDateFormat(" yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String currDate = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+		dir1 = currDate;
+		String newfilename = filename + " " + timeStamp + ".png";
+		String filepath = System.getProperty("user.dir") + "\\automation test output\\screenshots\\" + dir1
+				+ "\\Testscreenshots " + timeStamp + "\\" + newfilename;
+		try {
+			FileUtils.copyFile(srcfile, new File(filepath));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return filepath;
 	}
 
 }

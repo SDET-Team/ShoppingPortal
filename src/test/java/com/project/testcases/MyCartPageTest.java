@@ -8,11 +8,10 @@ import com.project.pages.MyCartPage;
 import com.project.utils.TestUtils;
 
 import org.testng.annotations.BeforeTest;
-
-import static org.testng.Assert.assertEquals;
-
 import java.io.FileNotFoundException;
-import java.lang.ProcessHandle.Info;
+
+//import java.lang.ProcessHandle.Info;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,24 +20,48 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 
+/**
+ * @file MyCartPageTest.java
+ * @author nikhil varavadekar
+ */
 public class MyCartPageTest extends CommonBase {
 
 	CartActivity cartActivity;
 	MyCartPage myCartPage;
 
+	@BeforeSuite(groups = "Log")
+	public void loginit() {
+		logConfig();
+	}
+
+	/**
+	 * @brief Driver initialization Add products to cart using
+	 *        TestUtils.addToCartProduct(numberOfProducts, numberOfTimes) as
+	 *        pre-condition
+	 * @bug No known bugs
+	 * @throws WebDriverException
+	 */
 	@BeforeTest
-	public void setup() {
+	public void setup() throws WebDriverException {
 		initialization();
+		myCartPage = new MyCartPage(driver);
 		log.info("Driver initialization");
+		myCartPage = new MyCartPage(driver);
 		driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
-		TestUtils.addToCartProduct(7, 3);
+		myCartPage.addToCartProduct(7, 3);
 		log.info("7 Products are already present in the cart as pre-condition");
 	}
 
+	/**
+	 * @brief Driver Closed
+	 * @bug No known bugs
+	 */
 	@AfterTest
 	public void afterTest() {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -46,9 +69,14 @@ public class MyCartPageTest extends CommonBase {
 		log.info("Driver closed");
 	}
 
+	/**
+	 * @brief validate My Cart page title
+	 * @bug No known bugs
+	 * @throws AssertionError
+	 */
 	@Test(priority = 1)
 	public void validateCartPageTitle() throws AssertionError {
-		myCartPage = new MyCartPage();
+
 		try {
 			Assert.assertEquals(myCartPage.getPageTitle(), "My Cart", "My Cart Page Title Not Matched");
 		} catch (AssertionError e) {
@@ -56,32 +84,60 @@ public class MyCartPageTest extends CommonBase {
 		}
 		log.info("validate cart page title test case execution completed");
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
-
 	}
 
+	/**
+	 * @brief validate Cart Head Section \n { "Remove", "Image", "Product Name",
+	 *        "Quantity", "Price Per unit", "Shipping Charge", "GrandTotal" } check
+	 *        if any Product is present in cart if number of product is 0 prompt
+	 *        user else validate the haed section
+	 * @bug No known bugs
+	 * @throws AssertionError
+	 */
 	@Test(priority = 2)
 	public void validateTableHeadSectionList() throws AssertionError {
-		myCartPage = new MyCartPage();
 		String[] strArray = new String[] { "Remove", "Image", "Product Name", "Quantity", "Price Per unit",
 				"Shipping Charge", "GrandTotal" };
-		List<WebElement> headList = myCartPage.getTableHeadColumnNames();
-		for (int i = 0; i < headList.size(); i++) {
-			try {
-				String actualString = headList.get(i).getText(); //
-				String expectedString = strArray[i];
-				Assert.assertEquals(actualString, expectedString);
-			} catch (AssertionError e) {
-				log.error("Assertion Error");
-			} catch (Exception e) {
-				log.error("Error");
+
+		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
+		Set<Integer> KeySet = bodyElements.keySet();
+
+		if (KeySet.size() == 0) {
+			log.info("Shopping cart is Empty" + KeySet.size() + "products present in cart");
+		} else {
+			List<WebElement> headList = myCartPage.getTableHeadColumnNames();
+			for (int i = 0; i < headList.size(); i++) {
+				try {
+					String actualString = headList.get(i).getText(); //
+					String expectedString = strArray[i];
+					Assert.assertEquals(actualString, expectedString);
+				} catch (AssertionError e) {
+					log.error("Assertion Error");
+				} catch (Exception e) {
+					log.error("Error");
+				}
 			}
 		}
+
 		log.info("validate Table Head Section List test case execution completed");
 	}
 
+	/**
+	 * @brief validate Cart Body Section \n { "productSelected", "imageSrc",
+	 *        "productLink", "productText", "Quantity", "product Price per Unit",
+	 *        "Shipping Charge", "Grandtotal" } \n File name "InCartProducts.xlsx"
+	 *        Sheet name "In Cart Products Details" Parse through the map
+	 *        getTableBodyData check if the text is Formated/null, \n check for
+	 *        broken links and insert the data in TreeMap productDataMap \n Using
+	 *        TestUtils.setTestData(filename, sheetName, productDataMap,
+	 *        columnNamesList) Write the products information in ProductsData.xlsx
+	 *        file
+	 * @bug No known bugs
+	 * @throws AssertionError
+	 */
 	@Test(priority = 3)
 	public void validateTableBodysectionList() throws AssertionError {
-		myCartPage = new MyCartPage();
+
 		String[] columnNamesList = { "productSelected", "imageSrc", "productLink", "productText", "Quantity",
 				"product Price per Unit", "Shipping Charge", "Grandtotal" };
 		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
@@ -101,8 +157,11 @@ public class MyCartPageTest extends CommonBase {
 		}
 
 		try {
-			String file = testDataDirectoryPath + "InCartProductsData.xlsx";
+			String file = testDataDirectoryPath + "InCartProducts.xlsx";
 			TestUtils.setTestData(file, "In Cart Products Details", inCartProductMap, columnNamesList);
+
+			String fileString = filePath + "\\src\\resources\\testdata\\" + "InCartProductsData.xlsx";
+			TestUtils.setTestData(fileString, "In Cart Products Details", inCartProductMap, columnNamesList);
 		} catch (FileNotFoundException e) {
 			log.error("FileNotFoundException");
 		} catch (Exception e) {
@@ -112,10 +171,17 @@ public class MyCartPageTest extends CommonBase {
 		log.info("validate cart page table test case execution completed");
 	}
 
+	/**
+	 * @brief validate if Product can be Removal From Cart \n select the check box
+	 *        of the products to be deleted handle click on "UPDATE SHOPPING CART"
+	 * @bug No known bugs
+	 * @throws AssertionError
+	 * @throws ElementNotInteractableException
+	 */
 	@Test(priority = 4)
-	public void validateProductRemovalFromCart() throws AssertionError {
+	public void validateProductRemovalFromCart() throws AssertionError, ElementNotInteractableException {
 		int productsToBeRemoved = 2;
-		myCartPage = new MyCartPage();
+
 		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
 
 		boolean isSelected = myCartPage.selectElementToBDeleted(bodyElements, productsToBeRemoved);
@@ -129,9 +195,18 @@ public class MyCartPageTest extends CommonBase {
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.MINUTES);
 	}
 
+	/**
+	 * @brief validate updated grand total of the cart \n validate displayed grand
+	 *        total with calculated grand total \n select the check box of the
+	 *        products to be deleted handle click on "UPDATE SHOPPING CART" again
+	 *        validate displayed grand total with calculated grand total
+	 * @bug No known bugs
+	 * @throws AssertionError
+	 * @throws ElementNotInteractableException
+	 */
 	@Test(priority = 5)
 	public void validateUpdatedGrandTotalCart() throws AssertionError {
-		myCartPage = new MyCartPage();
+
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
 		Map<Integer, ArrayList<WebElement>> bodyElements1 = myCartPage.getTableBodyData();
 
@@ -173,9 +248,16 @@ public class MyCartPageTest extends CommonBase {
 		log.info("validate Updated Grand Total of the Cart test case execution completed");
 	}
 
+	/**
+	 * @brief validate product Quantity Limit \n update prduct quantity wiht both
+	 *        valid and invalid quantities \n check the grand total
+	 * @bug No known bugs
+	 * @throws AssertionError
+	 * @throws ElementNotInteractableException
+	 */
 	@Test(priority = 6)
-	public void validateQuantityLimit() throws AssertionError {
-		myCartPage = new MyCartPage();
+	public void validateQuantityLimit() throws AssertionError, ElementNotInteractableException {
+		myCartPage = new MyCartPage(driver);
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
 
 		Map<Integer, ArrayList<WebElement>> bodyElements1 = myCartPage.getTableBodyData();
@@ -197,6 +279,7 @@ public class MyCartPageTest extends CommonBase {
 			log.error("AssertionError");
 		}
 
+		myCartPage.removeProductFromCart(18);
 		log.info("validate Quantity Limit test case execution completed");
 	}
 
