@@ -45,36 +45,59 @@ public class OrderHistoryPageTest extends CommonBase {
 			
 			afterLoginPage = new AfterLoginPage();
 			Assert.assertEquals(afterLoginPage.getTitle(), "My Cart");
-		} catch (IOException e) {  }
+			log.info("Login to website successful.");
+		} catch (IOException e) { 
+			log.error("Login to website failed.");
+		}
 	}
 	
 	@Test
 	public void checkIfNewOrdersAtTopInOrderHistory() {
-		afterLoginPage.goToMyAccountPage();
+		String testcase = "Verify_New_Orders_Present_On_Top_In_Order_History :: ";
 		
+		afterLoginPage.goToMyAccountPage();
 		MyAccountPage myAccountPage = new MyAccountPage();
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
-		myAccountPage.gotoOrderHistoryPageButton();
+		log.info(testcase + "Navigated to My Account page.");
 		
+		myAccountPage.gotoOrderHistoryPageButton();
 		OrderHistoryPage orderHistoryPage = new OrderHistoryPage();
 		Assert.assertEquals(orderHistoryPage.getTitle(), "Order History");
+		log.info(testcase + "Naviagetd to Order History page.");
 		
 		boolean output = orderHistoryPage.checkLatestOrderIsOnTop();
+		if(output == true) {
+			log.info(testcase + "New orders in Order History page are present at top in orders list.");
+			log.info(testcase + "Testcase passed.");
+		} else {
+			log.error(testcase + "New orders in Order History page are not present at top in orders list.");
+			log.info(testcase + "Testcase failed.");
+		}
 		Assert.assertTrue(output, "Order history does not show newer orders at top.");
 	}
 	
 	@Test
 	public void checkIfAllOrdersContainProductDetails() {
-		afterLoginPage.goToMyAccountPage();
+		String testcase = "Verify_All_Orders_In_Order_History_Contain_Product_Details :: ";
 		
+		afterLoginPage.goToMyAccountPage();
 		MyAccountPage myAccountPage = new MyAccountPage();
 		Assert.assertEquals(myAccountPage.getTitle(), "My Account");
-		myAccountPage.gotoOrderHistoryPageButton();
+		log.info(testcase + "Navigated to My Account page.");
 		
+		myAccountPage.gotoOrderHistoryPageButton();
 		OrderHistoryPage orderHistoryPage = new OrderHistoryPage();
 		Assert.assertEquals(orderHistoryPage.getTitle(), "Order History");
+		log.info(testcase + "Navigated to Order History page.");
 		
 		boolean output = orderHistoryPage.checkAllOrdersContainProductDetails();
+		if(output == true) {
+			log.info(testcase + "Products in Order History page contain product details.");
+			log.info(testcase + "Testcase passed.");
+		} else {
+			log.error(testcase + "Products in Order History page does not contain product details.");
+			log.info(testcase + "Testcase failed.");
+		}
 		Assert.assertTrue(output, "One or more orders are missing product details.");
 	}
 	
@@ -82,7 +105,8 @@ public class OrderHistoryPageTest extends CommonBase {
 	@AfterTest
 	public void tearDown() {
 		//try { Thread.sleep(5*1000); } catch(Exception e) {}
-		driver.quit();
+		//driver.quit();
+		driver.close();
 	}
 
 }

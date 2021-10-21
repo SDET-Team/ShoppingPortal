@@ -47,59 +47,128 @@ public class WishlistTestcases extends CommonBase {
 			
 			afterLoginPage = new AfterLoginPage();
 			Assert.assertEquals(afterLoginPage.getTitle(), "My Cart");
-		} catch (IOException e) {  }
+			log.info("Login to website successful.");
+		} catch (IOException e) { 
+			log.error("Login to website failed.");
+		}
 	}
 	
 	@Test(priority=1, dataProvider="product_type_name_data")
 	public void addProductToWishList(String category, String productTitle) {
+		String testcase = "Verify_User_Can_Add_Product_To_Wishlist :: ";
+		
+		if(category.equals("") || productTitle.equals("")) {
+			log.error(testcase + "Testcase values are not valid to continue testing.");
+			log.info(testcase + "Testcase failed.");
+		}
 		Assert.assertFalse(category.equals(""), "Product category is found empty.");
 		Assert.assertFalse(productTitle.equals(""), "Product title is found empty.");
 		
 		if(category.equals("Books")) {
 			afterLoginPage.goToBooksCategory();
 			BooksCategoryPage booksCategoryPage = new BooksCategoryPage();
+			log.info(testcase + "Navigated to Books category page.");
+			
 			booksCategoryPage.addBookToWishList(productTitle);
+			log.info(testcase + "Product '" + productTitle + "' successfully added to wishlist.");
+			
 			MyWishlistPage myWishlistPage = new MyWishlistPage();
-			Assert.assertTrue(myWishlistPage.findOccurencesOfProduct(productTitle) > 0, "Product did not added to wishlist.");
+			boolean output = myWishlistPage.findOccurencesOfProduct(productTitle) > 0;
+			if(output == true) {
+				log.info(testcase + "Wishlisted product found on Wishlist page.");
+				log.info(testcase + "Testcase passed.");
+			} else {
+				log.error(testcase + "Wishlisted product not found on Wishlist page.");
+				log.info(testcase + "Testcase failed.");
+			}
+			Assert.assertTrue(output, "Product did not added to wishlist.");
 		}
 	}
 	
 	@Test(priority=2, dataProvider="product_name_data")
 	public void deleteProductFromWishList(String productTitle) {
+		String testcase = "Verify_User_Can_Remove_Product_From_Wishlist :: ";
+		
+		if(productTitle.equals("")) {
+			log.error(testcase + "Testcase values are not valid to continue testing.");
+			log.info(testcase + "Testcase failed.");
+		}
 		Assert.assertFalse(productTitle.equals(""), "Product title is found empty.");
 		
 		afterLoginPage.goToWishlistPage();
 		MyWishlistPage myWishlistPage = new MyWishlistPage();
 		myWishlistPage.visit();
-		//Assert.assertEquals(myWishlistPage.findOccurencesOfProduct(productTitle), 1, "Product to remove from wishlist is actually not present in wishlist.");
-		Assert.assertTrue(myWishlistPage.findOccurencesOfProduct(productTitle) > 0, "Product to remove from wishlist is actually not present in wishlist.");
-		Assert.assertTrue(myWishlistPage.removeProductFromWishlist(productTitle), "Removing product from wishlist failed.");
+		log.info(testcase + "Navigated to Wishlist page.");
+		
+		boolean output = myWishlistPage.findOccurencesOfProduct(productTitle) > 0;
+		if(output == true) {
+			log.info(testcase + "Precondition : Product to remove from wishlist present in Wishlist page, satisfied.");
+		} else {
+			log.error(testcase + "Precondition : Product to remove from wishlist present in Wishlist page, failed.");
+			log.info(testcase + "Testcase failed.");
+		}
+		Assert.assertTrue(output, "Product to remove from wishlist is actually not present in wishlist.");
+		
+		output = myWishlistPage.removeProductFromWishlist(productTitle);
+		if(output == true) {
+			log.info(testcase + "Product '" + productTitle + "' successfully removed from wishlist.");
+			log.info(testcase + "Testcase passed.");
+		} else {
+			log.error(testcase + "Product '" + productTitle + "' failed to remove from wishlist.");
+			log.info(testcase + "Testcase failed.");
+		}
+		Assert.assertTrue(output, "Removing product from wishlist failed.");
 	}
 	
 	@Test(priority=3, dataProvider="product_type_name_data")
 	public void checkProductAddToWishlistOnlyOnce(String category, String productTitle) {
+		String testcase = "Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: ";
+		
+		if(category.equals("") || productTitle.equals("")) {
+			log.error(testcase + "Testcase values are not valid to continue testing.");
+			log.info(testcase + "Testcase failed.");
+		}
 		Assert.assertFalse(category.equals(""), "Product category is found empty.");
 		Assert.assertFalse(productTitle.equals(""), "Product title is found empty.");
 		
 		if(category.equals("Books")) {
 			afterLoginPage.goToWishlistPage();
-			
 			MyWishlistPage myWishlistPage = new MyWishlistPage();
-			Assert.assertEquals(myWishlistPage.findOccurencesOfProduct(productTitle), 0, "Product already present in wishlist page, precondition failed.");
-			myWishlistPage.goToBooksCategoryPage();
+			log.info(testcase + "Navigated to Wishlist page.");
 			
+			boolean output = (myWishlistPage.findOccurencesOfProduct(productTitle) == 0);
+			if(output == true) {
+				log.info(testcase + "Precondition : Product not in wishlist, satisfied.");
+			} else {
+				log.error(testcase + "Precondition : Product not in wishlist, failed.");
+				log.info(testcase + "Testcase failed.");
+			}
+			Assert.assertTrue(output, "Product already present in wishlist page, precondition failed.");
+			
+			myWishlistPage.goToBooksCategoryPage();
 			BooksCategoryPage booksCategoryPage = new BooksCategoryPage();
+			log.info(testcase + "Navigated to Books category page.");
 			booksCategoryPage.addBookToWishList(productTitle);
+			log.info(testcase + "Product '" + productTitle + "' successfully added to wishlist.");
 			
 			myWishlistPage = new MyWishlistPage();
 			//Assert.assertEquals(myWishlistPage.findOccurencesOfProduct(productTitle), 1, "Either product did not got added to wishlist OR multiple entries of same product in wishlist.");
 			myWishlistPage.goToBooksCategoryPage();
-			
 			booksCategoryPage = new BooksCategoryPage();
-			booksCategoryPage.addBookToWishList(productTitle);
+			log.info(testcase + "Navigated to Books category page.");
 			
+			booksCategoryPage.addBookToWishList(productTitle);
+			log.info(testcase + "Product '" + productTitle + "' successfully added to wishlist.");
 			myWishlistPage = new MyWishlistPage();
-			Assert.assertEquals(myWishlistPage.findOccurencesOfProduct(productTitle), 1, "A product added to wishlist multiple times, which is wrong.");
+			output = myWishlistPage.findOccurencesOfProduct(productTitle) == 1;
+			if(output == true) {
+				log.info(testcase + "Only one entry of wishlisted product found on Wishlist page.");
+				log.info(testcase + "Testcase passed.");
+			} else {
+				log.error(testcase + "Multiple entries of wishlisted product found on Wishlist page.");
+				log.info(testcase + "Testcase failed.");
+			}
+			Assert.assertTrue(output, "A product added to wishlist multiple times, which is wrong.");
 		}
 	}
 	
@@ -135,7 +204,8 @@ public class WishlistTestcases extends CommonBase {
 	@AfterTest
 	public void tearDown() {
 		//try { Thread.sleep(3*1000); } catch(Exception e) {}
-		driver.quit();
+		//driver.quit();
+		driver.close();
 	}
 
 }
