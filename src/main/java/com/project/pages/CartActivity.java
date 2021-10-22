@@ -153,7 +153,7 @@ public class CartActivity extends CommonBase {
 		}
 
 	}
-
+	
 	public By getMethodBy(String methodString, String tagName) {
 		methodString = methodString.toLowerCase().trim();
 		switch (methodString) {

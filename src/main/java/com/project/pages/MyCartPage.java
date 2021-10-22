@@ -3,23 +3,23 @@ package com.project.pages;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.jcp.xml.dsig.internal.dom.Utils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import com.project.base.CommonBase;
 import com.project.utils.TestUtils;
@@ -55,9 +55,12 @@ public class MyCartPage extends CommonBase {
 	@FindBy(xpath = "//div[@class='shopping-cart']//div[4]//tbody//button")
 	WebElement proccedToCheckoutBtn;
 
+	@FindBy(xpath = "//div[@class='shopping-cart']//div[@class='col-md-4 col-sm-12 estimate-ship-tax']")
+	List<WebElement> addressElements;
+
 	public MyCartPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
-		this.driver=driver;
+		this.driver = driver;
 	}
 
 	public String getPageTitle() {
@@ -381,6 +384,50 @@ public class MyCartPage extends CommonBase {
 		if (isSelected) {
 			driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
 			this.updateShoppingCartClick();
+		}
+
+	}
+
+	public void handleCheckOutButtonClick() throws ElementNotInteractableException {
+		proccedToCheckoutBtn.click();
+	}
+
+	public void setAddressData(String[] addressData) throws AssertionError {
+		int j = Integer.parseInt(addressData[0]);
+		WebElement addrElement = addressElements.get(j);
+		WebElement addrTagElement = null;
+
+		try {
+			addrTagElement = addrElement.findElement(By.xpath("//table//thead//tr//th//span[@class='estimate-title']"));
+			Assert.assertEquals(addrTagElement.getText().toLowerCase(), addressData[1].toLowerCase());
+		} catch (NoSuchElementException e) {
+			log.error("NoSuchElementException");
+		} catch (AssertionError e) {
+			log.error(addressData[1] + " Assertion Error");
+		} catch (Exception e) {
+			log.error("Error");
+		}
+
+		try {
+			List<WebElement> dataList = addrElement.findElements(
+					By.xpath("//table//tbody//tr//td/div[@class='form-group']//div[@class='form-group']"));
+
+			for (int i = 0; i < dataList.size(); i++) {
+				WebElement element = null;
+				if (i == 0) {
+					element = dataList.get(i).findElement(By.tagName("textarea"));
+					element.clear();
+					element.sendKeys(addressData[i + 2]);
+					continue;
+				}
+				element = dataList.get(i).findElement(By.tagName("input"));
+				element.clear();
+				element.sendKeys(addressData[i + 2]);
+			}
+		} catch (NoSuchElementException e) {
+			log.error("NoSuchElementException");
+		} catch (Exception e) {
+			log.error("Error");
 		}
 
 	}

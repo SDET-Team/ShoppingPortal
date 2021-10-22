@@ -110,8 +110,7 @@ public class TestUtils extends CommonBase {
 	 * @throws NullPointerException
 	 * @throws HttpTimeoutException
 	 */
-	public static boolean isLinkValid(String urlString)
-			throws NullPointerException, HttpTimeoutException {
+	public static boolean isLinkValid(String urlString) throws NullPointerException, HttpTimeoutException {
 		String baseUrl = config.getProperty("url");
 		boolean isValid = false;
 
@@ -283,54 +282,6 @@ public class TestUtils extends CommonBase {
 		}
 		return false;
 	}
-
-//	public static void addToCartProduct(int numberOfproducts, int numberOfTimes) {
-//		cartActivity = new CartActivity();
-//		List<WebElement> featureProductList = cartActivity.getfeatureProductListElement();
-//
-//		if (numberOfproducts >= featureProductList.size()) {
-//			numberOfproducts = featureProductList.size();
-//		} else if (numberOfproducts <= 0) {
-//			numberOfproducts = 0;
-//		}
-//
-//		if (numberOfTimes >= featureProductList.size()) {
-//			numberOfTimes = featureProductList.size();
-//		} else if (numberOfTimes <= featureProductList.size()) {
-//			numberOfTimes = 1;
-//		}
-//
-//		for (int i = 1; i <= numberOfproducts + 1; i++) {
-//			for (int j = 1; j <= numberOfTimes; j++) {
-//				driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
-//				WebElement firstElement = featureProductList.get(i);
-//				cartActivity.handleClickActionOnWebElement(firstElement, i);
-//
-//				try {
-//					navbeforeLogin.clickOnLogoImage();
-//				} catch (ElementNotInteractableException e) {
-//					log.error("ElementNotInteractableException");
-//				}
-//
-//			}
-//
-//		}
-//		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-//		navbeforeLogin.clickOnMyCartImage();
-//		log.info(numberOfproducts + "Products added to cart");
-//	}
-
-//	public static void removeProductFromCart(int count) throws AssertionError {
-//		myCartPage = new MyCartPage(driver);
-//		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
-//
-//		boolean isSelected = myCartPage.selectElementToBDeleted(bodyElements, count);
-//		if (isSelected) {
-//			driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
-//			myCartPage.updateShoppingCartClick();
-//		}
-//	}
-
 
 	public static Object[][] getTestData(String filepath, int sheetIndex) throws IOException {
 		File src = new File(filepath);

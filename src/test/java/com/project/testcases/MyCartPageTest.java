@@ -4,7 +4,10 @@ import org.testng.annotations.Test;
 
 import com.project.base.CommonBase;
 import com.project.pages.CartActivity;
+import com.project.pages.LoginPage;
 import com.project.pages.MyCartPage;
+import com.project.pages.PaymentMethod;
+import com.project.pages.commonnavbar.NavbarBeforeLogin;
 import com.project.utils.TestUtils;
 
 import org.testng.annotations.BeforeTest;
@@ -13,6 +16,7 @@ import java.io.FileNotFoundException;
 //import java.lang.ProcessHandle.Info;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +24,7 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -34,6 +39,8 @@ public class MyCartPageTest extends CommonBase {
 
 	CartActivity cartActivity;
 	MyCartPage myCartPage;
+	LoginPage loginPage;
+	PaymentMethod paymentMethod;
 
 	@BeforeSuite(groups = "Log")
 	public void loginit() {
@@ -281,6 +288,59 @@ public class MyCartPageTest extends CommonBase {
 
 		myCartPage.removeProductFromCart(18);
 		log.info("validate Quantity Limit test case execution completed");
+	}
+
+	/**
+	 * 
+	 * @brief validate Proceed to checkout \n if user logged in redirects to payment
+	 *        page else login page the payment page select payment method and submit
+	 * @bug No known bugs
+	 * @throws ElementNotInteractableException
+	 * @throws AssertionError
+	 * @throws NoSuchElementException
+	 */
+	@Test(priority = 7)
+	public void validateProceedToCheckOut()
+			throws ElementNotInteractableException, AssertionError, NoSuchElementException {
+		myCartPage = new MyCartPage(driver);
+		loginPage = new LoginPage(driver);
+		navbeforeLogin = new NavbarBeforeLogin(driver);
+		paymentMethod = new PaymentMethod(driver);
+
+		navbeforeLogin.clickOnLogoImage();
+		myCartPage.addToCartProduct(4, 2);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		myCartPage.handleCheckOutButtonClick();
+		String msgString = loginPage.loginOperation("anuj.lpu1@gmail.com", "Test@123");
+		log.info(msgString);
+		log.info(driver.getTitle());
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		String[] shippingAddr = { "0", "Shipping Address", "New Delhi sector 7", "New-Delhi-123", "Delhi-123",
+				"110096" };
+		String[] billingAddr = { "1", "Billing Address", "CS New Delhi sector 5", "New-Delhi-234", "Delhi-234",
+				"110091" };
+		myCartPage.setAddressData(shippingAddr);
+		myCartPage.setAddressData(billingAddr);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		myCartPage.handleCheckOutButtonClick();
+
+		Map<Integer, String> map = paymentMethod.setPaymantMethod();
+		Set<Integer> set = map.keySet();
+		for (Integer i : set) {
+			log.info(map.get(i) + " Payment Method Selected");
+		}
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		paymentMethod.handlePaymentSubmitBtn();
+
+		try {
+			Assert.assertEquals(driver.getTitle(), "Order History");
+			Assert.assertEquals(driver.getCurrentUrl(), "http://localhost/shopping/order-history.php");
+		} catch (AssertionError e) {
+			log.error("AssertionError");
+		} catch (Exception e) {
+			log.error("Error");
+		}
+
 	}
 
 }
