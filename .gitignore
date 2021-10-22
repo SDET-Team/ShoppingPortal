@@ -5,3 +5,5 @@ bin/
 test-output/
 *.log
 *.txt
+*.au3
+*.exe

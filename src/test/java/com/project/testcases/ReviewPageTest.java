@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -32,27 +33,28 @@ public class ReviewPageTest extends CommonBase {
 	ReviewPage reviewpage;
 	String filepath;
 
+	@BeforeSuite(groups = "Log")
+	public void loginit() {
+		logConfig();
+	}
+
 	@DataProvider(name = "testdata")
 	public Object[][] getpositivetestData(Method m) throws IOException {
-		String type="AddReview";
+		String type = "AddReview";
 		if (m.getName().equals("validateReview"))
 			filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\productReviewData.xlsx";
-		
-		else if(m.getName().equals("validateReviewUserNameFormat"))
-		{
-			  filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\productReviewData.xlsx";
-			  type="ValidateUserName";
+
+		else if (m.getName().equals("validateReviewUserNameFormat")) {
+			filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\productReviewData.xlsx";
+			type = "ValidateUserName";
+		} else if (m.getName().equals("validateAutoFillUserName")) {
+			filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\productReviewData.xlsx";
+			type = "ReviewAutoFillName";
 		}
-		else if(m.getName().equals("validateAutoFillUserName"))
-		{
-			  filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\productReviewData.xlsx";
-			  type="ReviewAutoFillName";
-		}
-		     
-		Object data[][] = TestUtils.getTestData(filepath,type);
+
+		Object data[][] = TestUtils.getTestData(filepath, type);
 		return data;
 	}
-	
 
 	@BeforeTest
 	public void setup() throws AssertionError {
@@ -61,34 +63,35 @@ public class ReviewPageTest extends CommonBase {
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 		navbeforeLogin.navigatetologin();
 	}
-	
-	@Test(priority=1,dataProvider="testdata")
-	public void validateReviewUserNameFormat(String userName,String summary,String review,String searchKey,String expUserName)
-	{
+
+	@Test(priority = 1, dataProvider = "testdata")
+	public void validateReviewUserNameFormat(String userName, String summary, String review, String searchKey,
+			String expUserName) {
 		log.info("Validating user name format in review");
-		reviewpage=new ReviewPage();
-		String name=reviewpage.verifyUserName(userName,summary,review,searchKey,expUserName);
-		Assert.assertEquals(name,expUserName);
+		reviewpage = new ReviewPage();
+		String name = reviewpage.verifyUserName(userName, summary, review, searchKey, expUserName);
+		Assert.assertEquals(name, expUserName);
 		log.info("test case passed");
 	}
-	
-	@Test(priority=2,dataProvider="testdata")
-	public void validateAutoFillUserName(String userName,String summary,String review,String searchKey,String expUserName){
+
+	@Test(priority = 2, dataProvider = "testdata")
+	public void validateAutoFillUserName(String userName, String summary, String review, String searchKey,
+			String expUserName) {
 		log.info("Validating autofill in username");
-		reviewpage=new ReviewPage();
-		boolean status=reviewpage.verifyAutoFillUserName(userName,summary,review,searchKey,expUserName);
+		reviewpage = new ReviewPage();
+		boolean status = reviewpage.verifyAutoFillUserName(userName, summary, review, searchKey, expUserName);
 		Assert.assertTrue(status);
 		log.info("test case passed");
 	}
-	
-	@Test(priority=3, dataProvider="testdata")
-	public void validateReview(String emailId, String pwd, String orderStatus, String name, String summary, String review){
+
+	@Test(priority = 3, dataProvider = "testdata")
+	public void validateReview(String emailId, String pwd, String orderStatus, String name, String summary,
+			String review) {
 		log.info("Validating review");
-		reviewpage=new ReviewPage();
-		reviewpage.addReview(emailId,pwd,orderStatus,name,summary,review);
+		reviewpage = new ReviewPage();
+		reviewpage.addReview(emailId, pwd, orderStatus, name, summary, review);
 		log.info("Testcase passed");
 	}
-	
 
 	@AfterTest
 	public void tearDown() {

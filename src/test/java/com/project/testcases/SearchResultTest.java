@@ -21,6 +21,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 
 /**
  * @file SearchResultTest.java
@@ -34,6 +35,11 @@ public class SearchResultTest extends CommonBase {
 
 	public SearchResultTest() {
 		super();
+	}
+
+	@BeforeSuite(groups = "Log")
+	public void loginit() {
+		logConfig();
 	}
 
 	/**
@@ -81,7 +87,7 @@ public class SearchResultTest extends CommonBase {
 	 * @throws NoSuchElementException
 	 */
 	@Test(priority = 1, dataProvider = "searchTestData")
-	public void valitateSearchReuslts(String data) throws ElementNotVisibleException, NoSuchElementException{
+	public void valitateSearchReuslts(String data) throws ElementNotVisibleException, NoSuchElementException {
 		homePage = new HomePage();
 		searchResult = new SearchResult();
 		if (data != null) {
@@ -94,7 +100,7 @@ public class SearchResultTest extends CommonBase {
 				WebElement webElement = searchResultList.get(i);
 				ArrayList<String> productDetailsList = searchResult.getProductDetails(webElement);
 				productDetailsList.set(0, data);
-				for(String dataString: productDetailsList) {
+				for (String dataString : productDetailsList) {
 					log.info(dataString);
 				}
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
