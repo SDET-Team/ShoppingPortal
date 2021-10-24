@@ -25,13 +25,13 @@ import com.project.pages.HomePage;
 import com.project.pages.LoginPage;
 import com.project.utils.TestUtils;
 
-    
-/**
- * @brief AdminPageTest class tests Admin page features. 
- * 
- * @details Verifies features of admin like admin login credentials, order management, user management, category, product management,etc. 
- * 
- */
+/*!*******************************************************************
+\file AdminPageTest.java
+\author Nishant Nair
+\date 20.10.2021	
+\brief Main class for Admin page functionalities. All test cases related to admin will be executed from here.   
+
+********************************************************************/
 public class AdminPageTest extends CommonBase
 {
 		AdminPage adminpage;
@@ -42,7 +42,7 @@ public class AdminPageTest extends CommonBase
 		/*!********************
 		\brief Constructor which will initialize the pre-requisites to execute test cases.
 		
-		
+		\bug No known bugs
 		**********************/
 		public AdminPageTest()
 		{
@@ -133,8 +133,7 @@ public class AdminPageTest extends CommonBase
 		
 		/*!*************************************************
 		   \brief Validate count of todaysOrder is displayed on the right side of the 
-		    tab in square box. 
-			\details Again it will depend on valid admin login. TodaysOrder method will return the count 
+		    tab in square box. \n Again it will depend on valid admin login. TodaysOrder method will return the count 
 			and it will be asserted.
 			@throws AssertionError
 		***************************************************/
@@ -151,12 +150,11 @@ public class AdminPageTest extends CommonBase
 		
 		/*!*************************************************
 		   \brief This method will validate whether category created is unique or not.
-		   \details Test case will fail if category with same name is created twice.
+		   \n Test case will fail if category with same name is created twice.
 		   Test data is fetched from a excel sheet.
-		   File name "productCategoryData.xlsx" Sheet name "Sheet1"
-		   Columns names {"Category","Description} 
-		   \param category This is products category.
-		   \param desc This is category description.
+		   \n File name "productCategoryData.xlsx" Sheet name "Sheet1"
+		   \n Columns names {"Category","Description} 
+		   
 		   @throws AssertionError
 		***************************************************/
 		@Test(priority=5,dataProvider="testdata")
@@ -171,8 +169,8 @@ public class AdminPageTest extends CommonBase
 		
 		/*!*************************************************
 		   \brief Validate whether admin user is able to upload image for creating products.
-		   \details AutoIt tool is used to execute the script to handle external window from where image will be uploaded.		  
-		  @throws FileNotFoundException
+		   \n AutoIt tool is used to execute the script to handle external window from where image will be uploaded.
+		   @throws FileNotFoundException
 		***************************************************/
 		@Test(priority=6)
 		public void validateUploadImage()
@@ -185,18 +183,11 @@ public class AdminPageTest extends CommonBase
 		
 		/*!*************************************************
 		   \brief Validation of product insertion and checking whther it is reflecting back on main user website.
-		   \details For it's successful execution it depends on validateUploadImage test case.
+		   \n For it's successful execution it depends on validateUploadImage test case.
 		   
-		   File name "insertProductData.xlsx" Sheet name "Sheet1"
-		    Columns names {"Company","Model","Type","Description","Price before Discount","Price after Discount",
+		   \n File name "insertProductData.xlsx" Sheet name "Sheet1"
+		   \n Columns names {"Company","Model","Type","Description","Price before Discount","Price after Discount",
 		   "Shipping charge"} 
-		   \param company Products company name
-		   \param model Product model name
-		   \param desc Product description
-		   \param priceBD Price before discount
-		   \param priceAD Price after discount
-		   \param shippCharge Shipping charges for product
-		   \param searchKey Product to be searched in search box
 		   @throws FileNotFoundException
 		***************************************************/
 		@Test(priority=7,dataProvider="testdata",dependsOnMethods="validateUploadImage")

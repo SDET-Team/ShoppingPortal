@@ -52,44 +52,37 @@ public class LoginPage extends CommonBase {
 	@FindBy(xpath = "//span[contains(text(),'Email already exists .')]")
 	WebElement duplicateEmail;
 
-	
-	
-	public WebElement invalidLoginElement()
-	{
+	public WebElement invalidLoginElement() {
 		return invalidLogin;
 	}
-	
-	public WebElement duplicateEmailElement()
-	{
+
+	public WebElement duplicateEmailElement() {
 		return duplicateEmail;
 	}
-	
-	
-	
+
 	public LoginPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
-		this.driver=driver;
+		this.driver = driver;
 	}
 
 	// Login
 	public String loginpageTitle() {
 		return driver.getTitle();
 	}
-	
-	public String loginOperation(String email,String password) 
-	{	
-		String msg="";
+
+	public String loginOperation(String email, String password) {
+		String msg = "";
 		loginEmail.sendKeys(email);
 		loginPass.sendKeys(password);
 		loginBtn.click();
-		if(driver.getTitle().equals("Shopping Portal | Signi-in | Signup") && TestUtils.isVisible(invalidLoginElement()))
-			msg=invalidLogin.getText();
-		else if(TestUtils.isVisible(navafterLogin.welcomeElement()))
-		 msg=navafterLogin.welcomeUser();
-		
+		if (driver.getTitle().equals("Shopping Portal | Signi-in | Signup")
+				&& TestUtils.isVisible(invalidLoginElement()))
+			msg = invalidLogin.getText();
+		else if (TestUtils.isVisible(navafterLogin.welcomeElement()))
+			msg = navafterLogin.welcomeUser();
+
 		return msg;
-		
-		
+
 	}
 
 	// forgot
@@ -102,7 +95,6 @@ public class LoginPage extends CommonBase {
 		fpassLink.click();
 	}
 
-	
 	// registration
 
 	public void regFormclear() {
@@ -112,37 +104,32 @@ public class LoginPage extends CommonBase {
 		newPass.clear();
 		confirmPass.clear();
 	}
- 
-	
-	public String regOperation(String fname,String email,String contact,String pass,String cpass)
-	{
-		
-		String msg="";
+
+	public String regOperation(String fname, String email, String contact, String pass, String cpass) {
+
+		String msg = "";
 		fullName.sendKeys(fname);
 		regEmail.sendKeys(email);
 		contactNo.sendKeys(contact);
 		newPass.sendKeys(pass);
 		confirmPass.sendKeys(cpass);
-		if(!(signupBtn.isEnabled()) && TestUtils.isVisible(duplicateEmailElement()))
-		{	
-			msg= duplicateEmail.getText();
+		if (!(signupBtn.isEnabled()) && TestUtils.isVisible(duplicateEmailElement())) {
+			msg = duplicateEmail.getText();
 			regFormclear();
 			return msg;
 		}
 		signupBtn.click();
-		
-		if(TestUtils.isAlertPresent(driver))
-		{
-			
+		if (TestUtils.isAlertPresent(driver)) {
+
 			Alert alert = TestUtils.switchToAlert(driver);
 			msg = alert.getText();
 			alert.accept();
 			regFormclear();
-			
+
 		}
-		
+
 		return msg;
-			
+
 	}
 
 }

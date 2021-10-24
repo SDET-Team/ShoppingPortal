@@ -99,6 +99,12 @@ public class CartActivity extends CommonBase {
 		return webArrayList;
 	}
 
+//	0 src
+//	1 href
+//	2 innerHTml
+//	3 price
+//	4 discount
+//	5 add to cart
 	public ArrayList<String> getProductDetails(WebElement webElement) {
 		javascriptExecutor = (JavascriptExecutor) driver;
 		javascriptExecutor.executeScript("arguments[0].scrollIntoView();", webElement);
@@ -147,7 +153,7 @@ public class CartActivity extends CommonBase {
 		}
 
 	}
-
+	
 	public By getMethodBy(String methodString, String tagName) {
 		methodString = methodString.toLowerCase().trim();
 		switch (methodString) {

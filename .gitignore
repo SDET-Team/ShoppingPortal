@@ -1,8 +1,15 @@
-.classpath
-.project
-.settings/
+*.classpath
+*.project
+*.settings/
 bin/
 docs/
 test-output/
+<<<<<<< HEAD
+*.log
+*.txt
+*.au3
+*.exe
+=======
 .log
 docgen
+>>>>>>> 4cf07b1ca74e869955c726108998d8c808a6c1c9

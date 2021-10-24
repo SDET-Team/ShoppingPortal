@@ -28,11 +28,12 @@ import org.testng.annotations.Test;
 
 import com.project.utils.TestUtils;
 
-/**
- * @brief ReviewPageTest class tests My Account page features. 
- * 
- * @details Verifies features of Review page like adding review ,user name in review,etc.
- */
+/*!*******************************************************************
+\file ReviewPageTest.java
+\author Nishant Nair
+\date 20.10.2021	
+\brief Main class for Admin page functionalities. All test cases related to admin will be executed from here.   
+********************************************************************/
 
 public class ReviewPageTest extends CommonBase
 {
@@ -66,8 +67,8 @@ public class ReviewPageTest extends CommonBase
 		return data;
 	}
 	
-	/**
-	 * @brief Initialize log4j log configuration to print testcase logs to specific file. 
+	/*!*
+	 * \brief Initialize log4j log configuration to print testcase logs to specific file. 
 	 * 
 	 */
 	@BeforeSuite(groups="Log")
@@ -91,14 +92,14 @@ public class ReviewPageTest extends CommonBase
 	
 	/*!*************************************************
 	   \brief This method will validate format of user name.
-	   \details Test case will fail if user's name contains character other than alphabets.
+	   \n Test case will fail if user's name contains character other than alphabets.
 	   Test data is fetched from a excel sheet.
-	    File name "productReviewData.xlsx" Sheet name "Sheet2"
-	    Columns names {"User Name","Summary","Review","searchKey","Expected User Name"} 
+	   \n File name "productReviewData.xlsx" Sheet name "Sheet2"
+	   \n Columns names {"User Name","Summary","Review","searchKey","Expected User Name"} 
 	   
 	   @throws AssertionError
        @throws FileNotFoundException
-    ***************************************************/
+***************************************************/
 	@Test(priority=1,dataProvider="testdata")
 	public void validateReviewUserNameFormat(String userName,String summary,String review,String searchKey,String expUserName)
 	{
@@ -111,10 +112,10 @@ public class ReviewPageTest extends CommonBase
 	
 	/*!*************************************************
 	   \brief This method will validate whether logged in user's name is auto filled.
-	   \details Test case will fail if we click on submit button and will propmt to type name.
+	   \n Test case will fail if we click on submit button and will propmt to type name.
 	   Test data is fetched from a excel sheet.
-	    File name "productReviewData.xlsx" Sheet name "Sheet2"
-	    Columns names {"User Name","Summary","Review","searchKey","Expected User Name"} 
+	   \n File name "productReviewData.xlsx" Sheet name "Sheet2"
+	   \n Columns names {"User Name","Summary","Review","searchKey","Expected User Name"} 
 	   
 	   @throws AssertionError
        @throws FileNotFoundException
@@ -131,10 +132,10 @@ public class ReviewPageTest extends CommonBase
 	
 	/*!*****************************************************************
     \brief This method will validate whether user can add review on purchased product.
-	 \details End to end test case as it shows functioning of website from user page to admin page.
+	   \n End to end test case as it shows functioning of website from user page to admin page.
 	   Test data is fetched from a excel sheet.
-	    File name "productReviewData.xlsx" Sheet name "Sheet1"
-	    Columns names {"EmailId","Password","Order Status Description","Name","Summary","Review"} 
+	   \n File name "productReviewData.xlsx" Sheet name "Sheet1"
+	   \n Columns names {"EmailId","Password","Order Status Description","Name","Summary","Review"} 
 	   
 	   @throws AssertionError
        @throws FileNotFoundException
