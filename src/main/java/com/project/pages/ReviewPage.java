@@ -47,7 +47,7 @@ public class ReviewPage extends CommonBase
 	}
 	public void addReview2()
 	{
-		driver.get("http://localhost/OnlineShoppingPortal/shopping/");
+		driver.get(config.getProperty("url"));
 		String parent=driver.getWindowHandle();
 		
 	    driver.findElement(By.cssSelector(".menu-item > .dropdown-toggle:nth-child(1)")).click();
@@ -68,7 +68,7 @@ public class ReviewPage extends CommonBase
 	    driver.findElement(By.cssSelector("input:nth-child(2)")).click();
 	    finalOrderPlace.click();
 	    
-	    driver.get("\"http://localhost/OnlineShoppingPortal/shopping/admin");
+	    driver.get(config.getProperty("adminurl"));
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         
@@ -106,7 +106,7 @@ public class ReviewPage extends CommonBase
     public void addReview(String emailId,String pwd,String orderStatus,String name,String summary,String review )
     {
     	
-    	driver.get("http://localhost/OnlineShoppingPortal/shopping/");
+    	driver.get(config.getProperty("url"));
 		String parent=driver.getWindowHandle();
 		
 	    driver.findElement(By.cssSelector(".menu-item > .dropdown-toggle:nth-child(1)")).click();
@@ -127,7 +127,7 @@ public class ReviewPage extends CommonBase
         driver.findElement(By.cssSelector("input:nth-child(2)")).click();
         driver.findElement(By.name("submit")).click();
         
-        driver.get("http://localhost/OnlineShoppingPortal/shopping/admin");
+        driver.get(config.getProperty("adminurl"));
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         
@@ -170,7 +170,7 @@ public class ReviewPage extends CommonBase
         js.executeScript("window.scrollBy(0,-800)");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
       
-        driver.get("http://localhost/OnlineShoppingPortal/shopping/");
+        driver.get(config.getProperty("url"));
         driver.findElement(By.xpath("//*[@id=\"top-banner-and-menu\"]/div/div/div[1]/div[1]/div/nav/ul/li/a[1]")).click();
         driver.findElement(By.xpath("//*[@id=\"grid-container\"]/div/div/div[1]/div/div/div[1]/div/a/img")).click();
         js.executeScript("window.scrollBy(0,800)");
@@ -195,7 +195,7 @@ public class ReviewPage extends CommonBase
     
     public String verifyUserName(String userName,String summary,String review,String searchKey,String expUserName)
     {
-    	driver.get("http://localhost/OnlineShoppingPortal/shopping/");
+    	driver.get(config.getProperty("url"));
          driver.findElement(By.name("product")).click();
         driver.findElement(By.name("product")).sendKeys(searchKey);
         driver.findElement(By.cssSelector(".search-button")).click();
@@ -219,7 +219,7 @@ public class ReviewPage extends CommonBase
     
     public boolean verifyAutoFillUserName(String userName,String summary,String review,String searchKey,String expUserName)
     {
-    	driver.get("http://localhost/OnlineShoppingPortal/shopping/");
+    	driver.get(config.getProperty("url"));
         
         driver.findElement(By.name("product")).click();
         driver.findElement(By.name("product")).sendKeys(searchKey);
