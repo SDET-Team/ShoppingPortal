@@ -1,0 +1,23 @@
+2021-10-23 00:42:57,677 CommonBase.java INFO  [main] base.CommonBase 121 - Starting Browser
+2021-10-23 00:42:59,670 CommonBase.java INFO  [main] base.CommonBase 128 - Maximizing the browser
+2021-10-23 00:42:59,812 CommonBase.java INFO  [main] base.CommonBase 132 - Deleting all cookies
+2021-10-23 00:42:59,821 CommonBase.java INFO  [main] base.CommonBase 136 - Adding implicit wait
+2021-10-23 00:42:59,837 CommonBase.java INFO  [main] base.CommonBase 142 - Loading URL
+2021-10-23 00:43:02,772 WishlistTestcases.java INFO  [main] base.CommonBase 79 - Login to website successful.
+2021-10-23 00:43:03,350 WishlistTestcases.java INFO  [main] base.CommonBase 113 - Verify_User_Can_Add_Product_To_Wishlist :: Navigated to Books category page.
+2021-10-23 00:43:03,669 WishlistTestcases.java INFO  [main] base.CommonBase 116 - Verify_User_Can_Add_Product_To_Wishlist :: Product 'The Wimpy Kid Do -It- Yourself Book' successfully added to wishlist.
+2021-10-23 00:43:03,717 WishlistTestcases.java INFO  [main] base.CommonBase 121 - Verify_User_Can_Add_Product_To_Wishlist :: Wishlisted product found on Wishlist page.
+2021-10-23 00:43:03,718 WishlistTestcases.java INFO  [main] base.CommonBase 122 - Verify_User_Can_Add_Product_To_Wishlist :: Testcase passed.
+2021-10-23 00:43:04,264 WishlistTestcases.java INFO  [main] base.CommonBase 157 - Verify_User_Can_Remove_Product_From_Wishlist :: Navigated to Wishlist page.
+2021-10-23 00:43:04,284 WishlistTestcases.java INFO  [main] base.CommonBase 161 - Verify_User_Can_Remove_Product_From_Wishlist :: Precondition : Product to remove from wishlist present in Wishlist page, satisfied.
+2021-10-23 00:43:04,460 WishlistTestcases.java INFO  [main] base.CommonBase 170 - Verify_User_Can_Remove_Product_From_Wishlist :: Product 'The Wimpy Kid Do -It- Yourself Book' successfully removed from wishlist.
+2021-10-23 00:43:04,461 WishlistTestcases.java INFO  [main] base.CommonBase 171 - Verify_User_Can_Remove_Product_From_Wishlist :: Testcase passed.
+2021-10-23 00:43:05,061 WishlistTestcases.java INFO  [main] base.CommonBase 206 - Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: Navigated to Wishlist page.
+2021-10-23 00:43:10,110 WishlistTestcases.java INFO  [main] base.CommonBase 210 - Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: Precondition : Product not in wishlist, satisfied.
+2021-10-23 00:43:10,432 WishlistTestcases.java INFO  [main] base.CommonBase 219 - Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: Navigated to Books category page.
+2021-10-23 00:43:10,781 WishlistTestcases.java INFO  [main] base.CommonBase 221 - Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: Product 'The Wimpy Kid Do -It- Yourself Book' successfully added to wishlist.
+2021-10-23 00:43:11,101 WishlistTestcases.java INFO  [main] base.CommonBase 227 - Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: Navigated to Books category page.
+2021-10-23 00:43:11,477 WishlistTestcases.java INFO  [main] base.CommonBase 230 - Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: Product 'The Wimpy Kid Do -It- Yourself Book' successfully added to wishlist.
+2021-10-23 00:43:11,521 WishlistTestcases.java ERROR [main] base.CommonBase 237 - Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: Multiple entries of wishlisted product found on Wishlist page.
+2021-10-23 00:43:11,521 WishlistTestcases.java INFO  [main] base.CommonBase 238 - Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: Testcase failed.
+2021-10-23 00:43:11,899 WishlistTestcases.java INFO  [main] base.CommonBase 283 - Browser closed successfully.

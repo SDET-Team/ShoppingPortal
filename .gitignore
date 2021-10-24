@@ -2,5 +2,7 @@
 .project
 .settings/
 bin/
+docs/
 test-output/
 .log
+docgen
