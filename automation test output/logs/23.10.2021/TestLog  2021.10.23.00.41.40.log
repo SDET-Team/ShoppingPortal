@@ -1,0 +1,15 @@
+2021-10-23 00:41:40,900 CommonBase.java INFO  [main] base.CommonBase 121 - Starting Browser
+2021-10-23 00:41:42,842 CommonBase.java INFO  [main] base.CommonBase 128 - Maximizing the browser
+2021-10-23 00:41:42,980 CommonBase.java INFO  [main] base.CommonBase 132 - Deleting all cookies
+2021-10-23 00:41:43,009 CommonBase.java INFO  [main] base.CommonBase 136 - Adding implicit wait
+2021-10-23 00:41:43,028 CommonBase.java INFO  [main] base.CommonBase 142 - Loading URL
+2021-10-23 00:41:46,072 OrderHistoryPageTest.java INFO  [main] base.CommonBase 77 - Login to website successful.
+2021-10-23 00:41:46,531 OrderHistoryPageTest.java INFO  [main] base.CommonBase 132 - Verify_All_Orders_In_Order_History_Contain_Product_Details :: Navigated to My Account page.
+2021-10-23 00:41:46,867 OrderHistoryPageTest.java INFO  [main] base.CommonBase 137 - Verify_All_Orders_In_Order_History_Contain_Product_Details :: Navigated to Order History page.
+2021-10-23 00:41:48,466 OrderHistoryPageTest.java INFO  [main] base.CommonBase 141 - Verify_All_Orders_In_Order_History_Contain_Product_Details :: Products in Order History page contain product details.
+2021-10-23 00:41:48,466 OrderHistoryPageTest.java INFO  [main] base.CommonBase 142 - Verify_All_Orders_In_Order_History_Contain_Product_Details :: Testcase passed.
+2021-10-23 00:41:48,743 OrderHistoryPageTest.java INFO  [main] base.CommonBase 99 - Verify_New_Orders_Present_On_Top_In_Order_History :: Navigated to My Account page.
+2021-10-23 00:41:48,998 OrderHistoryPageTest.java INFO  [main] base.CommonBase 104 - Verify_New_Orders_Present_On_Top_In_Order_History :: Naviagetd to Order History page.
+2021-10-23 00:41:50,345 OrderHistoryPageTest.java ERROR [main] base.CommonBase 111 - Verify_New_Orders_Present_On_Top_In_Order_History :: New orders in Order History page are not present at top in orders list.
+2021-10-23 00:41:50,345 OrderHistoryPageTest.java INFO  [main] base.CommonBase 112 - Verify_New_Orders_Present_On_Top_In_Order_History :: Testcase failed.
+2021-10-23 00:41:50,681 OrderHistoryPageTest.java INFO  [main] base.CommonBase 160 - Browser closed successfully.
