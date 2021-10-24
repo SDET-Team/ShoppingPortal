@@ -75,7 +75,8 @@ public class LoginPage extends CommonBase {
 		loginEmail.sendKeys(email);
 		loginPass.sendKeys(password);
 		loginBtn.click();
-		if (driver.getTitle().equals("Shopping Portal | Signi-in | Signup") && TestUtils.isVisible(invalidLoginElement()))
+		if (driver.getTitle().equals("Shopping Portal | Signi-in | Signup")
+				&& TestUtils.isVisible(invalidLoginElement()))
 			msg = invalidLogin.getText();
 		else if (TestUtils.isVisible(navafterLogin.welcomeElement()))
 			msg = navafterLogin.welcomeUser();
@@ -118,7 +119,6 @@ public class LoginPage extends CommonBase {
 			return msg;
 		}
 		signupBtn.click();
-
 		if (TestUtils.isAlertPresent(driver)) {
 
 			Alert alert = TestUtils.switchToAlert(driver);

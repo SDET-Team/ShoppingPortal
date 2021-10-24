@@ -33,8 +33,13 @@ public class ReviewPageTest extends CommonBase {
 	ReviewPage reviewpage;
 	String filepath;
 
+	/**
+	 * @brief Initialize log4j log configuration to print testcase logs to specific
+	 *        file.
+	 * 
+	 */
 	@BeforeSuite(groups = "Log")
-	public void loginit() {
+	public void logInit() {
 		logConfig();
 	}
 
@@ -59,9 +64,10 @@ public class ReviewPageTest extends CommonBase {
 	@BeforeTest
 	public void setup() throws AssertionError {
 		initialization();
-		homepage = new HomePage();
+		homepage = new HomePage(driver);
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 		navbeforeLogin.navigatetologin();
+
 	}
 
 	@Test(priority = 1, dataProvider = "testdata")

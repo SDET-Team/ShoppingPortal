@@ -112,7 +112,6 @@ public class AdminPage extends CommonBase {
 		adminLoginMail.sendKeys(email);
 		adminLoginPass.sendKeys(password);
 		adminLoginBtn.click();
-
 	}
 
 	public boolean orderManagement() {
@@ -140,6 +139,7 @@ public class AdminPage extends CommonBase {
 			assert (elements.size() > 0);
 		}
 		driver.findElement(By.name("submit")).click();
+
 		{
 			List<WebElement> elements = driver.findElements(By.cssSelector("strong"));
 			assert (elements.size() > 0);
@@ -189,7 +189,6 @@ public class AdminPage extends CommonBase {
 
 			System.out.println("Product Image Added successfully");
 		}
-
 		return expectedTestData;
 
 	}
@@ -219,6 +218,7 @@ public class AdminPage extends CommonBase {
 		selectsubCategory.click();
 		WebElement dropdown2 = selectsubCategory;
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//option[. = 'Television']")));
+
 		dropdown2.findElement(By.xpath("//option[. = 'Television']")).click();
 
 		productNameField.sendKeys(company);
@@ -236,11 +236,13 @@ public class AdminPage extends CommonBase {
 
 		productShippingChargeField.click();
 		productShippingChargeField.sendKeys(shippCharge);
+
 		productAvailabilityField.click();
 		WebElement dropdown3 = productAvailabilityField;
 		dropdown3.findElement(By.xpath("//option[. = 'In Stock']")).click();
 
 		status = productImageBtn1.isDisplayed();
+
 		Assert.assertTrue(status);
 
 		int i = 0;
@@ -288,20 +290,23 @@ public class AdminPage extends CommonBase {
 	// AutoIt
 	public void AutoIt(int i) {
 		try {
+
 			if (i == 1) {
-				Runtime.getRuntime().exec("F:\\Selenium\\AutoItScript1.exe");
+				Runtime.getRuntime().exec("F:/Selenium/AutoItScript1.exe");
 
 			}
 			if (i == 2) {
-				Runtime.getRuntime().exec("F:\\Selenium\\AutoItScript2.exe");
+				Runtime.getRuntime().exec("F:/Selenium/AutoItScript2.exe");
 
 			}
 			if (i == 3) {
-				Runtime.getRuntime().exec("F:\\Selenium\\AutoItScript3.exe");
+				Runtime.getRuntime().exec("F:/Selenium/AutoItScript3.exe");
 
 			}
 
-		} catch (IOException e) {
+		} catch (
+
+		IOException e) {
 			e.printStackTrace();
 		}
 	}

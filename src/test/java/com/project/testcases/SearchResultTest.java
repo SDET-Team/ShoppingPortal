@@ -51,7 +51,7 @@ public class SearchResultTest extends CommonBase {
 	public void setup() throws WebDriverException {
 		initialization();
 		log.info("driver initialization");
-		homePage = new HomePage();
+		homePage = new HomePage(driver);
 		homePage.setSearchData(" ");
 	}
 
@@ -88,13 +88,12 @@ public class SearchResultTest extends CommonBase {
 	 */
 	@Test(priority = 1, dataProvider = "searchTestData")
 	public void valitateSearchReuslts(String data) throws ElementNotVisibleException, NoSuchElementException {
-		homePage = new HomePage();
+		homePage = new HomePage(driver);
 		searchResult = new SearchResult();
 		if (data != null) {
 			homePage.setSearchData(data);
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
-						
 			List<WebElement> searchResultList = searchResult.getSearchResultList();
 			for (int i = 0; i < searchResultList.size(); i++) {
 				WebElement webElement = searchResultList.get(i);
@@ -103,10 +102,9 @@ public class SearchResultTest extends CommonBase {
 				for (String dataString : productDetailsList) {
 					log.info(dataString);
 				}
-				
+
 			}
-			
-			
+
 		}
 
 	}

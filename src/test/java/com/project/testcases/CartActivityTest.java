@@ -58,9 +58,11 @@ public class CartActivityTest extends CommonBase {
 	 * @throws AssertionError
 	 */
 	@BeforeTest
-	public void setup() throws WebDriverException, AssertionError {
+	public void setup() {
+
 		initialization();
 		log.info("driver initialization");
+
 		homepage = new HomePage(driver);
 		cartActivity = new CartActivity(driver);
 		try {
@@ -93,7 +95,6 @@ public class CartActivityTest extends CommonBase {
 	 */
 	@Test(priority = 1)
 	public void validateTitle() throws AssertionError {
-
 		String title = cartActivity.indexPageTitle();
 		try {
 			Assert.assertEquals(title, "Shopping Portal Home Page", "Home Page Title Not Matched");
@@ -254,6 +255,7 @@ public class CartActivityTest extends CommonBase {
 	@Test(priority = 5)
 	public void validateOtherProductList() throws AssertionError, NullPointerException, HttpTimeoutException {
 		cartActivity = new CartActivity(driver);
+
 		int key = 0;
 		String[] sectionList = { "Smart Phone", "Laptops" };
 		String[] columnNamesList = { "Section", "imageSrc", "productLink", "productText", "productPrice",
@@ -386,8 +388,9 @@ public class CartActivityTest extends CommonBase {
 		navbeforeLogin.clickOnMyCartImage();
 
 		try {
-			String file = testDataDirectoryPath + "InCartProducts.xlsx";
-			TestUtils.setTestData(file, "ProductsDetailsInCart", productDataMap, columnNamesList);
+
+			String file = System.getProperty("user.dir") + "\\src\\resources\\testdata\\" + "InCartProducts.xlsx";
+			TestUtils.setTestData(file, "Products Details", productDataMap, columnNamesList);
 		} catch (FileNotFoundException e) {
 			log.error("FileNotFoundException");
 		} catch (Exception e) {
@@ -416,13 +419,13 @@ public class CartActivityTest extends CommonBase {
 	 * @throws ElementNotInteractableException
 	 */
 	@Test(priority = 7)
+
 	public void validateAddToCartForSameProduct() throws ElementNotInteractableException {
 		cartActivity = new CartActivity(driver);
 		myCartPage = new MyCartPage(driver);
 		int numberOfproducts = 4, numberOfTimes = 4;
 
 		List<WebElement> featureProductList = cartActivity.getfeatureProductListElement();
-
 		for (int i = 1; i <= numberOfproducts + 1; i++) {
 			for (int j = 1; j <= numberOfTimes; j++) {
 				driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);

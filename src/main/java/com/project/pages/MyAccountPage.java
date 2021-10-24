@@ -12,13 +12,15 @@ import org.testng.Assert;
 import com.project.base.CommonBase;
 
 public class MyAccountPage extends CommonBase {
-	
+
 	public MyAccountPage(WebDriver driver) {
 		Assert.assertEquals(driver.getTitle(), "My Account", "Page title is not as expected.");
 		Assert.assertEquals(driver.getCurrentUrl(), "http://localhost/shopping/my-account.php",
 				"Page URL is not as expected.");
 		PageFactory.initElements(driver, this);
+
 		this.driver = driver;
+
 	}
 
 	@FindBy(css = "body > header > div.top-bar.animate-dropdown > div > div > div.cnt-account > ul > li:nth-child(1) > a")

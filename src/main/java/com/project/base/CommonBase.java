@@ -43,22 +43,18 @@ public class CommonBase {
 	public static Actions actions = null;
 
 	public static Logger log;
-	public static String testDataDirectoryPath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\";
 	public static String dir1;
 
 	// Create a constructor and initialize the variables
 	public CommonBase() {
-
 		config = new Properties();
 		filePath = System.getProperty("user.dir");
 		try {
 			input = new FileInputStream(filePath + "\\src\\main\\java\\com\\project\\config\\config.properties");
 			config.load(input);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -91,11 +87,8 @@ public class CommonBase {
 
 	public static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<WebDriver>();
 
-	public static synchronized WebDriver getDriver() {
-		return threadDriver.get();
-	}
-
 	public void initialization() {
+
 		String browserName = config.getProperty("browser");
 
 		String filePath = System.getProperty("user.dir");
@@ -145,6 +138,7 @@ public class CommonBase {
 	}
 
 	public void initialization(String mode) {
+
 		String browserName = config.getProperty("browser");
 		String filePath = System.getProperty("user.dir");
 		if (browserName.equals("chrome")) {
@@ -165,6 +159,7 @@ public class CommonBase {
 		log.info("Deleting all cookies");
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(TestUtils.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+
 		log.info("Adding implicit wait");
 		driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
 		try {

@@ -13,8 +13,6 @@ import com.project.utils.TestUtils;
 import org.testng.annotations.BeforeTest;
 import java.io.FileNotFoundException;
 
-//import java.lang.ProcessHandle.Info;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +39,7 @@ public class MyCartPageTest extends CommonBase {
 	MyCartPage myCartPage;
 	LoginPage loginPage;
 	PaymentMethod paymentMethod;
-
+	
 	@BeforeSuite(groups = "Log")
 	public void loginit() {
 		logConfig();
@@ -55,7 +53,7 @@ public class MyCartPageTest extends CommonBase {
 	 * @throws WebDriverException
 	 */
 	@BeforeTest
-	public void setup() throws WebDriverException {
+	public void setup() {
 		initialization();
 		myCartPage = new MyCartPage(driver);
 		log.info("Driver initialization");
@@ -164,11 +162,10 @@ public class MyCartPageTest extends CommonBase {
 		}
 
 		try {
-			String file = testDataDirectoryPath + "InCartProducts.xlsx";
-			TestUtils.setTestData(file, "In Cart Products Details", inCartProductMap, columnNamesList);
 
 			String fileString = filePath + "\\src\\resources\\testdata\\" + "InCartProductsData.xlsx";
 			TestUtils.setTestData(fileString, "In Cart Products Details", inCartProductMap, columnNamesList);
+
 		} catch (FileNotFoundException e) {
 			log.error("FileNotFoundException");
 		} catch (Exception e) {
@@ -188,7 +185,6 @@ public class MyCartPageTest extends CommonBase {
 	@Test(priority = 4)
 	public void validateProductRemovalFromCart() throws AssertionError, ElementNotInteractableException {
 		int productsToBeRemoved = 2;
-
 		Map<Integer, ArrayList<WebElement>> bodyElements = myCartPage.getTableBodyData();
 
 		boolean isSelected = myCartPage.selectElementToBDeleted(bodyElements, productsToBeRemoved);

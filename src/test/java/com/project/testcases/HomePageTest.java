@@ -4,14 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.http.HttpTimeoutException;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-
 import static org.testng.Assert.assertEquals;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -23,11 +16,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterClass;
@@ -46,6 +37,7 @@ public class HomePageTest extends CommonBase {
 
 	public HomePageTest() {
 		super();
+
 	}
 
 	@BeforeSuite(groups = "Log")
@@ -58,8 +50,10 @@ public class HomePageTest extends CommonBase {
 	 * @bug No known bugs
 	 * @throws WebDriverException
 	 */
+
 	@BeforeClass
 	public void setup() {
+
 		/*
 		 * log=Logger.getLogger(HomePageTest.class); String timeStamp = new
 		 * SimpleDateFormat(" yyyy.MM.dd.HH.mm.ss").format(new Date()); String
@@ -110,12 +104,11 @@ public class HomePageTest extends CommonBase {
 	 */
 
 	@Test(priority = 2)
-	public void validateHomePageDropDwnElements() throws AssertionError, NullPointerException, HttpTimeoutException {
+	public void validateHomePageDropDwnElements() throws AssertionError {
 
 		String[] expectedStrArray = new String[] { "HOME", "BOOKS", "ELECTRONICS", "FURNITURE", "FASHION" };
 		List<WebElement> list = homepage.getHomePageDropDwnElements();
 		for (int i = 0; i < list.size() - 2; i++) {
-
 			WebElement webElement = list.get(i);
 			String link = homepage.getAnchorTagLink(webElement);
 
@@ -123,7 +116,6 @@ public class HomePageTest extends CommonBase {
 				log.info(link);
 			} else {
 				log.info(" INVALID " + link);
-
 			}
 
 			String actualString = webElement.getText();
@@ -153,11 +145,9 @@ public class HomePageTest extends CommonBase {
 	 */
 	@Test(priority = 3)
 	public void validateBrandElementLink() throws NullPointerException, HttpTimeoutException {
-
 		List<WebElement> brandList = homepage.getBrandWebElements();
 		for (WebElement webElement : brandList) {
 			String link = homepage.getAnchorTagLink(webElement);
-
 			if (TestUtils.isLinkValid(link)) {
 				log.info(link);
 			} else {
@@ -188,6 +178,9 @@ public class HomePageTest extends CommonBase {
 
 			if (TestUtils.isLinkValid(link)) {
 				log.info(link);
+			}
+			if (TestUtils.isLinkValid(link)) {
+				log.info(link);
 			} else {
 				log.info(" INVALID " + link);
 			}
@@ -210,7 +203,7 @@ public class HomePageTest extends CommonBase {
 	public void validateSearchFunctionality(String data)
 			throws ElementNotVisibleException, ElementNotInteractableException {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		homepage = new HomePage();
+		homepage = new HomePage(driver);
 		homepage.setSearchData(data);
 		System.out.println(data);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -233,4 +226,3 @@ public class HomePageTest extends CommonBase {
 		return data;
 	}
 }
-

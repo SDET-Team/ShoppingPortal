@@ -1,0 +1,14 @@
+2021-10-21 18:18:12,671 CommonBase.java INFO  [main] base.CommonBase 121 - Starting Browser
+2021-10-21 18:18:15,356 CommonBase.java INFO  [main] base.CommonBase 128 - Maximizing the browser
+2021-10-21 18:18:15,484 CommonBase.java INFO  [main] base.CommonBase 132 - Deleting all cookies
+2021-10-21 18:18:15,501 CommonBase.java INFO  [main] base.CommonBase 136 - Adding implicit wait
+2021-10-21 18:18:15,536 CommonBase.java INFO  [main] base.CommonBase 142 - Loading URL
+2021-10-21 18:18:18,649 OrderHistoryPageTest.java INFO  [main] base.CommonBase 54 - Login to website successful.
+2021-10-21 18:18:18,974 OrderHistoryPageTest.java INFO  [main] base.CommonBase 92 - Verify_All_Orders_In_Order_History_Contain_Product_Details :: Navigated to My Account page.
+2021-10-21 18:18:19,224 OrderHistoryPageTest.java INFO  [main] base.CommonBase 97 - Verify_All_Orders_In_Order_History_Contain_Product_Details :: Navigated to Order History page.
+2021-10-21 18:18:20,476 OrderHistoryPageTest.java INFO  [main] base.CommonBase 101 - Verify_All_Orders_In_Order_History_Contain_Product_Details :: Products in Order History page contain product details.
+2021-10-21 18:18:20,476 OrderHistoryPageTest.java INFO  [main] base.CommonBase 102 - Verify_All_Orders_In_Order_History_Contain_Product_Details :: Testcase passed.
+2021-10-21 18:18:20,755 OrderHistoryPageTest.java INFO  [main] base.CommonBase 67 - Verify_New_Orders_Present_On_Top_In_Order_History :: Navigated to My Account page.
+2021-10-21 18:18:20,960 OrderHistoryPageTest.java INFO  [main] base.CommonBase 72 - Verify_New_Orders_Present_On_Top_In_Order_History :: Naviagetd to Order History page.
+2021-10-21 18:18:22,067 OrderHistoryPageTest.java ERROR [main] base.CommonBase 79 - Verify_New_Orders_Present_On_Top_In_Order_History :: New orders in Order History page are not present at top in orders list.
+2021-10-21 18:18:22,068 OrderHistoryPageTest.java INFO  [main] base.CommonBase 80 - Verify_New_Orders_Present_On_Top_In_Order_History :: Testcase failed.

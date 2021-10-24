@@ -2,19 +2,9 @@ package com.project.testcases;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.Alert;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
@@ -132,7 +122,6 @@ public class LoginPageTest extends CommonBase {
 
 		msg = loginpage.regOperation(fullname, email, contact, newpass, cpass);
 		Assert.assertEquals(msg, "You are successfully register", msg);
-
 		log.info("Testcase Passed!");
 	}
 

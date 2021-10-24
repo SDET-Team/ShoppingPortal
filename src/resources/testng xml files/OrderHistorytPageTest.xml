@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="OrderHistorySuite">
+<listeners>
+		<listener class-name="com.project.reports.Reporting" />
+	</listeners>
+
+  <test thread-count="5" name="OrderHistoryTest">
+    <classes>
+      <class name="com.project.testcases.OrderHistoryPageTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

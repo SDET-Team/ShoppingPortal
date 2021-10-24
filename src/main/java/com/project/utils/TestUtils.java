@@ -71,9 +71,6 @@ public class TestUtils extends CommonBase {
 		int row_count = sheet1.getLastRowNum();
 		int column_count = sheet1.getRow(0).getLastCellNum();
 
-		System.out.println("row_count => " + row_count);
-		System.out.println("column_count => " + column_count);
-
 		Object data[][] = new Object[row_count][column_count];
 		for (int i = 0; i < row_count; i++) {
 			for (int j = 0; j < column_count; j++) {
@@ -90,11 +87,6 @@ public class TestUtils extends CommonBase {
 	 * @return Alert
 	 * @throws NoAlertPresentException
 	 */
-	public static Alert switchToAlert() throws NoAlertPresentException {
-		Alert alert = driver.switchTo().alert();
-		return alert;
-	}
-
 	public static Alert switchToAlert(WebDriver driver) {
 		Alert alert = driver.switchTo().alert();
 		return alert;
@@ -110,7 +102,7 @@ public class TestUtils extends CommonBase {
 	 * @throws NullPointerException
 	 * @throws HttpTimeoutException
 	 */
-	public static boolean isLinkValid(String urlString) throws NullPointerException, HttpTimeoutException {
+	public static boolean isLinkValid(String urlString) {
 		String baseUrl = config.getProperty("url");
 		boolean isValid = false;
 
@@ -317,10 +309,8 @@ public class TestUtils extends CommonBase {
 		try {
 			FileUtils.copyFile(srcfile, new File(filepath));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return filepath;
 	}
-
 }
