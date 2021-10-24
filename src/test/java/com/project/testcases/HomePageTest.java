@@ -113,7 +113,7 @@ public class HomePageTest extends CommonBase{
 	}
 
 	@Test(priority = 3)
-	public void validateBrandElementLink() {
+	public  void validateBrandElementLink() {
 		
 		List<WebElement> brandList = homepage.getBrandWebElements();
 		for (WebElement webElement : brandList) {

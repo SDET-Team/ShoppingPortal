@@ -22,20 +22,45 @@ import com.project.pages.HomePage;
 import com.project.pages.LoginPage;
 import com.project.utils.TestUtils;
 
+
+
+
+
+/*!*******************************************************************
+\file ForgotpassPageTest.java
+\author Shivam Kushwaha
+\date 12.10.2021	
+\brief Test class for Forgot password page functionalities. All test cases related to forgot password functionalities will be executed from here.   
+
+********************************************************************/
+
 public class ForgotPasswordPageTest extends CommonBase {
 
 	LoginPage loginpage;
 	HomePage homepage;
 	ForgotPasswordPage forgotpasspage;
 	String filepath,msg;
+	
+	
+/*!********************
+	\brief Constructor which will initialize the pre-requisites to execute test cases.
+	
+	\bug No known bugs
+	
+**********************/
 
 	public ForgotPasswordPageTest() {
 		super();
 		
 	}
+	
+/*!*****************************************************************
+    \brief DataProvider annotations for fetch test data from the excel sheet.
+    @throws FileNotFoundException
+*******************************************************************/
 
 	@DataProvider(name = "testdata")
-	public Object[][] getPositiveData(Method m) throws IOException {
+	public   Object[][] getPositiveData(Method m) throws IOException {
 		String type="Negative";
 			filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\ForgotPasswordTestdata.xlsx";
 		if (m.getName().equals("validatepositiveForgotPassword"))
@@ -44,6 +69,14 @@ public class ForgotPasswordPageTest extends CommonBase {
 		return data;
 	}
 	
+	
+	
+/*!********************
+	\brief function to initialize the properties of the Log4J logger
+	
+	\bug No known bugs
+	
+**********************/
 	@BeforeSuite(groups="Log")
 	public void loginit()
 	{
@@ -51,19 +84,17 @@ public class ForgotPasswordPageTest extends CommonBase {
 	}
 	
 	
+
+ /*!********************
+		\brief function initialize the properties of the webdriver and will navigate to forgot password page from the homepage of the AUT.
+		@throws WebDriverException
+		@throws Assertion error
+		
+**********************/
+	
 	@BeforeClass
 	public void setup() {
 		
-		
-		/*log=Logger.getLogger(ForgotPasswordPageTest.class);
-		String timeStamp = new SimpleDateFormat(" yyyy.MM.dd.HH.mm.ss").format(new Date());
-		String currDate=new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-		dir1=currDate;
-		dir2="TestLog "+timeStamp;
-		String logFilename=ForgotPasswordPageTest.class.getSimpleName()+timeStamp+".log";
-		System.setProperty("logfile.name",filePath+"\\src\\resources\\log\\"+dir1+"\\"+dir2+"\\"+logFilename);
-		PropertyConfigurator.configure(logconfig);
-		*/
 		
 		initialization();
 		
@@ -78,6 +109,13 @@ public class ForgotPasswordPageTest extends CommonBase {
 				"Login Page Title Not Matched");
 		loginpage.navigateToForgotpass();
 	}
+	
+
+/*!*****************************************************************
+    \brief ValidateTitle() will verify the title of forgot password page. 
+   
+    @throws Assertion Error
+*******************************************************************/
 
 	@Test(priority = 1)
 	public void validateTitle() {
@@ -88,8 +126,19 @@ public class ForgotPasswordPageTest extends CommonBase {
 	}
 
 	
+	
+/*!*************************************************
+	   \brief This method will validate whether user can change their password by providing correct EmailID and Password.
+	   \n Positive test cases.
+	   \nTest data is fetched from a excel sheet.
+	   \n File name "forgotpassTestData.xlsx" Sheet name "Positive Testdata"
+	   \n Columns names {"email","contactno","newpass","confirmpass"} 
+	   
+	   @throws AssertionError
+***************************************************/
+	
 	@Test(priority=2,dataProvider="testdata")
-	public void validatepositiveForgotPassword(String email,String contact,String newpass, String cpass)
+	public  void validatepositiveForgotPassword(String email,String contact,String newpass, String cpass)
 	{
 		log.info("Validating Forgot password operation by providing valid emailid and contact number");
 		log.info("User details: Email: "+email+" , ContactNo: "+contact);
@@ -99,8 +148,18 @@ public class ForgotPasswordPageTest extends CommonBase {
 		log.info("Testcase Passed!");
 	}
 	
+/*!*************************************************
+	   \brief This method will validate that user should not be able to change their password by providing incorrect EmailID or Password.
+	   \n Negative test cases.
+	   \nTest data is fetched from a excel sheet.
+	   \n File name "forgotpassTestData.xlsx" Sheet name "Negative Testdata"
+	   \n Columns names {"email","contactno","newpass","confirmpass"} 
+	   
+	   @throws AssertionError
+***************************************************/
+	
 	@Test(priority=3,dataProvider="testdata")
-	public void validatenegativeForgotPassword(String email,String contact,String newpass, String cpass)
+	public  void validatenegativeForgotPassword(String email,String contact,String newpass, String cpass)
 	{
 		log.info("Validating Forgot password operation by providing invalid emailid or contact number");
 		log.info("User details: Email: "+email+" , ContactNo: "+contact);
@@ -119,8 +178,11 @@ public class ForgotPasswordPageTest extends CommonBase {
 
 
 
+    /*!***********************************************
+	  \brief Driver is closed.
+	*************************************************/
 	@AfterClass
-	public void tearDown() {
+	public  void tearDown() {
 		log.info("Closing browser");
 
 		driver.close();

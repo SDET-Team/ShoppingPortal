@@ -47,15 +47,7 @@ public class LoginPageTest extends CommonBase {
 	@BeforeClass(groups="BrowserActivity")
 	public void setup() {
 		
-		/*log=Logger.getLogger(LoginPageTest.class);
-		String timeStamp = new SimpleDateFormat(" yyyy.MM.dd.HH.mm.ss").format(new Date());
-		String currDate=new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-		dir1=currDate;
-		dir2="TestLog "+timeStamp;
-		String logFilename=LoginPageTest.class.getSimpleName()+timeStamp+".log";
-		System.setProperty("logfile.name",filePath+"\\src\\resources\\log\\"+dir1+"\\"+dir2+"\\"+logFilename);
-		PropertyConfigurator.configure(logconfig);
-		*/
+		
 		initialization();
 		homepage = new HomePage(driver);
 		loginpage=new LoginPage(driver);
@@ -64,7 +56,7 @@ public class LoginPageTest extends CommonBase {
 	}
 	
 	@DataProvider(name = "testdata")
-	public Object[][] getpositivetestData(Method m) throws IOException {
+	public  Object[][] getpositivetestData(Method m) throws IOException {
 		String type="Negative";
 		if (m.getName().equals("validatecorrectLogin") || m.getName().equals("validateincorrectLogin"))
 			filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\LoginTestdata.xlsx";
@@ -118,7 +110,7 @@ public class LoginPageTest extends CommonBase {
 	}
 
 	@Test(priority = 4)
-	public void validateForgotpassNav() {
+	public  void validateForgotpassNav() {
 		log.info("Validating that link for forgot password page is not broken");
 		loginpage.navigateToForgotpass();
 		String title = loginpage.forgotpassTitle();
@@ -131,7 +123,7 @@ public class LoginPageTest extends CommonBase {
 
 	
 	@Test(priority=4, dataProvider="testdata",groups="Registration")
-	public void validatecorrectRegistration(String fullname,String email,String contact,String newpass,String cpass)
+	public  void validatecorrectRegistration(String fullname,String email,String contact,String newpass,String cpass)
 	{	
 		log.info("Validating registration operation by providing all correct details");
 
@@ -142,7 +134,7 @@ public class LoginPageTest extends CommonBase {
 	}
 	
 	@Test(priority=5, dataProvider="testdata",groups="Registration")
-	public void validateincorrectRegistration(String fullname,String email,String contact,String newpass,String cpass)
+	public void  validateincorrectRegistration(String fullname,String email,String contact,String newpass,String cpass)
 	{
 		log.info("Validating registration operation by providing some incorrect details");
 		msg=loginpage.regOperation(fullname, email, contact, newpass, cpass);
@@ -160,7 +152,7 @@ public class LoginPageTest extends CommonBase {
 	}
 
 	@AfterClass(groups="BrowserActivity")
-	public void tearDown() {
+	public  void tearDown() {
 		log.info("Closing the Browser");
 		driver.close();
 	}

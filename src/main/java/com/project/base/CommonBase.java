@@ -32,10 +32,7 @@ public class CommonBase {
 
 	
 	public WebDriver driver;
-	
-
 	public static Properties config, logconfig;
-	
 	public static FileInputStream input;
 	public static NavbarBeforeLogin navbeforeLogin;
 	public static NavbarAfterLogin navafterLogin;
@@ -43,14 +40,12 @@ public class CommonBase {
 	public static JavascriptExecutor javascriptExecutor = null;
 	public static Alert alert = null;
 	public static Actions actions = null;	
-	
 	public static Logger log;
 	public static String dir1;
 	
 	
 
-	
-	// Create a constructor and initialize the variables
+
 	public CommonBase() {
 		
 		config = new Properties();
@@ -87,11 +82,9 @@ public class CommonBase {
 				
 		} catch (FileNotFoundException e) {
 
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 }
 		
@@ -104,7 +97,8 @@ public class CommonBase {
 	public static synchronized WebDriver getDriver() {
 		return threadDriver.get();
 	}
-	public void initialization()
+	
+	public synchronized void initialization()
 	{
 		String browserName = config.getProperty("browser");
 
@@ -125,6 +119,9 @@ public class CommonBase {
 			System.setProperty("webdriver.gecko.driver", filePath + config.getProperty("browserDriverpath"));
 			driver = new FirefoxDriver();
 		}
+		
+		threadDriver.set(driver);
+		
 		log.info("Maximizing the browser");
 		
 		driver.manage().window().maximize();
@@ -150,12 +147,12 @@ public class CommonBase {
 
 		navbeforeLogin = new NavbarBeforeLogin(driver);
 		navafterLogin = new NavbarAfterLogin(driver);
-		threadDriver.set(driver);
+		
 		
 	}
 
 	
-	public void initialization(String mode) 
+	public synchronized void initialization(String mode) 
 	{
 		String browserName = config.getProperty("browser");
 		String filePath = System.getProperty("user.dir");
@@ -173,6 +170,9 @@ public class CommonBase {
 			System.setProperty("webdriver.gecko.driver", filePath+config.getProperty("browserDriverpath"));
 			driver = new FirefoxDriver();
 		}
+		
+		threadDriver.set(driver);
+		
 		log.info("Maximizing the browser");
 		
 		driver.manage().window().maximize();
@@ -201,7 +201,7 @@ public class CommonBase {
 
 		navbeforeLogin = new NavbarBeforeLogin(driver);
 		navafterLogin = new NavbarAfterLogin(driver);
-		threadDriver.set(driver);
+	
 	
 
 	}

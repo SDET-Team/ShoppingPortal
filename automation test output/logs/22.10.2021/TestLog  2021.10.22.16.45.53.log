@@ -1,0 +1,37 @@
+2021-10-22 16:45:54,155 CommonBase.java INFO  [main] base.CommonBase 122 - Starting Browser
+2021-10-22 16:45:59,229 CommonBase.java INFO  [main] base.CommonBase 132 - Maximizing the browser
+2021-10-22 16:45:59,350 CommonBase.java INFO  [main] base.CommonBase 136 - Deleting all cookies
+2021-10-22 16:45:59,357 CommonBase.java INFO  [main] base.CommonBase 140 - Adding implicit wait
+2021-10-22 16:45:59,370 CommonBase.java INFO  [main] base.CommonBase 146 - Loading URL
+2021-10-22 16:46:01,014 LoginPageTest.java INFO  [main] base.CommonBase 84 - Validating Loginpage Title
+2021-10-22 16:46:01,019 LoginPageTest.java INFO  [main] base.CommonBase 87 - Testcase Passed!
+2021-10-22 16:46:01,763 LoginPageTest.java INFO  [main] base.CommonBase 92 - Validating Login operation using correct Credentials
+2021-10-22 16:46:01,764 LoginPageTest.java INFO  [main] base.CommonBase 93 - Logging using email: sk@g.com , Password: Test@123
+2021-10-22 16:46:02,987 LoginPageTest.java INFO  [main] base.CommonBase 96 - Testcase Passed!
+2021-10-22 16:46:03,428 LoginPageTest.java INFO  [main] base.CommonBase 99 - User logged out!!
+2021-10-22 16:46:03,578 LoginPageTest.java INFO  [main] base.CommonBase 92 - Validating Login operation using correct Credentials
+2021-10-22 16:46:03,578 LoginPageTest.java INFO  [main] base.CommonBase 93 - Logging using email: fake11@g.com , Password: Test@123
+2021-10-22 16:46:03,956 LoginPageTest.java INFO  [main] base.CommonBase 96 - Testcase Passed!
+2021-10-22 16:46:04,224 LoginPageTest.java INFO  [main] base.CommonBase 99 - User logged out!!
+2021-10-22 16:46:04,380 LoginPageTest.java INFO  [main] base.CommonBase 92 - Validating Login operation using correct Credentials
+2021-10-22 16:46:04,382 LoginPageTest.java INFO  [main] base.CommonBase 93 - Logging using email: fake12@g.com , Password: Test@123
+2021-10-22 16:46:04,748 LoginPageTest.java INFO  [main] base.CommonBase 96 - Testcase Passed!
+2021-10-22 16:46:05,009 LoginPageTest.java INFO  [main] base.CommonBase 99 - User logged out!!
+2021-10-22 16:46:05,187 LoginPageTest.java INFO  [main] base.CommonBase 105 - Validating Login operation using incorrect Credentials
+2021-10-22 16:46:05,187 LoginPageTest.java INFO  [main] base.CommonBase 106 - Logging using email: abc@f.com , Password: abc#123
+2021-10-22 16:46:05,533 LoginPageTest.java INFO  [main] base.CommonBase 116 - Testcase Passed!
+2021-10-22 16:46:05,536 LoginPageTest.java INFO  [main] base.CommonBase 105 - Validating Login operation using incorrect Credentials
+2021-10-22 16:46:05,536 LoginPageTest.java INFO  [main] base.CommonBase 106 - Logging using email: def@g.com , Password: df@456
+2021-10-22 16:46:05,831 LoginPageTest.java INFO  [main] base.CommonBase 116 - Testcase Passed!
+2021-10-22 16:46:05,834 LoginPageTest.java INFO  [main] base.CommonBase 105 - Validating Login operation using incorrect Credentials
+2021-10-22 16:46:05,834 LoginPageTest.java INFO  [main] base.CommonBase 106 - Logging using email: ghi@g.com , Password: jk789
+2021-10-22 16:46:06,151 LoginPageTest.java INFO  [main] base.CommonBase 116 - Testcase Passed!
+2021-10-22 16:46:06,154 LoginPageTest.java INFO  [main] base.CommonBase 122 - Validating that link for forgot password page is not broken
+2021-10-22 16:46:06,363 LoginPageTest.java INFO  [main] base.CommonBase 126 - Testcase Passed!
+2021-10-22 16:46:06,631 LoginPageTest.java INFO  [main] base.CommonBase 136 - Validating registration operation by providing all correct details
+2021-10-22 16:46:07,386 LoginPageTest.java INFO  [main] base.CommonBase 141 - Testcase Passed!
+2021-10-22 16:46:07,388 LoginPageTest.java INFO  [main] base.CommonBase 136 - Validating registration operation by providing all correct details
+2021-10-22 16:46:07,971 LoginPageTest.java INFO  [main] base.CommonBase 141 - Testcase Passed!
+2021-10-22 16:46:08,000 LoginPageTest.java INFO  [main] base.CommonBase 147 - Validating registration operation by providing some incorrect details
+2021-10-22 16:46:13,710 LoginPageTest.java INFO  [main] base.CommonBase 147 - Validating registration operation by providing some incorrect details
+2021-10-22 16:46:19,350 LoginPageTest.java INFO  [main] base.CommonBase 164 - Closing the Browser
