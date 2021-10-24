@@ -2,23 +2,16 @@ package com.project.testcases;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.AfterClass; 
+import org.testng.annotations.AfterClass;
 
 import com.project.base.CommonBase;
 import com.project.pages.HomePage;
-import com.project.pages.LoginPage;
 import com.project.pages.TrackOrderPage;
 import com.project.utils.TestUtils;
 
@@ -48,8 +41,8 @@ public class TrackOrderPageTest extends CommonBase {
 **********************/
 	public TrackOrderPageTest() {
 		super();
-		
 	}
+
 	
 	
 	
@@ -59,13 +52,12 @@ public class TrackOrderPageTest extends CommonBase {
 	\bug No known bugs
 	
 **********************/
-	
-	@BeforeSuite(groups="Log")
-	public void loginit()
-	{
+
+
+	@BeforeSuite(groups = "Log")
+	public void loginit() {
 		logConfig();
 	}
-	
 
 	
 /*!********************
@@ -76,14 +68,11 @@ public class TrackOrderPageTest extends CommonBase {
 **********************/
 	@BeforeClass
 	public void setup() {
-		
-	
-		
+
 		initialization();
-		
 		homepage = new HomePage(driver);
-		trackorderpage=new TrackOrderPage(driver);
-		
+		trackorderpage = new TrackOrderPage(driver);
+
 		Assert.assertEquals(homepage.title(), "Shopping Portal Home Page", "Home Page Title Not Matched");
 		navbeforeLogin.clickontrackorder();
 	}
@@ -95,14 +84,15 @@ public class TrackOrderPageTest extends CommonBase {
 *******************************************************************/
 	
 	@DataProvider(name = "testdata")
-	public  Object[][] getPositiveData(Method m) throws IOException {
-		String type="Negative";
-			filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\TrackorderTestdata.xlsx";
+	public Object[][] getPositiveData(Method m) throws IOException {
+		String type = "Negative";
+		filepath = System.getProperty("user.dir") + "\\src\\resources\\testdata\\TrackorderTestdata.xlsx";
 		if (m.getName().equals("validatePositiveTrackorderOperation"))
-			type="Positive";
-		Object data[][] = TestUtils.getTestData(filepath,type);
+			type = "Positive";
+		Object data[][] = TestUtils.getTestData(filepath, type);
 		return data;
 	}
+
 	
 
 	/*!*****************************************************************
@@ -111,14 +101,15 @@ public class TrackOrderPageTest extends CommonBase {
     @throws Assertion Error
 *******************************************************************/
 
-	@Test(priority=1)
-	public  void validateTitle()
-	{	log.info("Validating Loginpage Title");
-		String title=trackorderpage.title();
-		Assert.assertEquals(title, "Track Orders","Title Not Matched");
+	@Test(priority = 1)
+	public void validateTitle() {
+		log.info("Validating Loginpage Title");
+		String title = trackorderpage.title();
+		Assert.assertEquals(title, "Track Orders", "Title Not Matched");
 		log.info("Testcase Passed!");
-		
+
 	}
+
 	
 	
 /*!*************************************************
@@ -130,17 +121,17 @@ public class TrackOrderPageTest extends CommonBase {
 	   
 	   @throws AssertionError
 ***************************************************/
-	@Test(priority=2,dataProvider="testdata")
-	public void validatePositiveTrackorderOperation(String orderid,String emailid)
-	{
+
+	@Test(priority = 2, dataProvider = "testdata")
+	public void validatePositiveTrackorderOperation(String orderid, String emailid) {
 		log.info("Validating Tracking order operation by providing correct emailid and orderid");
-		log.info("Order details: Orderid: "+orderid+" , Emailid: "+emailid);
-		int col=trackorderpage.trackingOption(orderid, emailid);
-		Assert.assertEquals(col,9,"Error message displayed for correct orderid and emailid!!!");
+		log.info("Order details: Orderid: " + orderid + " , Emailid: " + emailid);
+		int col = trackorderpage.trackingOption(orderid, emailid);
+		Assert.assertEquals(col, 9, "Error message displayed for correct orderid and emailid!!!");
 		log.info("Testcase Passed!");
-		
+
 	}
-	
+
 
 	/*!*************************************************
 	   \brief This method will validate that user should not be able to change their password by providing incorrect EmailID or Password.
@@ -151,13 +142,14 @@ public class TrackOrderPageTest extends CommonBase {
 	   
 	   @throws AssertionError
 ***************************************************/
-	@Test(priority=3,dataProvider="testdata")
-	public  void validateNegativeTrackorderOperation(String orderid,String emailid)
-	{
+	
+	@Test(priority = 3, dataProvider = "testdata")
+	public void validateNegativeTrackorderOperation(String orderid, String emailid) {
+
 		log.info("Validating Tracking order operation by providing incorrect emailid or orderid");
 		log.info("Order details: Orderid: {0} , Emailid: {1}");
-		int col=trackorderpage.trackingOption(orderid, emailid);
-		Assert.assertEquals(col,1,"No error message displayed for incorrect orderid or emailid!!");
+		int col = trackorderpage.trackingOption(orderid, emailid);
+		Assert.assertEquals(col, 1, "No error message displayed for incorrect orderid or emailid!!");
 		log.info("Testcase Passed!");
 	}
 

@@ -1,0 +1,15 @@
+2021-10-22 10:54:53,168 CommonBase.java INFO  [main] base.CommonBase 169 - Starting Browser
+2021-10-22 10:54:55,386 CommonBase.java INFO  [main] base.CommonBase 176 - Maximizing the browser
+2021-10-22 10:54:55,535 CommonBase.java INFO  [main] base.CommonBase 180 - Deleting all cookies
+2021-10-22 10:54:56,383 CommonBase.java INFO  [main] base.CommonBase 185 - Adding implicit wait
+2021-10-22 10:54:56,396 CommonBase.java INFO  [main] base.CommonBase 192 - Loading URL
+2021-10-22 10:54:56,919 AdminPageTest.java INFO  [main] base.CommonBase 69 - Validating Admin page title
+2021-10-22 10:54:57,031 AdminPageTest.java INFO  [main] base.CommonBase 73 - Testcase Passed!
+2021-10-22 10:54:57,042 AdminPageTest.java INFO  [main] base.CommonBase 79 - Validating Admin login
+2021-10-22 10:54:57,590 AdminPageTest.java INFO  [main] base.CommonBase 83 - Testcase passed
+2021-10-22 10:54:57,598 AdminPageTest.java INFO  [main] base.CommonBase 89 - Validating color of square button in order management tab
+2021-10-22 10:54:57,747 AdminPageTest.java INFO  [main] base.CommonBase 102 - Validating count of today's order
+2021-10-22 10:54:58,638 AdminPageTest.java INFO  [main] base.CommonBase 110 - Validating unique category name
+2021-10-22 10:55:02,084 AdminPageTest.java INFO  [main] base.CommonBase 120 - Validating uploading image
+2021-10-22 10:55:02,959 AdminPageTest.java INFO  [main] base.CommonBase 123 - Testcase passed
+2021-10-22 10:55:03,064 AdminPageTest.java INFO  [main] base.CommonBase 129 - Validating insert product

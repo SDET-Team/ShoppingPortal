@@ -12,43 +12,37 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import org.openqa.selenium.ElementNotVisibleException;
 import com.project.base.CommonBase;
 import com.project.pages.CartActivity;
 import com.project.pages.MyCartPage;
 
+/**
+ * \file TestUtils.java \author nikhil varavadekar \author shivam k \author
+ * nishant nair \author nikhil pawar \data 20/10/2021
+ */
 public class TestUtils extends CommonBase {
 
-	public static long PAGE_LOAD_TIMEOUT =30;
+	public static long PAGE_LOAD_TIMEOUT = 30;
 	public static long IMPLICIT_WAIT = 5;
 	static HttpURLConnection huc = null;
 	static int respCode = 200;
@@ -66,15 +60,16 @@ public class TestUtils extends CommonBase {
 		else
 			sheet1 = (XSSFSheet) wb.getSheetAt(1);
 
-		if(type.equals("ReviewAutoFillName")||type.equals("ValidateUserName"))
-			sheet1=(XSSFSheet) wb.getSheetAt(1);
-		else if(type.equals("AddReview"))
-			sheet1=(XSSFSheet) wb.getSheetAt(0);
-		
+		if (type.equals("ReviewAutoFillName") || type.equals("ValidateUserName"))
+			sheet1 = (XSSFSheet) wb.getSheetAt(1);
+		else if (type.equals("AddReview"))
+			sheet1 = (XSSFSheet) wb.getSheetAt(0);
+
 		DataFormatter formatter = new DataFormatter();
 
 		int row_count = sheet1.getLastRowNum();
 		int column_count = sheet1.getRow(0).getLastCellNum();
+
 		Object data[][] = new Object[row_count][column_count];
 		for (int i = 0; i < row_count; i++) {
 			for (int j = 0; j < column_count; j++) {
@@ -88,12 +83,26 @@ public class TestUtils extends CommonBase {
 
 	}
 
+	/**
+	 * @return Alert
+	 * @throws NoAlertPresentException
+	 */
 	public static Alert switchToAlert(WebDriver driver) {
 		Alert alert = driver.switchTo().alert();
 		return alert;
 	}
 
-	public static boolean isLinkValid(String urlString,WebDriver driver) {
+	/**
+	 * \brief logs and returns if the link is broken or not
+	 * 
+	 * \bug No known bugs
+	 * 
+	 * @param urlString
+	 * @return boolean
+	 * @throws NullPointerException
+	 * @throws HttpTimeoutException
+	 */
+	public static boolean isLinkValid(String urlString) {
 		String baseUrl = config.getProperty("url");
 		boolean isValid = false;
 
@@ -101,7 +110,6 @@ public class TestUtils extends CommonBase {
 			log.error(urlString + " => " + "Either url is not configured or it is empty");
 			return isValid;
 		}
-
 		if (!urlString.startsWith(baseUrl)) {
 			log.error(urlString + " => " + "belongs to another domain, skipping it");
 			return isValid;
@@ -130,15 +138,34 @@ public class TestUtils extends CommonBase {
 		return isValid;
 	}
 
-	public static boolean isTextFormated(String string) {
+	/**
+	 * \bug No known bugs
+	 * 
+	 * @param string
+	 * @return boolean
+	 * @throws NullPointerException
+	 */
+	public static boolean isTextFormated(String string) throws NullPointerException {
 		if (string == null || string.isEmpty() || string == "#") {
 			return false;
 		}
 		return true;
 	}
 
+	/**
+	 * \bug No known bugs
+	 * 
+	 * @param fileName
+	 * @param sheetName
+	 * @param dataMap
+	 * @param columnNames
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws NullPointerException
+	 */
 	public static void setTestData(String fileName, String sheetName, Map<Integer, ArrayList<String>> dataMap,
-			String[] columnNames) throws FileNotFoundException {
+			String[] columnNames) throws FileNotFoundException, IOException, NullPointerException {
 
 		File file = new File(fileName);
 		XSSFWorkbook workbook = null;
@@ -199,26 +226,35 @@ public class TestUtils extends CommonBase {
 
 	}
 
+	/**
+	 * \bug No known bugs
+	 * 
+	 * @return boolean
+	 * @throws NoAlertPresentException
+	 * @throws TimeoutException
+	 */
 	
-	
-	public static boolean isAlertPresent(WebDriver driver) 
-	{ 
-		
-	    try 
-	    { 	
-	    	WebDriverWait wait = new WebDriverWait(driver,50);
-			wait.until(ExpectedConditions.alertIsPresent()); 
-	        return true; 
-	    }
-	    catch(TimeoutException e)
-	    {	
-	    	return false;
-	    }
-	    
-	    
-}
 
-	public static boolean isVisible(WebElement element) {
+	public static boolean isAlertPresent(WebDriver driver) {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 50);
+			wait.until(ExpectedConditions.alertIsPresent());
+			return true;
+		} catch (TimeoutException e) {
+			return false;
+		}
+
+	}
+
+	/**
+	 * \bug No known bugs
+	 * 
+	 * @param WebElement
+	 * @return boolean
+	 * @throws ElementNotVisibleException
+	 */
+	public static boolean isVisible(WebElement element) throws ElementNotVisibleException {
 		try {
 			if (element.isDisplayed()) {
 				return true;
@@ -229,28 +265,27 @@ public class TestUtils extends CommonBase {
 		return false;
 	}
 
-	
-	
+
 	public static Object[][] getTestData(String filepath, int sheetIndex) throws IOException {
 		File src = new File(filepath);
 		FileInputStream fileinput = new FileInputStream(src);
 		Workbook wb = new XSSFWorkbook(fileinput);
 		XSSFSheet sheet = (XSSFSheet) wb.getSheetAt(sheetIndex);
-		
-		//DataFormatter formatter = new DataFormatter();
-		
+
+		// DataFormatter formatter = new DataFormatter();
+
 		int row_count = sheet.getLastRowNum();
 		int column_count = sheet.getRow(0).getLastCellNum();
 		Object data[][] = new Object[row_count][column_count];
 		for (int i = 0; i < row_count; i++) {
 			for (int j = 0; j < column_count; j++) {
-				data[i][j] = sheet.getRow(i+1).getCell(j).toString();
+				data[i][j] = sheet.getRow(i + 1).getCell(j).toString();
 			}
 		}
 		wb.close();
 		return data;
 	}
-	
+
 	
 	
 	public static String getscreenShot(WebDriver driver,String filename)
@@ -259,22 +294,18 @@ public class TestUtils extends CommonBase {
 		TakesScreenshot screenshot=(TakesScreenshot) driver ;
 		
 		File srcfile= screenshot.getScreenshotAs(OutputType.FILE);
+
 		String timeStamp = new SimpleDateFormat(" yyyy.MM.dd.HH.mm.ss").format(new Date());
-		String currDate=new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-		dir1=currDate;
-		String newfilename=filename+" "+timeStamp+".png";
-		String filepath=System.getProperty("user.dir")+"\\automation test output\\screenshots\\"+dir1+"\\Testscreenshots "+timeStamp+"\\"+newfilename;
-		try { 
+		String currDate = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+		dir1 = currDate;
+		String newfilename = filename + " " + timeStamp + ".png";
+		String filepath = System.getProperty("user.dir") + "\\automation test output\\screenshots\\" + dir1
+				+ "\\Testscreenshots " + timeStamp + "\\" + newfilename;
+		try {
 			FileUtils.copyFile(srcfile, new File(filepath));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return filepath;
 	}
-	
-	
 }
-
-
-

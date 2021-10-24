@@ -1,0 +1,9 @@
+2021-10-24 11:33:30,363 CommonBase.java INFO  [main] base.CommonBase 121 - Starting Browser
+2021-10-24 11:33:34,182 CommonBase.java INFO  [main] base.CommonBase 128 - Maximizing the browser
+2021-10-24 11:33:34,316 CommonBase.java INFO  [main] base.CommonBase 132 - Deleting all cookies
+2021-10-24 11:33:34,938 CommonBase.java INFO  [main] base.CommonBase 136 - Adding implicit wait
+2021-10-24 11:33:34,980 CommonBase.java INFO  [main] base.CommonBase 142 - Loading URL
+2021-10-24 11:33:39,411 ReviewPageTest.java INFO  [main] base.CommonBase 77 - Validating user name format in review
+2021-10-24 11:33:44,744 ReviewPageTest.java INFO  [main] base.CommonBase 87 - Validating autofill in username
+2021-10-24 11:33:46,760 ReviewPageTest.java INFO  [main] base.CommonBase 97 - Validating review
+2021-10-24 11:34:01,460 ReviewPageTest.java INFO  [main] base.CommonBase 100 - Testcase passed
