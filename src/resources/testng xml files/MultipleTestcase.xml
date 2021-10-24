@@ -5,12 +5,21 @@
 			<listener class-name="com.project.listeners.ExtentReportListener" />
 	</listeners>
 
-  <test thread-count="50" parallel="classes" name="Test">
+  <test thread-count="3000" parallel="classes" name="Test">
     <classes>
+    	<class name="com.project.testcases.AdminPageTest"/>
+    	<class name="com.project.testcases.CartActivityTest"/>
+    	<class name="com.project.testcases.EndToEndTestCases"/>
       <class name="com.project.testcases.HomePageTest"/>
       <class name="com.project.testcases.LoginPageTest"/>  
        <class name="com.project.testcases.ForgotPasswordPageTest"/> 
        <class name="com.project.testcases.TrackOrderPageTest"/> 
+       <class name="com.project.testcases.MyAccountPageTest"/>
+       <class name="com.project.testcases.MyCartPageTest"/>
+       <class name="com.project.testcases.OrderHistoryPageTest"/>
+       <class name="com.project.testcases.ReviewPageTest"/>
+       <class name="com.project.testcases.SearchResultTest"/>
+       <class name="com.project.testcases.WishlistTestcases"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

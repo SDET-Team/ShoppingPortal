@@ -9,7 +9,7 @@
     <classes>
       <class name="com.project.testcases.LoginPageTest">
       <methods>
-      <exclude name="validateincorrectLogin"/>
+      <exclude name="validatecorrectRes"/>
        <exclude name="validateincorrectRegistration"/>
      </methods>
       </class>

@@ -10,6 +10,7 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -38,8 +39,9 @@ public class SearchResult extends CommonBase {
 	@FindBy(className = "list-unstyled")
 	WebElement listUnstyled;
 
-	public SearchResult() {
+	public SearchResult(WebDriver driver) {
 		PageFactory.initElements(driver, this);
+		this.driver=driver;
 	}
 
 	/**

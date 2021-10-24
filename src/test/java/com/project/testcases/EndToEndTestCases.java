@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
@@ -99,7 +100,7 @@ public class EndToEndTestCases extends CommonBase {
 	@Test(priority = 2, dependsOnMethods = "loginTestCase")
 	public void searchRequiredProductTestCase() throws ElementNotVisibleException, NoSuchElementException {
 		homePage = new HomePage(driver);
-		searchResult = new SearchResult();
+		searchResult = new SearchResult(driver);
 
 		String data = "redmi";
 		boolean flag = false;
@@ -107,7 +108,7 @@ public class EndToEndTestCases extends CommonBase {
 		navbeforeLogin.clickOnLogoImage();
 		log.info("redirects to home page");
 		homePage.setSearchData(data);
-
+		System.out.println("\n\n Hellooo \n\n");
 		List<WebElement> searchResultList = searchResult.getSearchResultList();
 		for (int i = 0; i < searchResultList.size(); i++) {
 			WebElement webElement = searchResultList.get(i);
@@ -211,18 +212,18 @@ public class EndToEndTestCases extends CommonBase {
 		navbeforeLogin = new NavbarBeforeLogin(driver);
 		paymentMethod = new PaymentMethod(driver);
 
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		myCartPage.handleCheckOutButtonClick();
+		
 
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//		String[] shippingAddr = { "0", "Shipping Address", "New Delhi sector 7", "New-Delhi-123", "Delhi-123",
-//				"110096" };
-//		String[] billingAddr = { "1", "Billing Address", "CS New Delhi sector 5", "New-Delhi-234", "Delhi-234",
-//				"110091" };
-//		myCartPage.setAddressData(shippingAddr);
-//		myCartPage.setAddressData(billingAddr);
-//		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-//		myCartPage.handleCheckOutButtonClick();
+		/*String[] shippingAddr = { "0", "Shipping Address", "New Delhi sector 7", "New-Delhi-123", "Delhi-123",
+				"110096" };
+		String[] billingAddr = { "1", "Billing Address", "CS New Delhi sector 5", "New-Delhi-234", "Delhi-234",
+				"110091" };
+		myCartPage.setAddressData(shippingAddr);
+		myCartPage.setAddressData(billingAddr);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);*/
+		myCartPage.handleCheckOutButtonClick();
+		
 		Map<Integer, String> map = paymentMethod.setPaymantMethod();
 		Set<Integer> set = map.keySet();
 		for (Integer i : set) {

@@ -1,6 +1,0 @@
-2021-10-24 11:18:42,916 CommonBase.java INFO  [main] base.CommonBase 121 - Starting Browser
-2021-10-24 11:19:00,800 CommonBase.java INFO  [main] base.CommonBase 128 - Maximizing the browser
-2021-10-24 11:19:01,042 CommonBase.java INFO  [main] base.CommonBase 132 - Deleting all cookies
-2021-10-24 11:19:01,149 CommonBase.java INFO  [main] base.CommonBase 136 - Adding implicit wait
-2021-10-24 11:19:01,167 CommonBase.java INFO  [main] base.CommonBase 142 - Loading URL
-2021-10-24 11:19:12,891 CommonBase.java ERROR [main] base.CommonBase 146 - WebDriverException

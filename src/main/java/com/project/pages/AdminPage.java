@@ -198,7 +198,7 @@ public class AdminPage extends CommonBase {
 
 		// AutoIt
 		try {
-			Runtime.getRuntime().exec("F:/Selenium/MiniProject.exe");
+			Runtime.getRuntime().exec(System.getProperty("user.dir")+"\\src\\resources\\autoIt\\AutoItScript1.exe");
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -279,7 +279,7 @@ public class AdminPage extends CommonBase {
         builder1.moveToElement(productImageBtn1).click().build().perform();
 	
 		try {
-			Runtime.getRuntime().exec("F:/Selenium/AutoItScript1.exe");
+			Runtime.getRuntime().exec(System.getProperty("user.dir")+"\\src\\resources\\autoIt\\AutoItScript1.exe");
 		} catch (IOException e) {
 		
 			e.printStackTrace();
@@ -293,7 +293,7 @@ public class AdminPage extends CommonBase {
 		Actions builder2=new Actions(driver);
         builder2.moveToElement(productImageBtn2).click().build().perform();
         try {
-			Runtime.getRuntime().exec("F:/Selenium/AutoItScript2.exe");
+			Runtime.getRuntime().exec(System.getProperty("user.dir")+"\\src\\resources\\autoIt\\AutoItScript2.exe");
 		} catch (IOException e) {
 		
 			e.printStackTrace();
@@ -307,7 +307,7 @@ public class AdminPage extends CommonBase {
 		Actions builder3=new Actions(driver);
         builder3.moveToElement(productImageBtn3).click().build().perform();
         try {
-			Runtime.getRuntime().exec("F:/Selenium/AutoItScript3.exe");
+			Runtime.getRuntime().exec(System.getProperty("user.dir")+"\\src\\resources\\autoIt\\AutoItScript3.exe");
 		} catch (IOException e) {
 		
 			e.printStackTrace();
@@ -335,29 +335,5 @@ public class AdminPage extends CommonBase {
 
 	}
 
-	// AutoIt
-	public void AutoIt(int i) {
-		try {
-
-			if (i == 1) {
-				Runtime.getRuntime().exec("F:/Selenium/AutoItScript1.exe");
-
-			}
-			if (i == 2) {
-				Runtime.getRuntime().exec("F:/Selenium/AutoItScript2.exe");
-
-			}
-			if (i == 3) {
-				Runtime.getRuntime().exec("F:/Selenium/AutoItScript3.exe");
-
-			}
-
-		} catch (
-
-		IOException e) {
-			e.printStackTrace();
-		}
-
-	}
 	
 }

@@ -89,7 +89,7 @@ public class SearchResultTest extends CommonBase {
 	@Test(priority = 1, dataProvider = "searchTestData")
 	public void valitateSearchReuslts(String data) throws ElementNotVisibleException, NoSuchElementException {
 		homePage = new HomePage(driver);
-		searchResult = new SearchResult();
+		searchResult = new SearchResult(driver);
 		if (data != null) {
 			homePage.setSearchData(data);
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
