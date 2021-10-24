@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -39,6 +40,11 @@ public class ReviewPage extends CommonBase
 	@FindBy(name="submit")
 	WebElement finalOrderPlace;
 	
+	public ReviewPage(WebDriver driver)
+	{
+		PageFactory.initElements(driver,this);
+		this.driver=driver;
+	}
 	public void addReview2()
 	{
 		driver.get("http://localhost/OnlineShoppingPortal/shopping/");
@@ -233,7 +239,6 @@ public class ReviewPage extends CommonBase
         driver.findElement(By.id("exampleInputName")).click();
         driver.findElement(By.name("submit")).click();
         boolean status=driver.findElement(By.id("exampleInputName")).getAttribute("value")!="";
-        boolean status1=driver.findElement(By.xpath("//body/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/label[1]/span[1]")).isDisplayed();
         return status;
     }
 

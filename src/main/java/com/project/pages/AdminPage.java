@@ -78,7 +78,7 @@ public class AdminPage extends CommonBase
 	@FindBy(id="subcategory")
 	WebElement selectsubCategory;
 	
-	@FindBy(xpath="//body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[7]/div[1]/textarea[1]")
+	@FindBy(xpath="//body/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/form[1]/div[7]/div[1]/div[2]/div[1]")
 	WebElement productDescriptionField;
 	
 	@FindBy(name="productShippingcharge")
@@ -148,8 +148,6 @@ public class AdminPage extends CommonBase
 	      assert(elements.size() > 0);
 	    }
 	    driver.findElement(By.cssSelector(".even:nth-child(2) > td:nth-child(2)")).click();
-	    //String getCategoryText=driver.findElement(By.cssSelector(".even:nth-child(2) > td:nth-child(2)")).getText();
-	   
 	    
 	    inputCategoryName.click();
 	    inputCategoryName.sendKeys(category);
@@ -189,10 +187,16 @@ public class AdminPage extends CommonBase
 			e.printStackTrace();
 		}
 		
-		String expectedTestData="SamsungTVFrontView.jpg";
-		 if(driver.getPageSource().contains(expectedTestData))
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String expectedTestData="Sams";
+		 if(driver.getPageSource().contains("Sams"))
 		    {
-
+               
 		    	System.out.println("Product Image Added successfully");
 		    }
 		      
@@ -202,7 +206,6 @@ public class AdminPage extends CommonBase
 	public String todaysOrder()
 	{
 	    
-	   // orderManagementList.click();
 	    String status=driver.findElement(By.cssSelector("li:nth-child(1) > a > .label")).getText();
 	    driver.findElement(By.cssSelector("li:nth-child(1) > a > .label")).click();
 	    return status;
@@ -252,66 +255,64 @@ public class AdminPage extends CommonBase
 		int i=0;
 		Actions builder1=new Actions(driver);
         builder1.moveToElement(productImageBtn1).click().build().perform();
-		AutoIt(i++);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        
+		//AutoIt(i++);
+		try {
+			Runtime.getRuntime().exec("F:/Selenium/AutoItScript1.exe");
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Actions builder2=new Actions(driver);
         builder2.moveToElement(productImageBtn2).click().build().perform();
-		AutoIt(i++);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        
+        try {
+			Runtime.getRuntime().exec("F:/Selenium/AutoItScript2.exe");
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Actions builder3=new Actions(driver);
         builder3.moveToElement(productImageBtn3).click().build().perform();
-		AutoIt(i++);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        
+        try {
+			Runtime.getRuntime().exec("F:/Selenium/AutoItScript3.exe");
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        	
 		wait.until(ExpectedConditions.elementToBeClickable(insertProductBtn));
+		
 		insertProductBtn.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        
 		
 		driver.get("http://localhost/OnlineShoppingPortal/shopping/");
-		driver.findElement(By.cssSelector(".dropdown:nth-child(3) > a")).click();
-	    driver.findElement(By.cssSelector(".dropdown:nth-child(6) > a")).click();
-	    driver.findElement(By.cssSelector(".dropdown:nth-child(7) > a")).click();
-	    driver.findElement(By.cssSelector(".dropdown:nth-child(3) > a")).click();
-	    driver.findElement(By.cssSelector(".dropdown-toggle:nth-child(2)")).click();
-	    String output=driver.findElement(By.linkText("Samsung")).getText();
-	    driver.findElement(By.cssSelector(".col-sm-6:nth-child(2) img")).click();
-	    {
-	      List<WebElement> elements = driver.findElements(By.cssSelector(".owl-item:nth-child(1) > #slide1 .img-responsive"));
-	      assert(elements.size() > 0);
-	    }
-	    driver.findElement(By.name("product")).click();
-	    driver.findElement(By.name("product")).sendKeys(searchKey);
+		driver.findElement(By.name("product")).click();
+	    driver.findElement(By.name("product")).sendKeys("samsung");
 	    driver.findElement(By.cssSelector(".search-button")).click();
-	    output=driver.findElement(By.linkText("Samsung")).getText();
-	    System.out.println(output);
-		return output;
+	    String nameStatus=driver.findElement(By.linkText("Samsung")).getText();
+	    driver.findElement(By.linkText("Samsung")).click();
+	    
+		
+		return nameStatus;
 		
 	}
-	//AutoIt
-	public void AutoIt(int i)
-	{
-		try {
-		if(i==1)
-		{
-		    Runtime.getRuntime().exec("F:/Selenium/AutoItScript1.exe");
-		        
-	    }
-		if(i==2)
-		{
-			Runtime.getRuntime().exec("F:/Selenium/AutoItScript2.exe");
-		    
-		}
-		if(i==3)
-		{
-			Runtime.getRuntime().exec("F:/Selenium/AutoItScript3.exe");
-		    
-		}
-		
-		} catch (IOException e){
-	         e.printStackTrace();
-	        }
-	}
+	
 }

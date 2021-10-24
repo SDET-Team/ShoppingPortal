@@ -21,11 +21,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.project.utils.TestUtils;
+
+/*!*******************************************************************
+\file ReviewPageTest.java
+\author Nishant Nair
+\date 20.10.2021	
+\brief Main class for Admin page functionalities. All test cases related to admin will be executed from here.   
+********************************************************************/
 
 public class ReviewPageTest extends CommonBase
 {
@@ -34,6 +42,10 @@ public class ReviewPageTest extends CommonBase
 	ReviewPage reviewpage;
 	String filepath;
 	
+	/*!*****************************************************************
+	\brief DataProvider annotations for fetch test data from file
+	@throws FileNotFoundException
+	*******************************************************************/
 	@DataProvider(name = "testdata")
 	public Object[][] getpositivetestData(Method m) throws IOException {
 		String type="AddReview";
@@ -55,6 +67,20 @@ public class ReviewPageTest extends CommonBase
 		return data;
 	}
 	
+	/**
+	 * @brief Initialize log4j log configuration to print testcase logs to specific file. 
+	 * 
+	 */
+	@BeforeSuite(groups="Log")
+	public void loginit()
+	{
+		logConfig();
+	}
+	
+	/*!*****************************************************************
+	\brief Driver initialization and pre-requisites for running test cases.
+	@throws WebDriverException
+	*******************************************************************/
 	@BeforeTest
 	public void setup()
 	{	
@@ -64,35 +90,69 @@ public class ReviewPageTest extends CommonBase
 		navbeforeLogin.navigatetologin();
 	}
 	
+	/*!*************************************************
+	   \brief This method will validate format of user name.
+	   \n Test case will fail if user's name contains character other than alphabets.
+	   Test data is fetched from a excel sheet.
+	   \n File name "productReviewData.xlsx" Sheet name "Sheet2"
+	   \n Columns names {"User Name","Summary","Review","searchKey","Expected User Name"} 
+	   
+	   @throws AssertionError
+       @throws FileNotFoundException
+***************************************************/
 	@Test(priority=1,dataProvider="testdata")
 	public void validateReviewUserNameFormat(String userName,String summary,String review,String searchKey,String expUserName)
 	{
 		log.info("Validating user name format in review");
-		reviewpage=new ReviewPage();
+		reviewpage=new ReviewPage(driver);
 		String name=reviewpage.verifyUserName(userName,summary,review,searchKey,expUserName);
 		Assert.assertEquals(name,expUserName);
 		log.info("test case passed");
 	}
 	
+	/*!*************************************************
+	   \brief This method will validate whether logged in user's name is auto filled.
+	   \n Test case will fail if we click on submit button and will propmt to type name.
+	   Test data is fetched from a excel sheet.
+	   \n File name "productReviewData.xlsx" Sheet name "Sheet2"
+	   \n Columns names {"User Name","Summary","Review","searchKey","Expected User Name"} 
+	   
+	   @throws AssertionError
+       @throws FileNotFoundException
+***************************************************/
 	@Test(priority=2,dataProvider="testdata")
 	public void validateAutoFillUserName(String userName,String summary,String review,String searchKey,String expUserName)
 	{
 		log.info("Validating autofill in username");
-		reviewpage=new ReviewPage();
+		reviewpage=new ReviewPage(driver);
 		boolean status=reviewpage.verifyAutoFillUserName(userName,summary,review,searchKey,expUserName);
 		Assert.assertTrue(status);
 		log.info("test case passed");
 	}
 	
+	/*!*****************************************************************
+    \brief This method will validate whether user can add review on purchased product.
+	   \n End to end test case as it shows functioning of website from user page to admin page.
+	   Test data is fetched from a excel sheet.
+	   \n File name "productReviewData.xlsx" Sheet name "Sheet1"
+	   \n Columns names {"EmailId","Password","Order Status Description","Name","Summary","Review"} 
+	   
+	   @throws AssertionError
+       @throws FileNotFoundException
+*******************************************************************/
 	@Test(priority=3,dataProvider="testdata")
 	public void validateReview(String emailId,String pwd,String orderStatus,String name,String summary,String review)
 	{
 		log.info("Validating review");
-		reviewpage=new ReviewPage();
+		reviewpage=new ReviewPage(driver);
 		reviewpage.addReview(emailId,pwd,orderStatus,name,summary,review);
 		log.info("Testcase passed");
 	}
 	
+	/*!*****************************************************************
+	\brief Driver is closed.
+	@throws
+	*******************************************************************/
 	@AfterTest
 	public void tearDown()
 	{
