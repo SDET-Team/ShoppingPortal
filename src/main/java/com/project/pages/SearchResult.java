@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,6 +15,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.project.base.CommonBase;
+
+import net.bytebuddy.jar.asm.Handle;
 
 public class SearchResult extends CommonBase {
 
@@ -103,6 +106,19 @@ public class SearchResult extends CommonBase {
 		}
 
 		return productDetails;
+	}
+
+	public void handleProductAddToCart(WebElement webElement) {
+		WebElement product = webElement.findElement(By.className("product"));
+		WebElement addToCartElement = product.findElement(
+				By.xpath("//div[@class='cart clearfix animate-effect']/div[@class='action']/ul/li/a/button"));
+		log.info(addToCartElement.getTagName());
+		try {
+			addToCartElement.click();
+		} catch (ElementNotInteractableException e) {
+			log.error("ElementNotInteractableException");
+		}
+
 	}
 
 }

@@ -256,7 +256,7 @@ public class MyCartPageTest extends CommonBase {
 	}
 
 	/**
-	 * @brief validate product Quantity Limit \n update prduct quantity wiht both
+	 * @brief validate product Quantity Limit \n update product quantity with both
 	 *        valid and invalid quantities \n check the grand total
 	 * @bug No known bugs
 	 * @throws AssertionError

@@ -94,7 +94,7 @@ public class SearchResultTest extends CommonBase {
 			homePage.setSearchData(data);
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
-//			multiple div
+						
 			List<WebElement> searchResultList = searchResult.getSearchResultList();
 			for (int i = 0; i < searchResultList.size(); i++) {
 				WebElement webElement = searchResultList.get(i);
@@ -103,8 +103,10 @@ public class SearchResultTest extends CommonBase {
 				for (String dataString : productDetailsList) {
 					log.info(dataString);
 				}
-				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+				
 			}
+			
+			
 		}
 
 	}
