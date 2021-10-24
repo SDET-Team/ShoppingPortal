@@ -190,7 +190,6 @@ public class AdminPage extends CommonBase
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String expectedTestData="Sams";
@@ -252,10 +251,9 @@ public class AdminPage extends CommonBase
 		status=productImageBtn1.isDisplayed();
 		Assert.assertTrue(status);
 		
-		int i=0;
 		Actions builder1=new Actions(driver);
         builder1.moveToElement(productImageBtn1).click().build().perform();
-		//AutoIt(i++);
+	
 		try {
 			Runtime.getRuntime().exec("F:/Selenium/AutoItScript1.exe");
 		} catch (IOException e) {
@@ -265,7 +263,6 @@ public class AdminPage extends CommonBase
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -280,7 +277,6 @@ public class AdminPage extends CommonBase
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -299,11 +295,11 @@ public class AdminPage extends CommonBase
 			e.printStackTrace();
 		}
         	
-		wait.until(ExpectedConditions.elementToBeClickable(insertProductBtn));
+		wait.until(ExpectedConditions.elementToBeClickable(insertProductSubmitBtn));
 		
-		insertProductBtn.click();
+		insertProductSubmitBtn.click();
 		
-		driver.get("http://localhost/OnlineShoppingPortal/shopping/");
+		driver.get(config.getProperty("url"));
 		driver.findElement(By.name("product")).click();
 	    driver.findElement(By.name("product")).sendKeys("samsung");
 	    driver.findElement(By.cssSelector(".search-button")).click();
