@@ -17,21 +17,44 @@ import com.project.pages.LoginPage;
 import com.project.pages.MyWishlistPage;
 import com.project.utils.TestUtils;
 
+/**
+ * @brief WishlistTestcases class tests User Wishlist page features. 
+ * 
+ * @details Verifies features of Wishlist page like user can add product to wishlist, user can remove product from wishlist 
+ * and selecting add to wishlist on product which is already in wishlist does not create duplicate entry of product on wishlist page. 
+ * 
+ */
 public class WishlistTestcases extends CommonBase {
 	
 	AfterLoginPage afterLoginPage;
 	
 	
+	/**
+	 * @brief Constructs object of WishlistTestcases class and calls base class @ref CommonBase constructor internally. 
+	 * 
+	 * @see CommonBase 
+	 * 
+	 */
 	public WishlistTestcases() {
 		super();
 	}
 	
+	
+	/**
+	 * @brief Initialize log4j log configuration to print testcase logs to specific file. 
+	 * 
+	 */
 	@BeforeSuite(groups="Log")
-	public void loginit()
+	public void logInit()
 	{
 		logConfig();
 	}
 	
+	
+	/**
+	 * @brief Initializes web driver, opens browser, navigates to shopping website and login to website using valid credentials. 
+	 * 
+	 */
 	@BeforeTest
 	public void setup() {
 		initialization();
@@ -59,6 +82,20 @@ public class WishlistTestcases extends CommonBase {
 		}
 	}
 	
+	
+	/**
+	 * @brief Testcase 1: Verifies that user can add a product to wishlist. 
+	 * 
+	 * @details Navigates to product's category page, selects specified product from webpage and adds it to wishlist and also checks if product added to wishlist successfully. 
+	 * 
+	 * @param category This is category of product
+	 * @param productTitle This is name of product
+	 * 
+	 * @attention Function will exit with error if specified category or product not found on respective webpages. 
+	 * 
+	 * @warning Function will exit with error if valid user login is not done before test. 
+	 * 
+	 */
 	@Test(priority=1, dataProvider="product_type_name_data")
 	public void addProductToWishList(String category, String productTitle) {
 		String testcase = "Verify_User_Can_Add_Product_To_Wishlist :: ";
@@ -91,6 +128,19 @@ public class WishlistTestcases extends CommonBase {
 		}
 	}
 	
+	
+	/**
+	 * @brief Testcase 2: Verifies that user can remove wishlisted product from Wishlist webpage. 
+	 * 
+	 * @details Navigates to Wishlist webpage, finds specified product and removes same from wishlist. 
+	 * 
+	 * @param productTitle This is name of product
+	 * 
+	 * @attention Function will exit with error if specified product not found on Wishlist webpage. 
+	 * 
+	 * @warning Function will exit with error if valid user login is not done before test. 
+	 * 
+	 */
 	@Test(priority=2, dataProvider="product_name_data")
 	public void deleteProductFromWishList(String productTitle) {
 		String testcase = "Verify_User_Can_Remove_Product_From_Wishlist :: ";
@@ -126,6 +176,19 @@ public class WishlistTestcases extends CommonBase {
 		Assert.assertTrue(output, "Removing product from wishlist failed.");
 	}
 	
+	/**
+	 * @brief Testcase 3: Verifies that adding already wishlisted product to wishlist again would not create duplicate entry of product in Wishlist webpage. 
+	 * 
+	 * @details Navigates to Wishlist webpage and checks whether specified product not present in wishlist. Then goes to product's category page, finds product and adds it to wishlist and checks product added to wishlist successfully. After this it again goes to product's category page, finds product and adds it to wishlist and checks if there is duplicate entry of product on Wishlist webpage. 
+	 * 
+	 * @param category This is category of product
+	 * @param productTitle This is name of product 
+	 * 
+	 * @attention Function will exit with error if specified category or product not found on respective webpages.
+	 * 
+	 * @warning Function will exit with error if valid user login is not done before test. 
+	 * 
+	 */
 	@Test(priority=3, dataProvider="product_type_name_data")
 	public void checkProductAddToWishlistOnlyOnce(String category, String productTitle) {
 		String testcase = "Verify_Already_Wishlisted_Product_Not_Wishlist_Again :: ";
@@ -208,11 +271,16 @@ public class WishlistTestcases extends CommonBase {
 	}
 	
 	
+	/**
+	 * @brief Closes browser session. 
+	 * 
+	 */
 	@AfterTest
 	public void tearDown() {
 		//try { Thread.sleep(3*1000); } catch(Exception e) {}
 		//driver.quit();
 		driver.close();
+		log.info("Browser closed successfully.");
 	}
 
 }

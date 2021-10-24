@@ -16,20 +16,43 @@ import com.project.pages.MyAccountPage;
 import com.project.pages.OrderHistoryPage;
 import com.project.utils.TestUtils;
 
+/**
+ * @brief OrderHistoryPageTest class tests Order History page features. 
+ * 
+ * @details Verifies features of Order History page like new orders are at top in list, orders in list contain product details, etc.
+ * 
+ */
 public class OrderHistoryPageTest extends CommonBase {
 	
 	AfterLoginPage afterLoginPage;
 	
+	
+	/**
+	 * @brief Constructs object of OrderHistoryPageTest class and calls base class @ref CommonBase constructor internally. 
+	 * 
+	 * @see CommonBase 
+	 * 
+	 */
 	public OrderHistoryPageTest() {
 		super();
 	}
 	
+	
+	/**
+	 * @brief Initialize log4j log configuration to print testcase logs to specific file. 
+	 * 
+	 */
 	@BeforeSuite(groups="Log")
-	public void loginit()
+	public void logInit()
 	{
 		logConfig();
 	}
 	
+	
+	/**
+	 * @brief Initializes web driver, opens browser, navigates to shopping website and login to website using valid credentials. 
+	 * 
+	 */
 	@BeforeTest
 	public void setup() {
 		initialization();
@@ -57,6 +80,15 @@ public class OrderHistoryPageTest extends CommonBase {
 		}
 	}
 	
+	
+	/**
+	 * @brief Testcase 1: Verifies orders in Order History page show recent orders at top. 
+	 * 
+	 * @details Navigates to My Account page, goes to Order History page and checks if recent orders are at top of orders list. 
+	 * 
+	 * @warning Function will exit with error if valid user login is not done before test. 
+	 * 
+	 */
 	@Test
 	public void checkIfNewOrdersAtTopInOrderHistory() {
 		String testcase = "Verify_New_Orders_Present_On_Top_In_Order_History :: ";
@@ -82,6 +114,14 @@ public class OrderHistoryPageTest extends CommonBase {
 		Assert.assertTrue(output, "Order history does not show newer orders at top.");
 	}
 	
+	/**
+	 * @brief Testcase 2: Verifies that orders in Order History page contain product details. 
+	 * 
+	 * @details Navigates to My Account page, goes to Order History page and then checks if orders contain product details. 
+	 * 
+	 * @warning Function will exit with error if valid user login is not done before test. 
+	 * 
+	 */
 	@Test
 	public void checkIfAllOrdersContainProductDetails() {
 		String testcase = "Verify_All_Orders_In_Order_History_Contain_Product_Details :: ";
@@ -108,11 +148,16 @@ public class OrderHistoryPageTest extends CommonBase {
 	}
 	
 	
+	/**
+	 * @brief Closes browser session. 
+	 * 
+	 */
 	@AfterTest
 	public void tearDown() {
 		//try { Thread.sleep(5*1000); } catch(Exception e) {}
 		//driver.quit();
 		driver.close();
+		log.info("Browser closed successfully.");
 	}
 
 }
